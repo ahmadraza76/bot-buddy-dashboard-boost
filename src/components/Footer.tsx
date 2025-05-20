@@ -5,7 +5,7 @@ import {
   Facebook, 
   Twitter, 
   Youtube, 
-  Telegram 
+  MessageCircle 
 } from "lucide-react";
 
 export default function Footer() {
@@ -53,7 +53,7 @@ export default function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Telegram"
               >
-                <Telegram size={20} />
+                <MessageCircle size={20} />
               </a>
               <a 
                 href="https://facebook.com/botbuddy" 
