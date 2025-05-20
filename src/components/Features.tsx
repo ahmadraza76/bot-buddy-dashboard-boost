@@ -5,7 +5,8 @@ import {
   Clock, 
   Shield, 
   Zap, 
-  Code
+  Code,
+  RefreshCw
 } from "lucide-react";
 
 const features = [
@@ -26,6 +27,12 @@ const features = [
     title: "Auto-Restart On Crash",
     description:
       "Our system automatically detects and resolves any issues, ensuring your bot is always available to your users.",
+  },
+  {
+    icon: <RefreshCw className="h-8 w-8 text-primary" />,
+    title: "Self-Healing System",
+    description:
+      "If something happens and someone has a problem with their bot, our system will automatically fix that problem without any manual intervention.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" />,
