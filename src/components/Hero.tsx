@@ -67,7 +67,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 text-white">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-black via-purple-950 to-black text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
@@ -90,14 +90,14 @@ export default function Hero() {
               Just ₹599/month — your bot will be fully installed, hosted, and running 24/7 with all music features ready to use.
             </p>
             
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4 bg-white/10 p-6 rounded-xl backdrop-blur-sm">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4 bg-black/50 p-6 rounded-xl backdrop-blur-sm border border-purple-500/10">
               <div>
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={cn(emailError && "border-red-500", "bg-white/20 border-white/10 text-white placeholder:text-gray-400")}
+                  className={cn(emailError && "border-red-500", "bg-black/50 border-white/10 text-white placeholder:text-gray-400")}
                   aria-label="Email"
                   aria-invalid={!!emailError}
                   aria-describedby="email-error"
@@ -115,7 +115,7 @@ export default function Hero() {
                   placeholder="Enter your Telegram bot token"
                   value={botToken}
                   onChange={(e) => setBotToken(e.target.value)}
-                  className={cn(botTokenError && "border-red-500", "bg-white/20 border-white/10 text-white placeholder:text-gray-400")}
+                  className={cn(botTokenError && "border-red-500", "bg-black/50 border-white/10 text-white placeholder:text-gray-400")}
                   aria-label="Bot token"
                   aria-invalid={!!botTokenError}
                   aria-describedby="token-error"
