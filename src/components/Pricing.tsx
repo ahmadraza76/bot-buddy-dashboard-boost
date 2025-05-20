@@ -4,50 +4,54 @@ import { Button } from "@/components/ui/button";
 
 const pricingPlans = [
   {
-    name: "Starter",
-    price: "Free",
-    description: "Perfect for personal projects and beginners",
+    name: "Basic",
+    price: "₹599",
+    period: "/month",
+    description: "Perfect for small to medium Telegram groups",
     features: [
-      "1 Bot",
-      "100 messages/day",
+      "1 Music Bot",
+      "Unlimited songs",
       "Basic analytics",
-      "Community support",
+      "Standard support",
       "99.5% Uptime",
+      "YouTube & SoundCloud support",
     ],
     isPopular: false,
-    buttonText: "Start for Free",
+    buttonText: "Get Started",
   },
   {
     name: "Pro",
-    price: "$9.99",
+    price: "₹999",
     period: "/month",
-    description: "For growing projects that need more power",
+    description: "For larger groups with advanced needs",
     features: [
-      "5 Bots",
-      "Unlimited messages",
+      "1 Music Bot",
+      "Unlimited songs",
       "Advanced analytics",
       "Priority support",
       "99.9% Uptime",
-      "API access",
-      "Webhook integration",
+      "YouTube, SoundCloud & Spotify",
+      "Custom bot name & logo",
+      "Custom commands",
     ],
     isPopular: true,
     buttonText: "Get Started",
   },
   {
-    name: "Business",
-    price: "$29.99",
+    name: "Enterprise",
+    price: "₹2,499",
     period: "/month",
-    description: "For businesses with advanced requirements",
+    description: "For professional music channels & large communities",
     features: [
-      "Unlimited Bots",
-      "Unlimited messages",
+      "3 Music Bots",
+      "Unlimited songs",
       "Enterprise analytics",
       "Dedicated support",
       "99.99% Uptime",
-      "Custom integrations",
+      "All music platforms support",
       "White-label option",
-      "SLA agreement",
+      "Custom integrations",
+      "API access",
     ],
     isPopular: false,
     buttonText: "Contact Sales",
@@ -61,7 +65,7 @@ export default function Pricing() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold mb-6">Simple, Transparent Pricing</h2>
           <p className="text-lg text-muted-foreground">
-            Choose the plan that fits your needs. All plans include our core features.
+            Choose the plan that fits your Telegram group's needs. All plans include our core music bot features.
           </p>
         </div>
 
@@ -69,12 +73,12 @@ export default function Pricing() {
           {pricingPlans.map((plan) => (
             <div
               key={plan.name}
-              className={`bg-card rounded-lg p-8 shadow-md flex flex-col h-full ${
-                plan.isPopular ? "ring-2 ring-primary relative" : ""
+              className={`bg-card rounded-lg p-8 shadow-md flex flex-col h-full border border-purple-500/10 ${
+                plan.isPopular ? "ring-2 ring-purple-500 relative" : ""
               }`}
             >
               {plan.isPopular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary px-4 py-1 rounded-full text-primary-foreground text-sm font-medium">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-blue-500 px-4 py-1 rounded-full text-white text-sm font-medium">
                   Most Popular
                 </div>
               )}
@@ -100,7 +104,9 @@ export default function Pricing() {
 
               <Button
                 className={`w-full ${
-                  plan.isPopular ? "bg-primary" : "bg-primary/80"
+                  plan.isPopular 
+                  ? "bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white" 
+                  : "bg-primary/80"
                 }`}
               >
                 {plan.buttonText}

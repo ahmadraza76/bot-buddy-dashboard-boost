@@ -8,25 +8,29 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { FormInput, CreditCard, Rocket } from "lucide-react";
 
 const steps = [
   {
     number: "01",
-    title: "Create your bot on Telegram",
+    icon: <FormInput className="h-6 w-6 text-purple-500" />,
+    title: "Fill a Simple Form",
     description:
-      "Start by creating a bot through BotFather on Telegram and get your bot token.",
+      "Enter your Bot Token, API ID/Hash, Owner ID & upload a logo for your music bot.",
   },
   {
     number: "02",
-    title: "Deploy on BotBuddy",
+    icon: <CreditCard className="h-6 w-6 text-purple-500" />,
+    title: "Make Payment",
     description:
-      "Enter your bot token in our platform to deploy your bot on our servers.",
+      "Pay ₹599/month via Razorpay, UPI, or other supported payment methods.",
   },
   {
     number: "03",
-    title: "Monitor and manage",
+    icon: <Rocket className="h-6 w-6 text-purple-500" />,
+    title: "Bot Goes Live",
     description:
-      "Access real-time logs, analytics, and manage settings through our dashboard.",
+      "Within seconds, your music bot is deployed and running in your Telegram group.",
   },
 ];
 
@@ -53,7 +57,7 @@ export default function HowItWorks() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl font-bold mb-6">How It Works</h2>
           <p className="text-lg text-muted-foreground">
-            Getting started with BotBuddy is quick and easy. Follow these simple steps to deploy your Telegram bot in minutes.
+            Getting started with BotifyHost is quick and easy. Follow these simple steps to deploy your Telegram music bot in seconds.
           </p>
         </div>
 
@@ -62,22 +66,25 @@ export default function HowItWorks() {
             {steps.map((step) => (
               <div key={step.number} className="flex">
                 <div className="mr-6">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-xl">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold text-xl">
                     {step.number}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                  <div className="flex items-center mb-2">
+                    {step.icon}
+                    <h3 className="text-xl font-bold ml-2">{step.title}</h3>
+                  </div>
                   <p className="text-muted-foreground">{step.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-card rounded-lg p-6 shadow-md h-96">
-            <h3 className="text-xl font-bold mb-4">Our Uptime Performance</h3>
+          <div className="bg-card rounded-lg p-6 shadow-md h-96 border border-purple-500/10">
+            <h3 className="text-xl font-bold mb-4">Music Bot Uptime Performance</h3>
             <p className="text-muted-foreground mb-6">
-              We maintain a consistent 99.9%+ uptime across all our servers, ensuring your bots are always online.
+              We maintain a consistent 99.9%+ uptime for all our music bots, ensuring your users always have access to music.
             </p>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">

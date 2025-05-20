@@ -1,6 +1,6 @@
 
 import { 
-  Cpu, 
+  Music, 
   BarChart, 
   Clock, 
   Shield, 
@@ -10,40 +10,40 @@ import {
 
 const features = [
   {
-    icon: <Cpu className="h-8 w-8 text-primary" />,
-    title: "Powerful Infrastructure",
+    icon: <Music className="h-8 w-8 text-primary" />,
+    title: "24/7 Online Music Bot",
     description:
-      "Our state-of-the-art infrastructure ensures your bots run 24/7 without interruption.",
+      "Your Telegram music bot stays online round-the-clock, ready to play music whenever your group needs it.",
   },
   {
     icon: <BarChart className="h-8 w-8 text-primary" />,
-    title: "Detailed Analytics",
+    title: "All Commands Preloaded",
     description:
-      "Monitor your bot's performance with comprehensive analytics and insights.",
+      "All popular music commands are pre-configured. Just start using your bot with zero setup.",
   },
   {
     icon: <Clock className="h-8 w-8 text-primary" />,
-    title: "99.9% Uptime",
+    title: "Auto-Restart On Crash",
     description:
-      "We guarantee 99.9% uptime for your bots, ensuring they're always available to your users.",
+      "Our system automatically detects and resolves any issues, ensuring your bot is always available to your users.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" />,
-    title: "Enhanced Security",
+    title: "Personal Dashboard",
     description:
-      "Your bot's data is encrypted and protected with enterprise-grade security measures.",
+      "Monitor your bot's performance and control settings through your own personal dashboard.",
   },
   {
     icon: <Zap className="h-8 w-8 text-primary" />,
-    title: "Instant Deployment",
+    title: "Instant Setup",
     description:
-      "Deploy your bots instantly with our easy-to-use platform. No technical knowledge required.",
+      "Your music bot is deployed instantly after payment. No technical knowledge required.",
   },
   {
     icon: <Code className="h-8 w-8 text-primary" />,
-    title: "API Integration",
+    title: "No VPS Needed",
     description:
-      "Integrate with third-party services using our flexible API and webhooks.",
+      "We handle all the hosting and technical details so you don't need to rent or manage a VPS.",
   },
 ];
 
@@ -52,10 +52,9 @@ export default function Features() {
     <section id="features" className="py-20 bg-muted">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Features</h2>
+          <h2 className="text-3xl font-bold mb-6">What You Get</h2>
           <p className="text-lg text-muted-foreground mb-12">
-            BotBuddy offers a comprehensive set of features to make hosting and managing your 
-            Telegram bots as easy as possible.
+            BotifyHost provides everything you need to run a successful Telegram music bot without any technical hassle.
           </p>
         </div>
 
@@ -64,9 +63,9 @@ export default function Features() {
             <div
               key={index}
               className="bg-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow 
-                         flex flex-col items-center text-center"
+                         flex flex-col items-center text-center border border-purple-500/10"
             >
-              <div className="p-3 rounded-full bg-primary/10 mb-6">
+              <div className="p-3 rounded-full bg-purple-500/10 mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
