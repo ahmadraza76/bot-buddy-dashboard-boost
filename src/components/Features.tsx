@@ -6,39 +6,49 @@ import {
   Shield, 
   Zap, 
   Code,
-  RefreshCw
+  RefreshCw,
+  Bot,
+  FileText,
+  MonitorCheck,
+  Docker
 } from "lucide-react";
 
 const features = [
   {
-    icon: <Music className="h-8 w-8 text-primary" />,
-    title: "24/7 Online Music Bot",
+    icon: <Bot className="h-8 w-8 text-primary" />,
+    title: "Python-Based Music Bot",
     description:
-      "Your Telegram music bot stays online round-the-clock, ready to play music whenever your group needs it.",
+      "Powered by python-telegram-bot and PyTgCalls libraries, supporting YouTube, Spotify, and more audio/video streams.",
   },
   {
-    icon: <BarChart className="h-8 w-8 text-primary" />,
-    title: "All Commands Preloaded",
+    icon: <Docker className="h-8 w-8 text-primary" />,
+    title: "Docker Container Deployment",
     description:
-      "All popular music commands are pre-configured. Just start using your bot with zero setup.",
+      "Your Telegram music bot is automatically deployed in an isolated Docker container with all dependencies configured.",
   },
   {
-    icon: <Clock className="h-8 w-8 text-primary" />,
-    title: "Auto-Restart On Crash",
+    icon: <FileText className="h-8 w-8 text-primary" />,
+    title: "Automatic .env Generation",
     description:
-      "Our system automatically detects and resolves any issues, ensuring your bot is always available to your users.",
+      "Just provide your Bot Token and Sudo ID. We'll handle all the configuration file generation for you.",
   },
   {
     icon: <RefreshCw className="h-8 w-8 text-primary" />,
     title: "Self-Healing System",
     description:
-      "If something happens and someone has a problem with their bot, our system will automatically fix that problem without any manual intervention.",
+      "If something happens and your bot encounters an issue, our system will automatically fix the problem without manual intervention.",
+  },
+  {
+    icon: <MonitorCheck className="h-8 w-8 text-primary" />,
+    title: "24/7 Monitoring",
+    description:
+      "We constantly monitor your bot's health and performance, ensuring it stays online round-the-clock.",
   },
   {
     icon: <Shield className="h-8 w-8 text-primary" />,
     title: "Personal Dashboard",
     description:
-      "Monitor your bot's performance and control settings through your own personal dashboard.",
+      "Monitor your bot's performance, view logs, and control settings through your own personal dashboard.",
   },
   {
     icon: <Zap className="h-8 w-8 text-primary" />,
@@ -48,9 +58,9 @@ const features = [
   },
   {
     icon: <Code className="h-8 w-8 text-primary" />,
-    title: "No VPS Needed",
+    title: "No Coding Needed",
     description:
-      "We handle all the hosting and technical details so you don't need to rent or manage a VPS.",
+      "We handle all the technical details so you don't need to write a single line of code or touch the terminal.",
   },
 ];
 
