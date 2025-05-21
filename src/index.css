@@ -35,7 +35,7 @@
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 5%;
+    --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 240 5.3% 85%;
     --sidebar-primary: 211 85% 52%;
     --sidebar-primary-foreground: 0 0% 98%;
@@ -170,3 +170,68 @@
     rgba(13, 13, 13, 0)
   );
 }
+
+/* Glass effect for cards */
+.glass-card {
+  @apply bg-black/40 border border-white/10 backdrop-blur-md;
+}
+
+/* Neon glow effects */
+.neon-glow {
+  @apply shadow-lg;
+  box-shadow: 0 0 15px rgba(103, 232, 249, 0.3), 0 0 30px rgba(103, 232, 249, 0.1);
+}
+
+.neon-text {
+  text-shadow: 0 0 8px rgba(103, 232, 249, 0.5);
+}
+
+/* Futuristic button */
+.btn-futuristic {
+  @apply relative overflow-hidden transition-all duration-300 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700;
+}
+
+.btn-futuristic::after {
+  content: '';
+  @apply absolute top-0 h-1/2 w-full bg-white/20 transform -skew-x-45;
+}
+
+/* Animation for shimmer effect */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Animation for loading and transitions */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-animation {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Railway.app inspired styles */
+.railway-card {
+  @apply bg-black border border-gray-800 rounded-xl overflow-hidden shadow-xl;
+  background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%);
+}
+
+.railway-glow {
+  box-shadow: 0 0 10px rgba(91, 33, 182, 0.4);
+}
+
+/* Futuristic grid background */
+.grid-background {
+  background-image: 
+    linear-gradient(rgba(66, 66, 66, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(66, 66, 66, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
