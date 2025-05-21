@@ -193,7 +193,8 @@
 
 .btn-futuristic::after {
   content: '';
-  @apply absolute top-0 h-1/2 w-full bg-white/20 transform -skew-x-45;
+  @apply absolute top-0 h-1/2 w-full bg-white/20;
+  transform: skewX(-45deg);
 }
 
 /* Animation for shimmer effect */
