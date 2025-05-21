@@ -67,11 +67,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-black grid-background relative">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black pointer-events-none"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-black via-purple-950 to-black text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="flex items-center mb-6">
@@ -93,7 +90,7 @@ export default function Hero() {
               Just ₹599/month — your bot will be fully installed, hosted, and running 24/7 with all music features ready to use.
             </p>
             
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4 glass-card p-6 rounded-xl backdrop-blur-md railway-card">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4 bg-black/50 p-6 rounded-xl backdrop-blur-sm border border-purple-500/10">
               <div>
                 <Input
                   type="email"
@@ -132,7 +129,7 @@ export default function Hero() {
               
               <Button 
                 type="submit" 
-                className="w-full btn-futuristic railway-glow"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium"
                 disabled={isLoading}
               >
                 {isLoading ? "Setting up..." : "Get Started for ₹599/month"}
@@ -149,9 +146,9 @@ export default function Hero() {
               <img
                 src="https://api.dicebear.com/6.x/shapes/svg?seed=music&backgroundColor=8B5CF6&shape1Color=60A5FA"
                 alt="Music Bot Illustration"
-                className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30 railway-glow"
+                className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30"
               />
-              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium railway-glow">
+              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">
                 Live in 60 seconds!
               </div>
             </div>

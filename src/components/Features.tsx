@@ -56,13 +56,10 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 bg-black relative grid-background">
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="features" className="py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-6 neon-text">What You Get</h2>
+          <h2 className="text-3xl font-bold mb-6">What You Get</h2>
           <p className="text-lg text-muted-foreground mb-12">
             BotifyHost provides everything you need to run a successful Telegram music bot without any technical hassle.
           </p>
@@ -72,9 +69,10 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="railway-card p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:railway-glow flex flex-col items-center text-center"
+              className="bg-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow 
+                         flex flex-col items-center text-center border border-purple-500/10"
             >
-              <div className="p-3 rounded-full bg-purple-500/10 mb-6 railway-glow">
+              <div className="p-3 rounded-full bg-purple-500/10 mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
