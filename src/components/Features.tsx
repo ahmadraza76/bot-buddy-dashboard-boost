@@ -10,7 +10,7 @@ import {
   Bot,
   FileText,
   MonitorCheck,
-  Docker
+  Container
 } from "lucide-react";
 
 const features = [
@@ -21,7 +21,7 @@ const features = [
       "Powered by python-telegram-bot and PyTgCalls libraries, supporting YouTube, Spotify, and more audio/video streams.",
   },
   {
-    icon: <Docker className="h-8 w-8 text-primary" />,
+    icon: <Container className="h-8 w-8 text-primary" />,
     title: "Docker Container Deployment",
     description:
       "Your Telegram music bot is automatically deployed in an isolated Docker container with all dependencies configured.",
