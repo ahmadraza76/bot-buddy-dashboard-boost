@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +20,9 @@ import LogsViewer from "@/pages/dashboard/LogsViewer";
 import ApiKeys from "@/pages/dashboard/ApiKeys";
 import Billing from "@/pages/dashboard/Billing";
 import Settings from "@/pages/dashboard/Settings";
+import UptimeMonitor from "@/pages/dashboard/UptimeMonitor";
+import ReferralSystem from "@/pages/dashboard/ReferralSystem";
+import BotStatusPage from "@/pages/BotStatusPage";
 
 // Admin Pages
 import AdminDashboard from "@/pages/admin/AdminDashboard";
@@ -46,12 +48,17 @@ const App = () => (
               <Route path="/" element={<Home />} />
             </Route>
             
+            {/* Public Status Page */}
+            <Route path="/status" element={<BotStatusPage />} />
+            
             {/* Dashboard routes */}
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DashboardIndex />} />
               <Route path="logs" element={<LogsViewer />} />
               <Route path="api-keys" element={<ApiKeys />} />
               <Route path="billing" element={<Billing />} />
+              <Route path="uptime" element={<UptimeMonitor />} />
+              <Route path="referrals" element={<ReferralSystem />} />
               <Route path="settings" element={<Settings />} />
             </Route>
             

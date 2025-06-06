@@ -12,6 +12,8 @@ import {
   Menu,
   X,
   ChevronDown,
+  Activity,
+  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
@@ -24,7 +26,7 @@ const navItems = [
     href: "/dashboard",
   },
   {
-    label: "Analytics",
+    label: "Analytics", 
     icon: BarChart2,
     href: "/dashboard/analytics",
   },
@@ -37,6 +39,16 @@ const navItems = [
     label: "API Keys",
     icon: Key,
     href: "/dashboard/api-keys",
+  },
+  {
+    label: "Uptime Monitor",
+    icon: Activity,
+    href: "/dashboard/uptime",
+  },
+  {
+    label: "Refer & Earn",
+    icon: Users,
+    href: "/dashboard/referrals",
   },
   {
     label: "Billing",
