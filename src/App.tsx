@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 // Layouts
 import HomeLayout from "@/components/HomeLayout";
 import DashboardLayout from "@/components/DashboardLayout";
+import AdminLayout from "@/components/AdminLayout";
 
 // Pages
 import Home from "@/pages/Home";
@@ -20,6 +21,15 @@ import LogsViewer from "@/pages/dashboard/LogsViewer";
 import ApiKeys from "@/pages/dashboard/ApiKeys";
 import Billing from "@/pages/dashboard/Billing";
 import Settings from "@/pages/dashboard/Settings";
+
+// Admin Pages
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+import UserManagement from "@/pages/admin/UserManagement";
+import BotManagement from "@/pages/admin/BotManagement";
+import PaymentManagement from "@/pages/admin/PaymentManagement";
+import SystemMonitoring from "@/pages/admin/SystemMonitoring";
+import SupportTickets from "@/pages/admin/SupportTickets";
+import AdminSettings from "@/pages/admin/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +53,17 @@ const App = () => (
               <Route path="api-keys" element={<ApiKeys />} />
               <Route path="billing" element={<Billing />} />
               <Route path="settings" element={<Settings />} />
+            </Route>
+            
+            {/* Admin routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<UserManagement />} />
+              <Route path="bots" element={<BotManagement />} />
+              <Route path="payments" element={<PaymentManagement />} />
+              <Route path="monitoring" element={<SystemMonitoring />} />
+              <Route path="support" element={<SupportTickets />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
             
             {/* Catch-all route for 404 */}
