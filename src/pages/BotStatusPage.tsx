@@ -119,7 +119,7 @@ export default function BotStatusPage() {
                 <div className="text-sm text-blue-700">Active Bots Running</div>
               </div>
               <div className="text-center p-4 bg-purple-50 rounded-lg">
-                <div className="text-3xl font-bold text-purple-600 mb-1">< 1s</div>
+                <div className="text-3xl font-bold text-purple-600 mb-1">&lt; 1s</div>
                 <div className="text-sm text-purple-700">Average Response Time</div>
               </div>
             </div>
