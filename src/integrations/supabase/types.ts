@@ -9,6 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_alerts: {
+        Row: {
+          bot_id: string | null
+          created_at: string
+          error_type: string | null
+          id: string
+          message: string
+          reason: string | null
+          severity: string | null
+          status: string
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          bot_id?: string | null
+          created_at?: string
+          error_type?: string | null
+          id?: string
+          message: string
+          reason?: string | null
+          severity?: string | null
+          status?: string
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          bot_id?: string | null
+          created_at?: string
+          error_type?: string | null
+          id?: string
+          message?: string
+          reason?: string | null
+          severity?: string | null
+          status?: string
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_alerts_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_alerts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       api_keys: {
         Row: {
           api_key: string
@@ -93,6 +147,57 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "bots_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      healing_actions: {
+        Row: {
+          action: string
+          bot_id: string
+          error_type: string
+          fix_details: Json | null
+          id: string
+          logs: string | null
+          status: string
+          timestamp: string
+          user_id: string
+        }
+        Insert: {
+          action: string
+          bot_id: string
+          error_type: string
+          fix_details?: Json | null
+          id?: string
+          logs?: string | null
+          status: string
+          timestamp?: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          bot_id?: string
+          error_type?: string
+          fix_details?: Json | null
+          id?: string
+          logs?: string | null
+          status?: string
+          timestamp?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "healing_actions_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "healing_actions_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"

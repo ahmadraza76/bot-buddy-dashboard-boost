@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, CheckCircle, Clock, Zap } from 'lucide-react';
-import { useTriggerHealing, useHealingHistory } from '@/hooks/useHealingSystem';
+import { useTriggerHealing, useHealingHistory, type HealingAction } from '@/hooks/useHealingSystem';
 import { useToast } from '@/hooks/use-toast';
 
 interface LogMonitorProps {
@@ -50,10 +50,10 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
           { botId, logContent: errorLog },
           {
             onSuccess: (data) => {
-              if (data.healingAction.status === 'success') {
+              if (data?.healingAction?.status === 'success') {
                 toast({
                   title: "🤖 AI Auto-Heal Success",
-                  description: `Fixed ${data.analysis.errorType.replace('_', ' ').toLowerCase()} automatically`,
+                  description: `Fixed ${data.analysis?.errorType?.replace('_', ' ')?.toLowerCase() || 'error'} automatically`,
                   duration: 5000,
                 });
               }
@@ -165,7 +165,7 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
             </p>
           ) : (
             <div className="space-y-3">
-              {healingHistory.slice(0, 10).map((action) => (
+              {healingHistory.slice(0, 10).map((action: HealingAction) => (
                 <div key={action.id} className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
                     {getActionIcon(action.status)}
