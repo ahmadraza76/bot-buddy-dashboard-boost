@@ -1,9 +1,11 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Layouts
 import HomeLayout from "@/components/HomeLayout";
@@ -33,6 +35,9 @@ import SystemMonitoring from "@/pages/admin/SystemMonitoring";
 import SupportTickets from "@/pages/admin/SupportTickets";
 import AdminSettings from "@/pages/admin/AdminSettings";
 
+// Auth
+import AuthForm from "@/components/AuthForm";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -43,16 +48,23 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Home routes */}
+            {/* Public routes */}
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Home />} />
             </Route>
             
+            {/* Auth route */}
+            <Route path="/auth" element={<AuthForm />} />
+            
             {/* Public Status Page */}
             <Route path="/status" element={<BotStatusPage />} />
             
-            {/* Dashboard routes */}
-            <Route path="/dashboard" element={<DashboardLayout />}>
+            {/* Protected Dashboard routes */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }>
               <Route index element={<DashboardIndex />} />
               <Route path="logs" element={<LogsViewer />} />
               <Route path="api-keys" element={<ApiKeys />} />
@@ -62,8 +74,12 @@ const App = () => (
               <Route path="settings" element={<Settings />} />
             </Route>
             
-            {/* Admin routes */}
-            <Route path="/admin" element={<AdminLayout />}>
+            {/* Protected Admin routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
               <Route index element={<AdminDashboard />} />
               <Route path="users" element={<UserManagement />} />
               <Route path="bots" element={<BotManagement />} />

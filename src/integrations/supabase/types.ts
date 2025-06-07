@@ -9,16 +9,352 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      api_keys: {
+        Row: {
+          api_key: string
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          key_name: string
+          last_used: string | null
+          permissions: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          api_key: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          key_name: string
+          last_used?: string | null
+          permissions?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          api_key?: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          key_name?: string
+          last_used?: string | null
+          permissions?: Json | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_keys_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bots: {
+        Row: {
+          container_id: string | null
+          cpu_usage: string | null
+          created_at: string | null
+          id: string
+          last_activity: string | null
+          memory_usage: string | null
+          status: Database["public"]["Enums"]["bot_status"] | null
+          updated_at: string | null
+          uptime_start: string | null
+          user_id: string | null
+          username: string
+        }
+        Insert: {
+          container_id?: string | null
+          cpu_usage?: string | null
+          created_at?: string | null
+          id?: string
+          last_activity?: string | null
+          memory_usage?: string | null
+          status?: Database["public"]["Enums"]["bot_status"] | null
+          updated_at?: string | null
+          uptime_start?: string | null
+          user_id?: string | null
+          username: string
+        }
+        Update: {
+          container_id?: string | null
+          cpu_usage?: string | null
+          created_at?: string | null
+          id?: string
+          last_activity?: string | null
+          memory_usage?: string | null
+          status?: Database["public"]["Enums"]["bot_status"] | null
+          updated_at?: string | null
+          uptime_start?: string | null
+          user_id?: string | null
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bots_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      incidents: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          duration: string | null
+          id: string
+          incident_date: string | null
+          severity: Database["public"]["Enums"]["incident_severity"] | null
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          incident_date?: string | null
+          severity?: Database["public"]["Enums"]["incident_severity"] | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          incident_date?: string | null
+          severity?: Database["public"]["Enums"]["incident_severity"] | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: string
+          created_at: string | null
+          id: string
+          method: Database["public"]["Enums"]["payment_method"]
+          plan: Database["public"]["Enums"]["subscription_type"]
+          status: Database["public"]["Enums"]["payment_status"] | null
+          transaction_id: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount: string
+          created_at?: string | null
+          id?: string
+          method: Database["public"]["Enums"]["payment_method"]
+          plan: Database["public"]["Enums"]["subscription_type"]
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          transaction_id: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: string
+          created_at?: string | null
+          id?: string
+          method?: Database["public"]["Enums"]["payment_method"]
+          plan?: Database["public"]["Enums"]["subscription_type"]
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          transaction_id?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          bot_token: string | null
+          created_at: string | null
+          email: string
+          id: string
+          join_date: string | null
+          last_seen: string | null
+          status: Database["public"]["Enums"]["user_status"] | null
+          subscription_type:
+            | Database["public"]["Enums"]["subscription_type"]
+            | null
+          telegram_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          bot_token?: string | null
+          created_at?: string | null
+          email: string
+          id: string
+          join_date?: string | null
+          last_seen?: string | null
+          status?: Database["public"]["Enums"]["user_status"] | null
+          subscription_type?:
+            | Database["public"]["Enums"]["subscription_type"]
+            | null
+          telegram_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          bot_token?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          join_date?: string | null
+          last_seen?: string | null
+          status?: Database["public"]["Enums"]["user_status"] | null
+          subscription_type?:
+            | Database["public"]["Enums"]["subscription_type"]
+            | null
+          telegram_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          status: Database["public"]["Enums"]["service_status"] | null
+          updated_at: string | null
+          uptime_percentage: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          status?: Database["public"]["Enums"]["service_status"] | null
+          updated_at?: string | null
+          uptime_percentage?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          status?: Database["public"]["Enums"]["service_status"] | null
+          updated_at?: string | null
+          uptime_percentage?: number | null
+        }
+        Relationships: []
+      }
+      support_tickets: {
+        Row: {
+          assigned_to: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          priority: Database["public"]["Enums"]["ticket_priority"] | null
+          status: Database["public"]["Enums"]["ticket_status"] | null
+          title: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["ticket_priority"] | null
+          status?: Database["public"]["Enums"]["ticket_status"] | null
+          title: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["ticket_priority"] | null
+          status?: Database["public"]["Enums"]["ticket_status"] | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_tickets_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "support_tickets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_admin_role: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      bot_status: "running" | "stopped" | "error"
+      incident_severity: "minor" | "major" | "maintenance"
+      payment_method: "UPI" | "PayPal" | "USDT"
+      payment_status: "completed" | "pending" | "failed" | "refunded"
+      service_status: "operational" | "degraded" | "outage"
+      subscription_type: "Monthly" | "Yearly" | "3 Months"
+      ticket_priority: "low" | "medium" | "high" | "urgent"
+      ticket_status: "open" | "in_progress" | "resolved" | "closed"
+      user_status: "active" | "inactive" | "banned"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +469,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      bot_status: ["running", "stopped", "error"],
+      incident_severity: ["minor", "major", "maintenance"],
+      payment_method: ["UPI", "PayPal", "USDT"],
+      payment_status: ["completed", "pending", "failed", "refunded"],
+      service_status: ["operational", "degraded", "outage"],
+      subscription_type: ["Monthly", "Yearly", "3 Months"],
+      ticket_priority: ["low", "medium", "high", "urgent"],
+      ticket_status: ["open", "in_progress", "resolved", "closed"],
+      user_status: ["active", "inactive", "banned"],
+    },
   },
 } as const

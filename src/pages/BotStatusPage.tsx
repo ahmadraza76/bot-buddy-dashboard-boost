@@ -2,49 +2,19 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, AlertTriangle, Activity, Server, Globe } from "lucide-react";
+import { useServices, useIncidents } from "@/hooks/useServices";
 
 export default function BotStatusPage() {
+  const { data: services = [], isLoading: servicesLoading } = useServices();
+  const { data: incidents = [], isLoading: incidentsLoading } = useIncidents();
+
+  // Calculate overall system status
   const systemStatus = {
-    overall: "operational",
-    uptime: "99.97%",
-    lastIncident: "12 days ago"
+    overall: services.some(s => s.status === 'outage') ? 'outage' : 
+             services.some(s => s.status === 'degraded') ? 'degraded' : 'operational',
+    uptime: services.length > 0 ? (services.reduce((acc, s) => acc + (s.uptime_percentage || 0), 0) / services.length).toFixed(2) + '%' : '99.97%',
+    lastIncident: incidents.length > 0 ? new Date(incidents[0].incident_date || '').toLocaleDateString() : '12 days ago'
   };
-
-  const services = [
-    { name: "Bot Hosting Service", status: "operational", uptime: "99.99%", description: "Core bot hosting infrastructure" },
-    { name: "Telegram API Gateway", status: "operational", uptime: "99.95%", description: "Telegram bot API connectivity" },
-    { name: "User Dashboard", status: "operational", uptime: "99.98%", description: "Web dashboard and controls" },
-    { name: "Payment Processing", status: "operational", uptime: "99.92%", description: "Billing and subscription management" },
-    { name: "Docker Containers", status: "operational", uptime: "99.96%", description: "Container orchestration system" },
-    { name: "Auto-Healing System", status: "operational", uptime: "99.94%", description: "Automatic bot recovery service" },
-  ];
-
-  const recentIncidents = [
-    {
-      date: "Dec 24, 2024",
-      title: "Telegram API Rate Limiting",
-      status: "resolved",
-      duration: "45 minutes",
-      description: "Some bots experienced delayed message delivery due to Telegram API rate limits. Auto-recovery implemented.",
-      severity: "minor"
-    },
-    {
-      date: "Dec 18, 2024", 
-      title: "Scheduled Maintenance",
-      status: "completed",
-      duration: "2 hours",
-      description: "Planned infrastructure upgrade completed successfully. All services restored.",
-      severity: "maintenance"
-    },
-    {
-      date: "Dec 10, 2024",
-      title: "Docker Registry Issue",
-      status: "resolved", 
-      duration: "1 hour 20 minutes",
-      description: "Temporary issue with container deployments. All affected bots automatically restarted.",
-      severity: "minor"
-    }
-  ];
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -72,6 +42,25 @@ export default function BotStatusPage() {
     }
   };
 
+  const getIncidentBadge = (status: string) => {
+    switch (status) {
+      case 'resolved':
+        return <Badge variant="outline" className="bg-green-50 text-green-700">resolved</Badge>;
+      case 'completed':
+        return <Badge variant="outline" className="bg-blue-50 text-blue-700">completed</Badge>;
+      default:
+        return <Badge variant="outline" className="bg-gray-50 text-gray-700">{status}</Badge>;
+    }
+  };
+
+  if (servicesLoading || incidentsLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -87,8 +76,14 @@ export default function BotStatusPage() {
             </div>
             <div className="text-right">
               <div className="flex items-center space-x-2 mb-1">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="font-medium text-green-600">All Systems Operational</span>
+                {getStatusIcon(systemStatus.overall)}
+                <span className={`font-medium ${
+                  systemStatus.overall === 'operational' ? 'text-green-600' : 
+                  systemStatus.overall === 'degraded' ? 'text-yellow-600' : 'text-red-600'
+                }`}>
+                  {systemStatus.overall === 'operational' ? 'All Systems Operational' : 
+                   systemStatus.overall === 'degraded' ? 'Some Systems Degraded' : 'System Outage'}
+                </span>
               </div>
               <p className="text-sm text-muted-foreground">
                 {systemStatus.uptime} uptime • Last incident: {systemStatus.lastIncident}
@@ -137,18 +132,20 @@ export default function BotStatusPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {services.map((service, index) => (
-                <div key={index} className="flex items-center justify-between p-4 rounded-lg border">
+              {services.map((service) => (
+                <div key={service.id} className="flex items-center justify-between p-4 rounded-lg border">
                   <div className="flex items-center space-x-3">
-                    {getStatusIcon(service.status)}
+                    {getStatusIcon(service.status || 'operational')}
                     <div>
                       <h4 className="font-medium">{service.name}</h4>
                       <p className="text-sm text-muted-foreground">{service.description}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    {getStatusBadge(service.status)}
-                    <p className="text-sm text-muted-foreground mt-1">{service.uptime} uptime</p>
+                    {getStatusBadge(service.status || 'operational')}
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {service.uptime_percentage?.toFixed(2) || '99.99'}% uptime
+                    </p>
                   </div>
                 </div>
               ))}
@@ -164,15 +161,15 @@ export default function BotStatusPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {recentIncidents.map((incident, index) => (
-                <div key={index} className="border-l-4 border-green-500 pl-4">
+              {incidents.length > 0 ? incidents.map((incident) => (
+                <div key={incident.id} className="border-l-4 border-green-500 pl-4">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium">{incident.title}</h4>
                     <div className="flex items-center space-x-2">
-                      <Badge variant="outline" className="bg-green-50 text-green-700">
-                        {incident.status}
-                      </Badge>
-                      <span className="text-sm text-muted-foreground">{incident.date}</span>
+                      {getIncidentBadge(incident.status || 'resolved')}
+                      <span className="text-sm text-muted-foreground">
+                        {new Date(incident.incident_date || '').toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground mb-2">{incident.description}</p>
@@ -180,7 +177,9 @@ export default function BotStatusPage() {
                     Duration: {incident.duration} • Severity: {incident.severity}
                   </p>
                 </div>
-              ))}
+              )) : (
+                <p className="text-muted-foreground">No recent incidents to report.</p>
+              )}
             </div>
           </CardContent>
         </Card>
