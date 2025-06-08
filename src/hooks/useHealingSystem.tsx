@@ -1,32 +1,13 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
+import type { Database } from '@/integrations/supabase/types';
 
-export interface HealingAction {
-  id: string;
-  bot_id: string;
-  user_id: string;
-  error_type: string;
-  action: string;
-  status: 'success' | 'failed' | 'pending';
-  timestamp: string;
-  logs?: string;
-  fix_details?: any;
-}
-
-export interface AdminAlert {
-  id: string;
-  type: string;
-  bot_id: string;
-  user_id: string;
-  error_type?: string;
-  reason?: string;
-  severity?: string;
-  message: string;
-  status: 'open' | 'resolved';
-  created_at: string;
-}
+export type HealingAction = Database['public']['Tables']['healing_actions']['Row'];
+export type AdminAlert = Database['public']['Tables']['admin_alerts']['Row'] & {
+  profiles?: { email: string };
+  bots?: { username: string };
+};
 
 export const useHealingHistory = (botId?: string) => {
   return useQuery({

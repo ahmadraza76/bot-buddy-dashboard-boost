@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, CheckCircle, Clock, Zap } from 'lucide-react';
-import { useTriggerHealing, useHealingHistory, type HealingAction } from '@/hooks/useHealingSystem';
+import { useTriggerHealing, useHealingHistory } from '@/hooks/useHealingSystem';
 import { useToast } from '@/hooks/use-toast';
 
 interface LogMonitorProps {
@@ -165,7 +164,7 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
             </p>
           ) : (
             <div className="space-y-3">
-              {healingHistory.slice(0, 10).map((action: HealingAction) => (
+              {healingHistory.slice(0, 10).map((action) => (
                 <div key={action.id} className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
                     {getActionIcon(action.status)}
