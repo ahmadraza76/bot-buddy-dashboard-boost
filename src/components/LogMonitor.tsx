@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, CheckCircle, Clock, Zap } from 'lucide-react';
-import { useTriggerHealing, useHealingHistory } from '@/hooks/useHealingSystem';
+import { useTriggerHealing, useHealingHistory, type HealingAction } from '@/hooks/useHealingSystem';
 import { useToast } from '@/hooks/use-toast';
 
 interface LogMonitorProps {
@@ -13,7 +14,7 @@ interface LogMonitorProps {
 
 export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
   const [detectedErrors, setDetectedErrors] = useState<string[]>([]);
-  const { data: healingHistory } = useHealingHistory(botId);
+  const { data: healingHistory, isLoading: healingLoading, error: healingError } = useHealingHistory(botId);
   const triggerHealing = useTriggerHealing();
   const { toast } = useToast();
 
@@ -95,6 +96,12 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
     }
   };
 
+  // Debug logging
+  console.log('LogMonitor - botId:', botId);
+  console.log('LogMonitor - healingHistory:', healingHistory);
+  console.log('LogMonitor - healingLoading:', healingLoading);
+  console.log('LogMonitor - healingError:', healingError);
+
   return (
     <div className="space-y-4">
       {/* Error Detection Panel */}
@@ -158,13 +165,24 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
           <CardDescription>Recent AI-powered fixes and interventions</CardDescription>
         </CardHeader>
         <CardContent>
-          {!healingHistory || healingHistory.length === 0 ? (
+          {healingLoading ? (
+            <div className="text-center p-4">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+              <p className="mt-2 text-sm text-muted-foreground">Loading healing history...</p>
+            </div>
+          ) : healingError ? (
+            <div className="text-center p-4 text-red-500">
+              <AlertTriangle className="h-8 w-8 mx-auto mb-2" />
+              <p>Error loading healing history</p>
+              <p className="text-sm">{healingError.message}</p>
+            </div>
+          ) : !healingHistory || healingHistory.length === 0 ? (
             <p className="text-muted-foreground text-center p-4">
               No healing actions recorded yet
             </p>
           ) : (
             <div className="space-y-3">
-              {healingHistory.slice(0, 10).map((action) => (
+              {healingHistory.slice(0, 10).map((action: HealingAction) => (
                 <div key={action.id} className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
                     {getActionIcon(action.status)}
