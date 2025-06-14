@@ -1,1 +1,11 @@
+
 project_id = "evhqmlflrerazafzmvdk"
+
+[functions.payment-webhook]
+verify_jwt = false
+
+[functions.telegram-notification]
+verify_jwt = false
+
+[functions.razorpay-webhook]
+verify_jwt = false
