@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useAdminPayments } from "@/hooks/useAdmin";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -7,70 +8,39 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, CreditCard, RefreshCw, Eye, Download } from "lucide-react";
 
-// Sample payment data
-const payments = [
-  {
-    id: "pay_001",
-    user: "john@example.com",
-    amount: "₹599",
-    plan: "Monthly",
-    method: "UPI",
-    status: "completed",
-    date: "2024-06-05 14:30",
-    transactionId: "UPI123456789"
-  },
-  {
-    id: "pay_002", 
-    user: "sarah@example.com",
-    amount: "₹4999",
-    plan: "Yearly",
-    method: "PayPal",
-    status: "completed",
-    date: "2024-06-04 10:15",
-    transactionId: "PP987654321"
-  },
-  {
-    id: "pay_003",
-    user: "mike@example.com",
-    amount: "₹1499",
-    plan: "3 Months",
-    method: "USDT",
-    status: "pending",
-    date: "2024-06-03 16:45",
-    transactionId: "USDT456789123"
-  },
-  {
-    id: "pay_004",
-    user: "alice@example.com",
-    amount: "₹599",
-    plan: "Monthly",
-    method: "UPI",
-    status: "failed",
-    date: "2024-06-02 09:22",
-    transactionId: "UPI789123456"
-  },
-];
-
 export default function PaymentManagement() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [methodFilter, setMethodFilter] = useState("all");
+  const { data: payments = [], isLoading, error, refetch } = useAdminPayments();
 
-  const filteredPayments = payments.filter(payment => {
-    const matchesSearch = payment.user.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         payment.transactionId.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === "all" || payment.status === statusFilter;
-    const matchesMethod = methodFilter === "all" || payment.method === methodFilter;
+  const filteredPayments = (payments || []).filter((payment: any) => {
+    const matchesSearch =
+      (payment.profiles?.email || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      (payment.transaction_id || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      statusFilter === "all" || payment.status === statusFilter;
+    const matchesMethod =
+      methodFilter === "all" || (payment.method || "").toLowerCase() === methodFilter.toLowerCase();
     return matchesSearch && matchesStatus && matchesMethod;
   });
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-500";
-      case "pending": return "bg-yellow-500";
-      case "failed": return "bg-red-500";
-      case "refunded": return "bg-blue-500";
-      default: return "bg-gray-500";
+      case "completed":
+        return "bg-green-500";
+      case "pending":
+        return "bg-yellow-500";
+      case "failed":
+        return "bg-red-500";
+      case "refunded":
+        return "bg-blue-500";
+      default:
+        return "bg-gray-500";
     }
   };
 
@@ -79,11 +49,11 @@ export default function PaymentManagement() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Payment Management</h1>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={refetch}>
             <RefreshCw className="h-4 w-4 mr-2" />
             Sync
           </Button>
@@ -97,8 +67,17 @@ export default function PaymentManagement() {
             <CardDescription>Total Revenue</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹15,47,000</div>
-            <p className="text-xs text-green-600">+12.5% from last month</p>
+            {/* Optionally compute from payments data */}
+            <div className="text-2xl font-bold">
+              ₹
+              {
+                filteredPayments
+                  .filter((p: any) => p.status === "completed")
+                  .reduce((sum: number, p: any) => sum + Number(p.amount || 0), 0)
+                  .toLocaleString()
+              }
+            </div>
+            <p className="text-xs text-green-600">Live payments</p>
           </CardContent>
         </Card>
         <Card>
@@ -106,8 +85,22 @@ export default function PaymentManagement() {
             <CardDescription>This Month</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹3,59,000</div>
-            <p className="text-xs text-green-600">+8.3% from last month</p>
+            {/* Calculate by filtering payments of this month */}
+            <div className="text-2xl font-bold">
+              ₹
+              {
+                filteredPayments
+                  .filter(
+                    (p: any) =>
+                      p.status === "completed" &&
+                      new Date(p.created_at).getMonth() === new Date().getMonth() &&
+                      new Date(p.created_at).getFullYear() === new Date().getFullYear()
+                  )
+                  .reduce((sum: number, p: any) => sum + Number(p.amount || 0), 0)
+                  .toLocaleString()
+              }
+            </div>
+            <p className="text-xs text-green-600">Stats this month</p>
           </CardContent>
         </Card>
         <Card>
@@ -115,8 +108,10 @@ export default function PaymentManagement() {
             <CardDescription>Failed Payments</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-600">45</div>
-            <p className="text-xs text-red-600">-2.1% from last month</p>
+            <div className="text-2xl font-bold text-red-600">
+              {filteredPayments.filter((p: any) => p.status === "failed").length}
+            </div>
+            <p className="text-xs text-red-600">Failures</p>
           </CardContent>
         </Card>
         <Card>
@@ -124,8 +119,10 @@ export default function PaymentManagement() {
             <CardDescription>Pending Payments</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-yellow-600">23</div>
-            <p className="text-xs text-yellow-600">12 require attention</p>
+            <div className="text-2xl font-bold text-yellow-600">
+              {filteredPayments.filter((p: any) => p.status === "pending").length}
+            </div>
+            <p className="text-xs text-yellow-600">Awaiting</p>
           </CardContent>
         </Card>
       </div>
@@ -158,6 +155,7 @@ export default function PaymentManagement() {
           className="px-3 py-2 border rounded-md"
         >
           <option value="all">All Methods</option>
+          <option value="razorpay">Razorpay</option>
           <option value="UPI">UPI</option>
           <option value="PayPal">PayPal</option>
           <option value="USDT">USDT</option>
@@ -174,62 +172,70 @@ export default function PaymentManagement() {
           <CardDescription>All payment transactions and billing history</CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Transaction ID</TableHead>
-                <TableHead>User</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Plan</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredPayments.map((payment) => (
-                <TableRow key={payment.id}>
-                  <TableCell>
-                    <code className="text-xs bg-muted px-2 py-1 rounded">
-                      {payment.transactionId}
-                    </code>
-                  </TableCell>
-                  <TableCell>{payment.user}</TableCell>
-                  <TableCell className="font-medium">{payment.amount}</TableCell>
-                  <TableCell>{payment.plan}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{payment.method}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={`${getStatusColor(payment.status)} text-white`}>
-                      {payment.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {payment.date}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center space-x-1">
-                      <Button variant="ghost" size="sm" title="View Details">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                      {payment.status === "pending" && (
-                        <Button variant="ghost" size="sm" title="Process Payment" className="text-green-600">
-                          <CreditCard className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {payment.status === "completed" && (
-                        <Button variant="ghost" size="sm" title="Refund" className="text-blue-600">
-                          <RefreshCw className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
-                  </TableCell>
+          {isLoading ? (
+            <div className="p-6 text-center text-muted-foreground">Loading payments...</div>
+          ) : error ? (
+            <div className="p-6 text-center text-red-500">Could not load payments.</div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Transaction ID</TableHead>
+                  <TableHead>User</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Plan</TableHead>
+                  <TableHead>Method</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filteredPayments.map((payment: any) => (
+                  <TableRow key={payment.id}>
+                    <TableCell>
+                      <code className="text-xs bg-muted px-2 py-1 rounded">
+                        {payment.transaction_id}
+                      </code>
+                    </TableCell>
+                    <TableCell>{payment.profiles?.email || "-"}</TableCell>
+                    <TableCell className="font-medium">₹{payment.amount}</TableCell>
+                    <TableCell>{payment.plan}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">{payment.method}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={`${getStatusColor(payment.status)} text-white`}>
+                        {payment.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {payment.created_at
+                        ? new Date(payment.created_at).toLocaleString()
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-1">
+                        <Button variant="ghost" size="sm" title="View Details">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        {payment.status === "pending" && (
+                          <Button variant="ghost" size="sm" title="Process Payment" className="text-green-600">
+                            <CreditCard className="h-4 w-4" />
+                          </Button>
+                        )}
+                        {payment.status === "completed" && (
+                          <Button variant="ghost" size="sm" title="Refund" className="text-blue-600">
+                            <RefreshCw className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </CardContent>
       </Card>
     </div>
