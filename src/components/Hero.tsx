@@ -218,14 +218,14 @@ export default function Hero() {
                 {/* Matching badge */}
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
                   <span
-                    className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2"
+                    className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border border-purple-300 flex items-center gap-2"
                     style={{
                       background:
-                        "linear-gradient(90deg, rgba(17,0,36,0.95) 0%, rgba(88,28,135,0.88) 60%, rgba(29,78,216,0.75) 100%)",
+                        "linear-gradient(90deg, #24113a 0%, #491f7b 60%, #2f51a4 100%)", // solid, opaque gradient, no alpha/transparency
                       color: "#ede9fe",
                       boxShadow:
                         "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170",
-                      border: "1.5px solid rgba(168,139,250,0.07)",
+                      border: "1.5px solid #a78bfa",
                     }}
                   >
                     <svg width="22" height="22" aria-hidden="true" viewBox="0 0 22 22" fill="none" className="drop-shadow">
