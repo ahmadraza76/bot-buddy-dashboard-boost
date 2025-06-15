@@ -126,13 +126,21 @@ export default function Hero() {
                 )}
               </div>
               
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium"
+                disabled={isLoading}
+              >
+                {isLoading ? "Setting up..." : "Get Started for ₹599/month"}
+              </Button>
+              
               <p className="text-center text-xs text-gray-400 mt-2">
                 No setup fee. Cancel anytime.
               </p>
             </form>
           </div>
           
-          <div className="order-1 lg:order-2 flex flex-col items-center justify-center">
+          <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
                 <svg
@@ -179,13 +187,24 @@ export default function Hero() {
                   <circle cx="162" cy="123" r="2" fill="#60a5fa" />
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
                 </svg>
-                <div className="mt-6 w-full flex flex-col items-center animate-fade-in">
-                  <Music size={36} className="text-purple-400 mb-2" />
+                <div className="mt-6 w-full flex justify-center animate-fade-in">
                   <span
-                    className="text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 select-none"
-                    style={{ letterSpacing: "0.01em" }}
+                    className="
+                      inline-flex items-center justify-center
+                      rounded-full select-none
+                      bg-gradient-to-r from-purple-700 to-blue-500
+                      text-sm md:text-base font-medium
+                      px-4 py-1
+                      text-white
+                      border border-white/10
+                      shadow-none
+                      transition-all
+                    "
+                    style={{
+                      letterSpacing: "0.01em",
+                    }}
                   >
-                    BotifyHost
+                    Live Audio &amp; Video Streaming!
                   </span>
                 </div>
               </div>
