@@ -194,11 +194,24 @@ export default function Hero() {
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
                 </svg>
                 
-                {/* Replace the badge with a music icon + BotifyHost gradient text */}
-                <div className="mt-6 flex items-center justify-center animate-fade-in">
-                  <Music size={32} className="text-purple-400 mr-3" />
-                  <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-                    BotifyHost
+                <div className="mt-6 w-full flex justify-center animate-fade-in">
+                  <span
+                    className="
+                      inline-flex items-center justify-center
+                      rounded-full select-none
+                      bg-gradient-to-r from-purple-700 to-blue-500
+                      text-sm md:text-base font-medium
+                      px-4 py-1
+                      text-white
+                      border border-white/10
+                      shadow-none
+                      transition-all
+                    "
+                    style={{
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    Live Audio &amp; Video Streaming!
                   </span>
                 </div>
               </div>
