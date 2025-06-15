@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -141,68 +140,69 @@ export default function Hero() {
             </form>
           </div>
           
-          {/* IMAGE AND BADGE */}
+          {/* Updated IMAGE AND BADGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* Updated Music Bot SVG - matching hero background colors */}
+                {/* Perfect Bot SVG matching reference image */}
                 <svg
                   width="280"
                   height="280"
                   viewBox="0 0 280 280"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-full max-w-md rounded-full shadow-2xl"
+                  className="w-full max-w-md"
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="botGradient" cx="0.5" cy="0.3" r="0.7">
-                      <stop offset="0%" stopColor="#8b5cf6" />
-                      <stop offset="50%" stopColor="#7c3aed" />
-                      <stop offset="100%" stopColor="#5b21b6" />
+                    <radialGradient id="botFaceGradient" cx="0.5" cy="0.4" r="0.6">
+                      <stop offset="0%" stopColor="#a855f7" />
+                      <stop offset="70%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#7c3aed" />
                     </radialGradient>
                     <linearGradient id="headphoneGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#a855f7" />
-                      <stop offset="100%" stopColor="#6366f1" />
+                      <stop offset="0%" stopColor="#6366f1" />
+                      <stop offset="100%" stopColor="#4f46e5" />
                     </linearGradient>
                   </defs>
                   
-                  {/* Main bot head - perfect circle */}
-                  <circle cx="140" cy="140" r="85" fill="url(#botGradient)" />
+                  {/* Main bot face - perfect circle */}
+                  <circle cx="140" cy="140" r="90" fill="url(#botFaceGradient)" />
                   
                   {/* Headphones */}
                   <g>
-                    {/* Left headphone */}
-                    <rect x="45" y="115" width="18" height="50" rx="9" fill="url(#headphoneGradient)" />
-                    {/* Right headphone */}
-                    <rect x="217" y="115" width="18" height="50" rx="9" fill="url(#headphoneGradient)" />
-                    {/* Headphone band */}
-                    <path d="M63 130 Q70 120 140 120 Q210 120 217 130" stroke="url(#headphoneGradient)" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    {/* Left headphone ear piece */}
+                    <rect x="40" y="120" width="20" height="40" rx="10" fill="url(#headphoneGradient)" />
+                    {/* Right headphone ear piece */}
+                    <rect x="220" y="120" width="20" height="40" rx="10" fill="url(#headphoneGradient)" />
+                    {/* Headphone band - curved path */}
+                    <path d="M60 135 Q70 110 140 110 Q210 110 220 135" stroke="url(#headphoneGradient)" strokeWidth="12" strokeLinecap="round" fill="none" />
                   </g>
                   
-                  {/* Bot eyes */}
-                  <circle cx="115" cy="125" r="8" fill="#1e1b4b" />
-                  <circle cx="165" cy="125" r="8" fill="#1e1b4b" />
-                  <circle cx="115" cy="125" r="4" fill="#60a5fa" />
-                  <circle cx="165" cy="125" r="4" fill="#60a5fa" />
+                  {/* Bot eyes - simple dots */}
+                  <circle cx="120" cy="125" r="6" fill="#1e1b4b" />
+                  <circle cx="160" cy="125" r="6" fill="#1e1b4b" />
                   
-                  {/* Smile */}
-                  <path d="M115 165 Q140 180 165 165" stroke="#60a5fa" strokeWidth="4" strokeLinecap="round" />
+                  {/* Eye highlights */}
+                  <circle cx="122" cy="123" r="2" fill="#60a5fa" />
+                  <circle cx="162" cy="123" r="2" fill="#60a5fa" />
                   
-                  {/* Antenna */}
-                  <rect x="137" y="60" width="6" height="25" rx="3" fill="url(#headphoneGradient)" />
-                  <circle cx="140" cy="55" r="6" fill="#60a5fa" />
+                  {/* Simple smile */}
+                  <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
+                  
+                  {/* Small antenna */}
+                  <rect x="137" y="55" width="6" height="20" rx="3" fill="#6366f1" />
+                  <circle cx="140" cy="50" r="4" fill="#60a5fa" />
                 </svg>
                 
                 {/* Badge */}
                 <div className="mt-6 select-none animate-fade-in">
                   <span
-                    className="px-8 py-3 rounded-full shadow-lg text-lg font-semibold border-2"
+                    className="px-8 py-3 rounded-full shadow-lg text-lg font-semibold"
                     style={{
-                      background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #3730a3 100%)",
+                      background: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%)",
                       color: "#f3f4f6",
-                      boxShadow: "0 8px 32px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.2)",
-                      borderColor: "#8b5cf6",
+                      boxShadow: "0 8px 32px rgba(139, 92, 246, 0.3)"
                     }}
                   >
                     Live Audio & Video Streaming!
