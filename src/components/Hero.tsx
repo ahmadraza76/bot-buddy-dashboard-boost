@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -180,12 +179,11 @@ export default function Hero() {
                   
                   {/* Headphones */}
                   <g>
-                    {/* Left headphone ear piece */}
-                    <rect x="40" y="120" width="20" height="40" rx="10" fill="url(#headphoneGradient)" />
-                    {/* Right headphone ear piece */}
-                    <rect x="220" y="120" width="20" height="40" rx="10" fill="url(#headphoneGradient)" />
-                    {/* Headphone band - curved path */}
-                    <path d="M60 135 Q70 110 140 110 Q210 110 220 135" stroke="url(#headphoneGradient)" strokeWidth="12" strokeLinecap="round" fill="none" />
+                    {/* Centered left and right headphone earpieces */}
+                    <rect x="32" y="125" width="22" height="40" rx="11" fill="url(#headphoneGradient)" />
+                    <rect x="226" y="125" width="22" height="40" rx="11" fill="url(#headphoneGradient)" />
+                    {/* Headphone band - perfectly semicircular and centered */}
+                    <path d="M43 145 Q140 70 237 145" stroke="url(#headphoneGradient)" strokeWidth="12" strokeLinecap="round" fill="none" />
                   </g>
                   
                   {/* Bot eyes - simple dots */}
