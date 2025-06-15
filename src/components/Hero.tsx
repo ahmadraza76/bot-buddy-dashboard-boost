@@ -144,7 +144,7 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* New SVG illustration: Music Bot w/ Headphones and Modern Glow */}
+                {/* Updated SVG illustration: No white color (#fff/white) used */}
                 <svg
                   width="220"
                   height="220"
@@ -181,7 +181,7 @@ export default function Hero() {
                   {/* Main bot head */}
                   <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradient)" filter="url(#botShadow)" />
                   {/* Face highlight */}
-                  <ellipse cx="110" cy="110" rx="48" ry="36" fill="white" fillOpacity="0.07" />
+                  <ellipse cx="110" cy="110" rx="48" ry="36" fill="#f5f3ff" fillOpacity="0.10" /> {/* soft lavender highlight */}
                   {/* Headphones */}
                   <g>
                     <rect x="38" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
@@ -189,13 +189,13 @@ export default function Hero() {
                     <path d="M54 105 Q40 110 54 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
                     <path d="M166 105 Q180 110 166 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
-                  {/* Bot eyes */}
-                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#fff" />
-                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#fff" />
+                  {/* Bot eyes - replaced white with soft cyan/light purple */}
+                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#c7d2fe" />
+                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#c7d2fe" />
                   <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#a78bfa" />
                   <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#a78bfa" />
-                  {/* Smile */}
-                  <path d="M96 151 Q110 163 124 151" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+                  {/* Smile - use blue-violet */}
+                  <path d="M96 151 Q110 163 124 151" stroke="#a5b4fc" strokeWidth="4" strokeLinecap="round" />
                   {/* Music note (right side) */}
                   <g>
                     <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="url(#noteGradient)" />
@@ -215,14 +215,14 @@ export default function Hero() {
                     <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#6366f1" />
                   </g>
                 </svg>
-                {/* New matching badge */}
+                {/* Matching badge */}
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
                   <span
                     className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2"
                     style={{
                       background:
                         "linear-gradient(90deg, rgba(17,0,36,0.95) 0%, rgba(88,28,135,0.88) 60%, rgba(29,78,216,0.75) 100%)",
-                      color: "#fff",
+                      color: "#ede9fe",
                       boxShadow:
                         "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170",
                       border: "1.5px solid rgba(168,139,250,0.07)",
@@ -243,7 +243,7 @@ export default function Hero() {
                       <path d="M4 13a7 7 0 0 1 14 0" stroke="url(#headband)" strokeWidth="2" fill="none"/>
                       <rect x="2.5" y="13" width="3" height="5" rx="1.3" fill="#a78bfa" />
                       <rect x="16.5" y="13" width="3" height="5" rx="1.3" fill="#6366f1" />
-                      <rect x="12" y="7" width="1.1" height="6" rx="0.54" fill="#fff" />
+                      <rect x="12" y="7" width="1.1" height="6" rx="0.54" fill="#fef9c3" />
                       <ellipse cx="12.7" cy="13.3" rx="1.6" ry="1.1" fill="#fef9c3" />
                     </svg>
                     <span className="ml-1 font-semibold drop-shadow-sm">
