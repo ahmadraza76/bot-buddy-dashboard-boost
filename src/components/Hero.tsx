@@ -126,21 +126,13 @@ export default function Hero() {
                 )}
               </div>
               
-              <Button 
-                type="submit" 
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium"
-                disabled={isLoading}
-              >
-                {isLoading ? "Setting up..." : "Get Started for ₹599/month"}
-              </Button>
-              
               <p className="text-center text-xs text-gray-400 mt-2">
                 No setup fee. Cancel anytime.
               </p>
             </form>
           </div>
           
-          <div className="order-1 lg:order-2 flex justify-center">
+          <div className="order-1 lg:order-2 flex flex-col items-center justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
                 <svg
@@ -167,12 +159,9 @@ export default function Hero() {
                       <stop offset="100%" stopColor="#3b82f6" />
                     </linearGradient>
                   </defs>
-                  
                   <circle cx="140" cy="140" r="90" fill="url(#botFaceGradient)" />
-                  
                   <rect x="137" y="45" width="6" height="18" rx="3" fill="url(#antennaGradient)" />
                   <circle cx="140" cy="42" r="5" fill="#60a5fa" />
-                  
                   <g>
                     <rect x="38" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
                     <rect x="220" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
@@ -184,34 +173,19 @@ export default function Hero() {
                       fill="none"
                     />
                   </g>
-                  
                   <circle cx="120" cy="125" r="6" fill="#1e1b4b" />
                   <circle cx="160" cy="125" r="6" fill="#1e1b4b" />
-                  
                   <circle cx="122" cy="123" r="2" fill="#60a5fa" />
                   <circle cx="162" cy="123" r="2" fill="#60a5fa" />
-                  
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
                 </svg>
-                
-                <div className="mt-6 w-full flex justify-center animate-fade-in">
+                <div className="mt-6 w-full flex flex-col items-center animate-fade-in">
+                  <Music size={36} className="text-purple-400 mb-2" />
                   <span
-                    className="
-                      inline-flex items-center justify-center
-                      rounded-full select-none
-                      bg-gradient-to-r from-purple-700 to-blue-500
-                      text-sm md:text-base font-medium
-                      px-4 py-1
-                      text-white
-                      border border-white/10
-                      shadow-none
-                      transition-all
-                    "
-                    style={{
-                      letterSpacing: "0.01em",
-                    }}
+                    className="text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 select-none"
+                    style={{ letterSpacing: "0.01em" }}
                   >
-                    Live Audio &amp; Video Streaming!
+                    BotifyHost
                   </span>
                 </div>
               </div>
