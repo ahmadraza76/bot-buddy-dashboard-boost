@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,11 +6,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Save, Settings, Users, CreditCard, Bell, Shield, Server } from "lucide-react";
+import { usePlatformSettings, useUpdatePlatformSetting } from "@/hooks/usePlatformSettings";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AdminSettings() {
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [autoBackup, setAutoBackup] = useState(true);
   const [emailNotifications, setEmailNotifications] = useState(true);
+  const { data: platformSettings = {}, isLoading: isLoadingSettings } = usePlatformSettings();
+  const updateSetting = useUpdatePlatformSetting();
+  const { toast } = useToast();
+  const [razorpayKey, setRazorpayKey] = useState("");
+  const [usdtPayoutKey, setUsdtPayoutKey] = useState("");
+
+  // On load: fill from settings if present
+  React.useEffect(() => {
+    setRazorpayKey(platformSettings["razorpay_payout_key"] ?? "");
+    setUsdtPayoutKey(platformSettings["usdt_trc20_payout_key"] ?? "");
+  }, [isLoadingSettings, platformSettings]);
 
   return (
     <div>
@@ -139,10 +151,11 @@ export default function AdminSettings() {
               </CardContent>
             </Card>
 
+            {/* Payment Gateways + PAYOUT CONFIG */}
             <Card>
               <CardHeader>
                 <CardTitle>Payment Gateways</CardTitle>
-                <CardDescription>Configure payment methods</CardDescription>
+                <CardDescription>Configure payment methods and payouts</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -156,6 +169,86 @@ export default function AdminSettings() {
                 <div>
                   <label className="text-sm font-medium mb-2 block">USDT Wallet Address</label>
                   <Input placeholder="TRC20 wallet address..." />
+                </div>
+                
+                {/* NEW: Payout Gateway API Config */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Razorpay Payout API Key (for withdrawals)</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="Razorpay Payout API Key"
+                      value={razorpayKey}
+                      onChange={e => setRazorpayKey(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        updateSetting.mutate(
+                          { key: "razorpay_payout_key", value: razorpayKey },
+                          {
+                            onSuccess: () =>
+                              toast({
+                                title: "Saved!",
+                                description: "Razorpay payout API key has been saved.",
+                              }),
+                            onError: err =>
+                              toast({
+                                title: "Error",
+                                description: String(
+                                  (err as any).message || "Failed to save Razorpay payout key."
+                                ),
+                                variant: "destructive",
+                              }),
+                          }
+                        );
+                      }}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Used to automate payout withdrawals directly to user bank/UPI.
+                  </p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">USDT (TRC20) Payout Key/Address</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="USDT TRC20 API Key or Wallet"
+                      value={usdtPayoutKey}
+                      onChange={e => setUsdtPayoutKey(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        updateSetting.mutate(
+                          { key: "usdt_trc20_payout_key", value: usdtPayoutKey },
+                          {
+                            onSuccess: () =>
+                              toast({
+                                title: "Saved!",
+                                description: "USDT TRC20 payout key/address saved.",
+                              }),
+                            onError: err =>
+                              toast({
+                                title: "Error",
+                                description: String(
+                                  (err as any).message || "Failed to save USDT payout key.",
+                                ),
+                                variant: "destructive",
+                              }),
+                          }
+                        );
+                      }}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Used for automatic USDT (TRC20) payout/withdrawals.
+                  </p>
                 </div>
               </CardContent>
             </Card>
