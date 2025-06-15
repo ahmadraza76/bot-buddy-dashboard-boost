@@ -228,8 +228,10 @@ export default function Hero() {
                       border: "1.5px solid #a78bfa",
                     }}
                   >
+                    {/* Headphones icon with no background or bubble */}
                     <svg width="22" height="22" aria-hidden="true" viewBox="0 0 22 22" fill="none" className="drop-shadow">
-                      <ellipse cx="11" cy="11" rx="10" ry="10" fill="url(#grad1)" />
+                      {/* REMOVE ellipse background */}
+                      {/* <ellipse cx="11" cy="11" rx="10" ry="10" fill="url(#grad1)" /> */}
                       <defs>
                         <radialGradient id="grad1" cx="0.7" cy="0.35" r="1">
                           <stop offset="0.2" stopColor="#c4b5fd"/>
