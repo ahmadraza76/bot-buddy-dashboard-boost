@@ -144,75 +144,54 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* Updated SVG illustration: No white color (#fff/white) used */}
+                {/* Updated Music Bot SVG illustration: ALL white/cream/lavender (and their shades) colors removed */}
                 <svg
                   width="220"
                   height="220"
                   viewBox="0 0 220 220"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-full max-w-md rounded-xl shadow-2xl border-4 border-purple-500/30 bg-white"
-                  style={{ background: "linear-gradient(135deg,#ede9fe 60%,#dbebff 100%)" }}
+                  className="w-full max-w-md rounded-xl shadow-2xl border-4 border-purple-500/30 bg-transparent"
+                  style={{ background: "linear-gradient(135deg,#1e1634 60%,#1a2c40 100%)" }}
                   aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="botGlow" cx="0.6" cy="0.35" r="0.8">
-                      <stop offset="0%" stopColor="#c7d2fe" stopOpacity="0.7"/>
-                      <stop offset="100%" stopColor="#ede9fe" stopOpacity="0.13"/>
-                    </radialGradient>
-                    <linearGradient id="botGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#a78bfa" />
-                      <stop offset="100%" stopColor="#6366f1" />
+                    {/* Remove botGlow, botGradient, headphonesGradient, noteGradient, etc with white/cream/lavender */}
+                    <linearGradient id="botGradientDark" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#6d28d9" />
+                      <stop offset="100%" stopColor="#312e81" />
                     </linearGradient>
-                    <linearGradient id="headphonesGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#8b5cf6"/>
-                      <stop offset="100%" stopColor="#60a5fa"/>
-                    </linearGradient>
-                    <linearGradient id="noteGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#fef9c3"/>
-                      <stop offset="100%" stopColor="#a78bfa"/>
-                    </linearGradient>
-                    <filter id="botShadow" x="-40%" y="-20%" width="180%" height="180%">
-                      <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#a78bfa" floodOpacity="0.19"/>
-                    </filter>
                   </defs>
-                  {/* Background - REMOVED unwanted white/lavender bubble/ellipse */}
-                  {/* <rect width="220" height="220" rx="32" fill="url(#botGlow)" /> */}
                   {/* Main bot head */}
-                  <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradient)" filter="url(#botShadow)" />
-                  {/* Face highlight removed */}
-                  {/* <ellipse cx="110" cy="110" rx="48" ry="36" fill="#f5f3ff" fillOpacity="0.10" /> */}
-                  {/* Headphones */}
+                  <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradientDark)" />
+                  {/* --- Headphones --- */}
                   <g>
-                    <rect x="38" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
-                    <rect x="166" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
-                    <path d="M54 105 Q40 110 54 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M166 105 Q180 110 166 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    <rect x="38" y="90" width="16" height="52" rx="8" fill="#3730a3" opacity="0.67"/>
+                    <rect x="166" y="90" width="16" height="52" rx="8" fill="#3730a3" opacity="0.67"/>
+                    <path d="M54 105 Q40 110 54 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    <path d="M166 105 Q180 110 166 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
                   {/* Bot eyes */}
-                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#c7d2fe" />
-                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#c7d2fe" />
-                  <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#a78bfa" />
-                  <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#a78bfa" />
+                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#312e81" />
+                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#312e81" />
+                  <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#8b5cf6" />
+                  <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#6366f1" />
                   {/* Smile */}
-                  <path d="M96 151 Q110 163 124 151" stroke="#a5b4fc" strokeWidth="4" strokeLinecap="round" />
-                  {/* Music note (right side) */}
+                  <path d="M96 151 Q110 163 124 151" stroke="#6366f1" strokeWidth="4" strokeLinecap="round" />
+                  {/* Music note (right side) -- no yellow/cream */}
                   <g>
-                    <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="url(#noteGradient)" />
-                    <ellipse cx="154.7" cy="63" rx="8" ry="7.5" fill="url(#noteGradient)" stroke="#a78bfa" strokeWidth="1.4" />
-                    <ellipse cx="157" cy="97" rx="7" ry="4.5" fill="url(#noteGradient)" opacity="0.52" />
+                    <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="#60a5fa" />
+                    <ellipse cx="154.7" cy="63" rx="8" ry="7.5" fill="#312e81" stroke="#6366f1" strokeWidth="1.4" />
+                    <ellipse cx="157" cy="97" rx="7" ry="4.5" fill="#6366f1" opacity="0.32" />
                   </g>
-                  {/* Subtle waves/audio signals */}
-                  <path d="M60 190 Q110 210 160 190" stroke="#a78bfa" strokeWidth="6" fill="none" opacity="0.21" />
-                  <path d="M45 203 Q110 222 175 203" stroke="#6366f1" strokeWidth="3" fill="none" opacity="0.13" />
-                  {/* Ear sparkles */}
-                  <circle cx="52" cy="142" r="4" fill="#a78bfa" opacity="0.8" />
-                  <circle cx="176" cy="142" r="3.5" fill="#60a5fa" opacity="0.7" />
-                  <circle cx="107" cy="64" r="7" fill="#fef9c3" opacity="0.15"/>
-                  {/* Little music note left side */}
+                  {/* Audio waves, all darker */}
+                  <path d="M60 190 Q110 210 160 190" stroke="#8b5cf6" strokeWidth="6" fill="none" opacity="0.17" />
+                  <path d="M45 203 Q110 222 175 203" stroke="#312e81" strokeWidth="3" fill="none" opacity="0.15" />
+                  {/* NO sparkles/cream/yellow/light ellipses */}
+                  {/* Left mini music note, no lavender nor cream */}
                   <g>
-                    <rect x="62" y="70" width="3" height="13" rx="1.3" fill="#60a5fa" />
-                    <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#6366f1" />
+                    <rect x="62" y="70" width="3" height="13" rx="1.3" fill="#3730a3" />
+                    <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#4f46e5" />
                   </g>
                 </svg>
                 {/* Matching badge */}
@@ -230,16 +209,15 @@ export default function Hero() {
                   >
                     {/* Flat minimal headphones icon, no background shape */}
                     <svg width="26" height="26" aria-hidden="true" viewBox="0 0 32 32" fill="none">
-                      {/* Red flat badge background behind icon—just like your screenshot */}
+                      {/* Red flat badge background behind icon—no white here, already correct */}
                       <rect x="2" y="2" width="22" height="22" rx="7" fill="#ea353a"/>
-                      {/* Headphones: purple theme and yellow for left wire */}
                       <path d="M10 17a6 6 0 0 1 12 0" stroke="#7c3aed" strokeWidth="2" fill="none"/>
                       <rect x="6" y="17" width="3.5" height="5" rx="1.3" fill="#7c3aed" />
                       <rect x="16.5" y="17" width="3.5" height="5" rx="1.3" fill="#6366f1" />
                       {/* Left wire */}
                       <rect x="12" y="13" width="1.1" height="5" rx="0.54" fill="#facc15" />
-                      {/* Left wire tip */}
-                      <ellipse cx="12.6" cy="18.3" rx="1.1" ry="0.9" fill="#fde68a" />
+                      {/* Tip */}
+                      <ellipse cx="12.6" cy="18.3" rx="1.1" ry="0.9" fill="#bb9300" />
                     </svg>
                     <span className="ml-1 font-semibold drop-shadow-sm">
                       Live Audio &amp; Video Streaming!
