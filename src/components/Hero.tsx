@@ -221,31 +221,25 @@ export default function Hero() {
                     className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border border-purple-300 flex items-center gap-2"
                     style={{
                       background:
-                        "linear-gradient(90deg, #24113a 0%, #491f7b 60%, #2f51a4 100%)", // solid, opaque gradient, no alpha/transparency
+                        "linear-gradient(90deg, #24113a 0%, #491f7b 60%, #2f51a4 100%)",
                       color: "#ede9fe",
                       boxShadow:
                         "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170",
                       border: "1.5px solid #a78bfa",
                     }}
                   >
-                    {/* Headphones icon with no background or bubble */}
-                    <svg width="22" height="22" aria-hidden="true" viewBox="0 0 22 22" fill="none" className="drop-shadow">
-                      {/* Bilkul remove kar diya ellipse background ko */}
-                      <defs>
-                        <radialGradient id="grad1" cx="0.7" cy="0.35" r="1">
-                          <stop offset="0.2" stopColor="#c4b5fd"/>
-                          <stop offset="1" stopColor="#818cf8"/>
-                        </radialGradient>
-                        <linearGradient id="headband" x1="0" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#8b5cf6"/>
-                          <stop offset="1" stopColor="#60a5fa"/>
-                        </linearGradient>
-                      </defs>
-                      <path d="M4 13a7 7 0 0 1 14 0" stroke="url(#headband)" strokeWidth="2" fill="none"/>
-                      <rect x="2.5" y="13" width="3" height="5" rx="1.3" fill="#a78bfa" />
-                      <rect x="16.5" y="13" width="3" height="5" rx="1.3" fill="#6366f1" />
-                      <rect x="12" y="7" width="1.1" height="6" rx="0.54" fill="#fef9c3" />
-                      <ellipse cx="12.7" cy="13.3" rx="1.6" ry="1.1" fill="#fef9c3" />
+                    {/* Flat minimal headphones icon, no background shape */}
+                    <svg width="26" height="26" aria-hidden="true" viewBox="0 0 32 32" fill="none">
+                      {/* Red flat badge background behind icon—just like your screenshot */}
+                      <rect x="2" y="2" width="22" height="22" rx="7" fill="#ea353a"/>
+                      {/* Headphones: purple theme and yellow for left wire */}
+                      <path d="M10 17a6 6 0 0 1 12 0" stroke="#7c3aed" strokeWidth="2" fill="none"/>
+                      <rect x="6" y="17" width="3.5" height="5" rx="1.3" fill="#7c3aed" />
+                      <rect x="16.5" y="17" width="3.5" height="5" rx="1.3" fill="#6366f1" />
+                      {/* Left wire */}
+                      <rect x="12" y="13" width="1.1" height="5" rx="0.54" fill="#facc15" />
+                      {/* Left wire tip */}
+                      <ellipse cx="12.6" cy="18.3" rx="1.1" ry="0.9" fill="#fde68a" />
                     </svg>
                     <span className="ml-1 font-semibold drop-shadow-sm">
                       Live Audio &amp; Video Streaming!
