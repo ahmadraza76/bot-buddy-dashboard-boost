@@ -14,6 +14,11 @@ export default function AdminSettings() {
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [autoBackup, setAutoBackup] = useState(true);
   const [emailNotifications, setEmailNotifications] = useState(true);
+  const [facebookUrl, setFacebookUrl] = useState("");
+  const [twitterUrl, setTwitterUrl] = useState("");
+  const [instagramUrl, setInstagramUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [linkedinUrl, setLinkedinUrl] = useState("");
   const { data: platformSettings = {}, isLoading: isLoadingSettings } = usePlatformSettings();
   const updateSetting = useUpdatePlatformSetting();
   const { toast } = useToast();
@@ -24,6 +29,11 @@ export default function AdminSettings() {
   React.useEffect(() => {
     setRazorpayKey(platformSettings["razorpay_payout_key"] ?? "");
     setUsdtPayoutKey(platformSettings["usdt_trc20_payout_key"] ?? "");
+    setFacebookUrl(platformSettings["facebook_url"] ?? "");
+    setTwitterUrl(platformSettings["twitter_url"] ?? "");
+    setInstagramUrl(platformSettings["instagram_url"] ?? "");
+    setYoutubeUrl(platformSettings["youtube_url"] ?? "");
+    setLinkedinUrl(platformSettings["linkedin_url"] ?? "");
   }, [isLoadingSettings, platformSettings]);
 
   return (
@@ -57,6 +67,10 @@ export default function AdminSettings() {
           <TabsTrigger value="system" className="flex items-center">
             <Server className="h-4 w-4 mr-2" />
             System
+          </TabsTrigger>
+          <TabsTrigger value="social" className="flex items-center">
+            <Users className="h-4 w-4 mr-2" />
+            Social Media Links
           </TabsTrigger>
         </TabsList>
 
@@ -451,6 +465,167 @@ export default function AdminSettings() {
                 <div>
                   <label className="text-sm font-medium mb-2 block">Container Timeout (minutes)</label>
                   <Input defaultValue="30" type="number" />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* NEW: Social Media Links Tab */}
+        <TabsContent value="social">
+          <div className="max-w-xl">
+            <Card>
+              <CardHeader>
+                <CardTitle>Edit Social Media Links</CardTitle>
+                <CardDescription>
+                  Update your platform's public social media URLs. Leave blank to hide a platform.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                {/* Facebook */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Facebook</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="https://facebook.com/yourpage"
+                      value={facebookUrl}
+                      onChange={e => setFacebookUrl(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        updateSetting.mutate(
+                          { key: "facebook_url", value: facebookUrl },
+                          {
+                            onSuccess: () => toast({ title: "Facebook link saved!" }),
+                            onError: err => toast({
+                              title: "Error",
+                              description: String((err as any).message || "Failed to save Facebook link."),
+                              variant: "destructive",
+                            }),
+                          }
+                        )}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </div>
+                {/* Twitter */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Twitter / X</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="https://x.com/yourprofile"
+                      value={twitterUrl}
+                      onChange={e => setTwitterUrl(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        updateSetting.mutate(
+                          { key: "twitter_url", value: twitterUrl },
+                          {
+                            onSuccess: () => toast({ title: "Twitter link saved!" }),
+                            onError: err => toast({
+                              title: "Error",
+                              description: String((err as any).message || "Failed to save Twitter link."),
+                              variant: "destructive",
+                            }),
+                          }
+                        )}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </div>
+                {/* Instagram */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Instagram</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="https://instagram.com/yourprofile"
+                      value={instagramUrl}
+                      onChange={e => setInstagramUrl(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        updateSetting.mutate(
+                          { key: "instagram_url", value: instagramUrl },
+                          {
+                            onSuccess: () => toast({ title: "Instagram link saved!" }),
+                            onError: err => toast({
+                              title: "Error",
+                              description: String((err as any).message || "Failed to save Instagram link."),
+                              variant: "destructive",
+                            }),
+                          }
+                        )}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </div>
+                {/* YouTube */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">YouTube</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="https://youtube.com/yourchannel"
+                      value={youtubeUrl}
+                      onChange={e => setYoutubeUrl(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        updateSetting.mutate(
+                          { key: "youtube_url", value: youtubeUrl },
+                          {
+                            onSuccess: () => toast({ title: "YouTube link saved!" }),
+                            onError: err => toast({
+                              title: "Error",
+                              description: String((err as any).message || "Failed to save YouTube link."),
+                              variant: "destructive",
+                            }),
+                          }
+                        )}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                </div>
+                {/* LinkedIn */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">LinkedIn</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="https://linkedin.com/company/yourcompany"
+                      value={linkedinUrl}
+                      onChange={e => setLinkedinUrl(e.target.value)}
+                    />
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        updateSetting.mutate(
+                          { key: "linkedin_url", value: linkedinUrl },
+                          {
+                            onSuccess: () => toast({ title: "LinkedIn link saved!" }),
+                            onError: err => toast({
+                              title: "Error",
+                              description: String((err as any).message || "Failed to save LinkedIn link."),
+                              variant: "destructive",
+                            }),
+                          }
+                        )}
+                      disabled={updateSetting.isPending}
+                    >
+                      Save
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
