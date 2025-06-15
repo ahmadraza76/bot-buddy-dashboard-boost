@@ -1,11 +1,8 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// ThemeProvider import removed
-
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Layouts
@@ -26,6 +23,7 @@ import Settings from "@/pages/dashboard/Settings";
 import UptimeMonitor from "@/pages/dashboard/UptimeMonitor";
 import ReferralSystem from "@/pages/dashboard/ReferralSystem";
 import BotStatusPage from "@/pages/BotStatusPage";
+import Payouts from "@/pages/dashboard/Payouts";
 
 // Admin Pages
 import AdminDashboard from "@/pages/admin/AdminDashboard";
@@ -42,7 +40,6 @@ import AuthForm from "@/components/AuthForm";
 const queryClient = new QueryClient();
 
 const App = () => (
-  // ThemeProvider removed
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -73,6 +70,7 @@ const App = () => (
             <Route path="uptime" element={<UptimeMonitor />} />
             <Route path="referrals" element={<ReferralSystem />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="payouts" element={<Payouts />} />
           </Route>
           
           {/* Protected Admin routes */}
