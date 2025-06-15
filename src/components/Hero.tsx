@@ -197,28 +197,21 @@ export default function Hero() {
                 <div className="mt-6 w-full flex justify-center animate-fade-in">
                   <span
                     className="
-                      relative px-8 py-3 rounded-2xl overflow-hidden select-none
-                      bg-gradient-to-r from-purple-700 via-purple-600 to-blue-500
-                      shadow-xl text-[1.22rem] md:text-xl font-bold
-                      flex items-center justify-center
-                      tracking-wide
-                      border border-white/15
+                      inline-flex items-center justify-center
+                      rounded-full select-none
+                      bg-gradient-to-r from-purple-700 to-blue-500
+                      text-sm md:text-base font-medium
+                      px-4 py-1
+                      text-white
+                      border border-white/10
+                      shadow-none
                       transition-all
-                      backdrop-blur-[3px]
-                      [box-shadow:0_8px_32px_rgba(139,92,246,0.30)]
                     "
                     style={{
-                      letterSpacing: "0.03em",
+                      letterSpacing: "0.01em",
                     }}
                   >
-                    <span
-                      className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 via-white to-blue-300 drop-shadow"
-                      style={{
-                        WebkitTextStroke: "1px #7c3aed33"
-                      }}
-                    >
-                      Live Audio &amp; Video Streaming!
-                    </span>
+                    Live Audio &amp; Video Streaming!
                   </span>
                 </div>
               </div>
