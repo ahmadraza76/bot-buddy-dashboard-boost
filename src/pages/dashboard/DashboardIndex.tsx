@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Card,
@@ -68,18 +69,43 @@ export default function DashboardIndex() {
     <div>
       {/* Insert SessionGenerator at the top of dashboard */}
       <SessionGenerator />
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <div className="flex items-center gap-2">
+      {/* Title and filter row */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center mb-6 mt-3">
+        <h1 className="font-bold text-2xl sm:text-3xl leading-none sm:leading-tight">
+          <span className="block sm:inline text-[1.2rem] sm:text-3xl">Dashboard</span>
+        </h1>
+        <div className="flex items-center gap-2 flex-row">
           <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
-            <TabsList>
-              <TabsTrigger value="day">Day</TabsTrigger>
-              <TabsTrigger value="week">Week</TabsTrigger>
-              <TabsTrigger value="month">Month</TabsTrigger>
-              <TabsTrigger value="year">Year</TabsTrigger>
+            <TabsList className="flex px-0 py-0 bg-transparent gap-0">
+              <TabsTrigger 
+                value="day"
+                className="text-xs sm:text-sm px-2 py-1 h-7 sm:h-9 rounded-none"
+              >
+                Day
+              </TabsTrigger>
+              <TabsTrigger 
+                value="week"
+                className="text-xs sm:text-sm px-2 py-1 h-7 sm:h-9 rounded-none"
+              >
+                Week
+              </TabsTrigger>
+              <TabsTrigger 
+                value="month"
+                className="text-xs sm:text-sm px-2 py-1 h-7 sm:h-9 rounded-none"
+              >
+                Month
+              </TabsTrigger>
+              <TabsTrigger 
+                value="year"
+                className="text-xs sm:text-sm px-2 py-1 h-7 sm:h-9 rounded-none"
+              >
+                Year
+              </TabsTrigger>
             </TabsList>
           </Tabs>
-          <Button variant="outline">Refresh</Button>
+          <Button variant="outline" className="text-xs sm:text-sm px-3 py-1 h-7 sm:h-9">
+            Refresh
+          </Button>
         </div>
       </div>
 
