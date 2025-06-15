@@ -53,32 +53,33 @@ function getMethodFields(method: string) {
 function getStatusBadge(status: string) {
   let color = "";
   let label = "";
-  let icon = Circle;
+  let Icon = Circle; // note the uppercase
+
   if (status === "pending") {
     color = "bg-yellow-500";
     label = "Pending";
-    icon = Circle;
+    Icon = Circle;
   } else if (status === "approved") {
     color = "bg-green-600";
     label = "Approved";
-    icon = DollarSign;
+    Icon = DollarSign;
   } else if (status === "declined") {
     color = "bg-red-600";
     label = "Declined";
-    icon = CreditCard;
+    Icon = CreditCard;
   } else if (status === "paid") {
     color = "bg-blue-600";
     label = "Paid";
-    icon = Banknote;
+    Icon = Banknote;
   } else {
     color = "bg-gray-400";
     label = status;
-    icon = Circle;
+    Icon = Circle;
   }
   return (
     <Badge className={`${color} text-white gap-2 flex items-center`}>
       <span>
-        <icon className="h-4 w-4" />
+        <Icon className="h-4 w-4" />
       </span>
       {label}
     </Badge>
