@@ -144,84 +144,93 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                
-                {/* Upgraded SVG illustration */}
+                {/* New SVG illustration: Music Bot w/ Headphones and Modern Glow */}
                 <svg
-                  viewBox="0 0 200 200"
-                  width="200"
-                  height="200"
+                  width="220"
+                  height="220"
+                  viewBox="0 0 220 220"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-full max-w-md rounded-xl shadow-2xl border-4 border-purple-500/30 bg-white"
                   style={{ background: "linear-gradient(135deg,#ede9fe 60%,#dbebff 100%)" }}
+                  aria-hidden="true"
                 >
                   <defs>
-                    <radialGradient id="faceGlow" cx="70%" cy="40%" r="70%">
-                      <stop offset="0%" stopColor="#c7d2fe" stopOpacity="0.8" />
-                      <stop offset="90%" stopColor="#ede9fe" stopOpacity="0.1" />
+                    <radialGradient id="botGlow" cx="0.6" cy="0.35" r="0.8">
+                      <stop offset="0%" stopColor="#c7d2fe" stopOpacity="0.7"/>
+                      <stop offset="100%" stopColor="#ede9fe" stopOpacity="0.13"/>
                     </radialGradient>
-                    <linearGradient id="visor" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="10%" stopColor="#a78bfa" />
-                      <stop offset="100%" stopColor="#60a5fa" />
+                    <linearGradient id="botGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#a78bfa" />
+                      <stop offset="100%" stopColor="#6366f1" />
                     </linearGradient>
-                    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
-                      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
+                    <linearGradient id="headphonesGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#8b5cf6"/>
+                      <stop offset="100%" stopColor="#60a5fa"/>
+                    </linearGradient>
+                    <linearGradient id="noteGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#fef9c3"/>
+                      <stop offset="100%" stopColor="#a78bfa"/>
+                    </linearGradient>
+                    <filter id="botShadow" x="-40%" y="-20%" width="180%" height="180%">
+                      <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#a78bfa" floodOpacity="0.19"/>
                     </filter>
                   </defs>
                   {/* Background */}
-                  <rect width="200" height="200" rx="26" fill="url(#faceGlow)" />
-                  {/* Main Music Bot Shape */}
-                  <g transform="translate(30, 40)">
-                    <path
-                      d="M70 0C95 0 110 15 110 40V60C110 70 105 80 95 85L100 90V110H80V100C75 105 65 110 50 110C25 110 10 95 10 70V40C10 15 25 0 50 0H70Z"
-                      fill="url(#visor)"
-                      filter="url(#softGlow)"
-                    />
-                    {/* Eyes */}
-                    <ellipse cx="60" cy="60" rx="6" ry="6" fill="white" opacity="0.95" />
-                    <ellipse cx="90" cy="62" rx="5.2" ry="6" fill="#fff" opacity="0.95" />
-                    {/* Smile */}
-                    <path d="M65 80C70 85 80 85 85 80" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
-                    {/* Music Note */}
-                    <g filter="url(#softGlow)">
-                      <rect x="68" y="-19" width="4" height="20" rx="2" fill="#7B3FE4" />
-                      <circle cx="70" cy="-20" r="6" fill="#a78bfa" stroke="#7B3FE4" strokeWidth="1" />
-                    </g>
-                    {/* Side flair (audio waves) */}
-                    <g>
-                      <ellipse cx="110" cy="110" rx="8" ry="7" fill="#7B3FE4" opacity="0.7" />
-                      <ellipse cx="130" cy="100" rx="6.7" ry="7" fill="#a78bfa" opacity="0.8" />
-                      <ellipse cx="98" cy="105" rx="2" ry="4" fill="#a5b4fc" opacity="0.55" />
-                    </g>
-                    {/* Additional face light */}
-                    <ellipse cx="80" cy="22" rx="42" ry="16" fill="#fff" fillOpacity="0.11" />
+                  <rect width="220" height="220" rx="32" fill="url(#botGlow)" />
+                  {/* Main bot head */}
+                  <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradient)" filter="url(#botShadow)" />
+                  {/* Face highlight */}
+                  <ellipse cx="110" cy="110" rx="48" ry="36" fill="white" fillOpacity="0.07" />
+                  {/* Headphones */}
+                  <g>
+                    <rect x="38" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
+                    <rect x="166" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
+                    <path d="M54 105 Q40 110 54 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    <path d="M166 105 Q180 110 166 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
-                  {/* Decorative sound waves */}
-                  <path
-                    d="M24 185 Q 60 175 100 190 Q 140 206 176 185"
-                    stroke="#a78bfa"
-                    strokeWidth="4"
-                    fill="none"
-                    opacity="0.3"
-                  />
-                  <path
-                    d="M20 198 Q 65 192 100 200 Q 135 207 180 194"
-                    stroke="#6366f1"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.18"
-                  />
+                  {/* Bot eyes */}
+                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#fff" />
+                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#fff" />
+                  <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#a78bfa" />
+                  <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#a78bfa" />
+                  {/* Smile */}
+                  <path d="M96 151 Q110 163 124 151" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+                  {/* Music note (right side) */}
+                  <g>
+                    <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="url(#noteGradient)" />
+                    <ellipse cx="154.7" cy="63" rx="8" ry="7.5" fill="url(#noteGradient)" stroke="#a78bfa" strokeWidth="1.4" />
+                    <ellipse cx="157" cy="97" rx="7" ry="4.5" fill="url(#noteGradient)" opacity="0.52" />
+                  </g>
+                  {/* Subtle waves/audio signals */}
+                  <path d="M60 190 Q110 210 160 190" stroke="#a78bfa" strokeWidth="6" fill="none" opacity="0.21" />
+                  <path d="M45 203 Q110 222 175 203" stroke="#6366f1" strokeWidth="3" fill="none" opacity="0.13" />
+                  {/* Ear sparkles */}
+                  <circle cx="52" cy="142" r="4" fill="#a78bfa" opacity="0.8" />
+                  <circle cx="176" cy="142" r="3.5" fill="#60a5fa" opacity="0.7" />
+                  <circle cx="107" cy="64" r="7" fill="#fef9c3" opacity="0.15"/>
+                  {/* Little music note left side */}
+                  <g>
+                    <rect x="62" y="70" width="3" height="13" rx="1.3" fill="#60a5fa" />
+                    <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#6366f1" />
+                  </g>
                 </svg>
                 {/* Badge remains the same */}
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
-                  <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
+                  <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2">
+                    <span className="inline-block">
+                      <svg width="18" height="18" fill="none" aria-hidden="true" viewBox="0 0 20 20">
+                        <circle cx="10" cy="10" r="9" fill="#a78bfa" />
+                        <path d="M8 5v6a3 3 0 0 0 6 0V6.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                        <ellipse cx="15.7" cy="8.3" rx="1.6" ry="1.3" fill="#fff" opacity="0.8"/>
+                        <ellipse cx="7.2" cy="15.6" rx="1.3" ry="1" fill="#fff" opacity="0.5"/>
+                        <ellipse cx="5" cy="8" rx="1" ry="0.7" fill="#fff" opacity="0.45"/>
+                      </svg>
+                    </span>
                     Live Audio &amp; Video Streaming!
                   </span>
                 </div>
-                {/* Decorative waves under badge remain the same */}
+                {/* Decorative waves under badge */}
                 <svg
                   width="180"
                   height="32"
