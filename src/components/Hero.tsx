@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -144,96 +145,69 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* Updated Music Bot SVG illustration: ALL white/cream/lavender (and their shades) colors removed */}
+                {/* Updated Music Bot SVG - matching hero background colors */}
                 <svg
-                  width="220"
-                  height="220"
-                  viewBox="0 0 220 220"
+                  width="280"
+                  height="280"
+                  viewBox="0 0 280 280"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-full max-w-md rounded-xl shadow-2xl border-4 border-purple-500/30 bg-transparent"
-                  style={{ background: "linear-gradient(135deg,#1e1634 60%,#1a2c40 100%)" }}
+                  className="w-full max-w-md rounded-full shadow-2xl"
                   aria-hidden="true"
                 >
                   <defs>
-                    {/* Remove botGlow, botGradient, headphonesGradient, noteGradient, etc with white/cream/lavender */}
-                    <linearGradient id="botGradientDark" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#6d28d9" />
-                      <stop offset="100%" stopColor="#312e81" />
+                    <radialGradient id="botGradient" cx="0.5" cy="0.3" r="0.7">
+                      <stop offset="0%" stopColor="#8b5cf6" />
+                      <stop offset="50%" stopColor="#7c3aed" />
+                      <stop offset="100%" stopColor="#5b21b6" />
+                    </radialGradient>
+                    <linearGradient id="headphoneGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#a855f7" />
+                      <stop offset="100%" stopColor="#6366f1" />
                     </linearGradient>
                   </defs>
-                  {/* Main bot head */}
-                  <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradientDark)" />
-                  {/* --- Headphones --- */}
+                  
+                  {/* Main bot head - perfect circle */}
+                  <circle cx="140" cy="140" r="85" fill="url(#botGradient)" />
+                  
+                  {/* Headphones */}
                   <g>
-                    <rect x="38" y="90" width="16" height="52" rx="8" fill="#3730a3" opacity="0.67"/>
-                    <rect x="166" y="90" width="16" height="52" rx="8" fill="#3730a3" opacity="0.67"/>
-                    <path d="M54 105 Q40 110 54 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
-                    <path d="M166 105 Q180 110 166 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
+                    {/* Left headphone */}
+                    <rect x="45" y="115" width="18" height="50" rx="9" fill="url(#headphoneGradient)" />
+                    {/* Right headphone */}
+                    <rect x="217" y="115" width="18" height="50" rx="9" fill="url(#headphoneGradient)" />
+                    {/* Headphone band */}
+                    <path d="M63 130 Q70 120 140 120 Q210 120 217 130" stroke="url(#headphoneGradient)" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
+                  
                   {/* Bot eyes */}
-                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#312e81" />
-                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#312e81" />
-                  <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#8b5cf6" />
-                  <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#6366f1" />
+                  <circle cx="115" cy="125" r="8" fill="#1e1b4b" />
+                  <circle cx="165" cy="125" r="8" fill="#1e1b4b" />
+                  <circle cx="115" cy="125" r="4" fill="#60a5fa" />
+                  <circle cx="165" cy="125" r="4" fill="#60a5fa" />
+                  
                   {/* Smile */}
-                  <path d="M96 151 Q110 163 124 151" stroke="#6366f1" strokeWidth="4" strokeLinecap="round" />
-                  {/* Music note (right side) -- no yellow/cream */}
-                  <g>
-                    <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="#60a5fa" />
-                    <ellipse cx="154.7" cy="63" rx="8" ry="7.5" fill="#312e81" stroke="#6366f1" strokeWidth="1.4" />
-                    <ellipse cx="157" cy="97" rx="7" ry="4.5" fill="#6366f1" opacity="0.32" />
-                  </g>
-                  {/* Audio waves, all darker */}
-                  <path d="M60 190 Q110 210 160 190" stroke="#8b5cf6" strokeWidth="6" fill="none" opacity="0.17" />
-                  <path d="M45 203 Q110 222 175 203" stroke="#312e81" strokeWidth="3" fill="none" opacity="0.15" />
-                  {/* NO sparkles/cream/yellow/light ellipses */}
-                  {/* Left mini music note, no lavender nor cream */}
-                  <g>
-                    <rect x="62" y="70" width="3" height="13" rx="1.3" fill="#3730a3" />
-                    <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#4f46e5" />
-                  </g>
+                  <path d="M115 165 Q140 180 165 165" stroke="#60a5fa" strokeWidth="4" strokeLinecap="round" />
+                  
+                  {/* Antenna */}
+                  <rect x="137" y="60" width="6" height="25" rx="3" fill="url(#headphoneGradient)" />
+                  <circle cx="140" cy="55" r="6" fill="#60a5fa" />
                 </svg>
-                {/* Matching badge */}
-                <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
+                
+                {/* Badge */}
+                <div className="mt-6 select-none animate-fade-in">
                   <span
-                    className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border border-purple-300 flex items-center gap-2"
+                    className="px-8 py-3 rounded-full shadow-lg text-lg font-semibold border-2"
                     style={{
-                      background:
-                        "linear-gradient(90deg, #24113a 0%, #491f7b 60%, #2f51a4 100%)",
-                      color: "#ede9fe",
-                      boxShadow:
-                        "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170",
-                      border: "1.5px solid #a78bfa",
+                      background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #3730a3 100%)",
+                      color: "#f3f4f6",
+                      boxShadow: "0 8px 32px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.2)",
+                      borderColor: "#8b5cf6",
                     }}
                   >
-                    Live Audio &amp; Video Streaming!
+                    Live Audio & Video Streaming!
                   </span>
                 </div>
-                {/* Decorative waves under badge */}
-                <svg
-                  width="180"
-                  height="32"
-                  viewBox="0 0 180 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mt-2 w-44"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0,20 Q30,32 60,20 T120,20 T180,20"
-                    stroke="#a78bfa"
-                    strokeWidth="3"
-                    fill="none"
-                  />
-                  <path
-                    d="M0,28 Q30,40 60,28 T120,28 T180,28"
-                    stroke="#60a5fa"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.5"
-                  />
-                </svg>
               </div>
             </div>
           </div>
