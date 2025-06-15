@@ -140,11 +140,9 @@ export default function Hero() {
             </form>
           </div>
           
-          {/* Updated IMAGE AND BADGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* Perfect Bot SVG matching reference image */}
                 <svg
                   width="280"
                   height="280"
@@ -170,19 +168,14 @@ export default function Hero() {
                     </linearGradient>
                   </defs>
                   
-                  {/* Main bot face - perfect circle */}
                   <circle cx="140" cy="140" r="90" fill="url(#botFaceGradient)" />
                   
-                  {/* Antenna - positioned at the very top center */}
                   <rect x="137" y="45" width="6" height="18" rx="3" fill="url(#antennaGradient)" />
                   <circle cx="140" cy="42" r="5" fill="#60a5fa" />
                   
-                  {/* Headphones */}
                   <g>
-                    {/* Earpieces placed naturally at side-of-head, at "ear" level */}
                     <rect x="38" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
                     <rect x="220" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
-                    {/* Headphone band: attaches to tops of earpieces, smooth arc over the head */}
                     <path
                       d="M49 128 Q140 55 231 128"
                       stroke="url(#headphoneGradient)"
@@ -192,29 +185,40 @@ export default function Hero() {
                     />
                   </g>
                   
-                  {/* Bot eyes - simple dots */}
                   <circle cx="120" cy="125" r="6" fill="#1e1b4b" />
                   <circle cx="160" cy="125" r="6" fill="#1e1b4b" />
                   
-                  {/* Eye highlights */}
                   <circle cx="122" cy="123" r="2" fill="#60a5fa" />
                   <circle cx="162" cy="123" r="2" fill="#60a5fa" />
                   
-                  {/* Simple smile */}
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
                 </svg>
                 
-                {/* Badge */}
-                <div className="mt-6 select-none animate-fade-in">
+                <div className="mt-6 w-full flex justify-center animate-fade-in">
                   <span
-                    className="px-8 py-3 rounded-full shadow-lg text-lg font-semibold"
+                    className="
+                      relative px-8 py-3 rounded-2xl overflow-hidden select-none
+                      bg-gradient-to-r from-purple-700 via-purple-600 to-blue-500
+                      shadow-xl text-[1.22rem] md:text-xl font-bold
+                      flex items-center justify-center
+                      tracking-wide
+                      border border-white/15
+                      transition-all
+                      backdrop-blur-[3px]
+                      [box-shadow:0_8px_32px_rgba(139,92,246,0.30)]
+                    "
                     style={{
-                      background: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6366f1 100%)",
-                      color: "#f3f4f6",
-                      boxShadow: "0 8px 32px rgba(139, 92, 246, 0.3)"
+                      letterSpacing: "0.03em",
                     }}
                   >
-                    Live Audio & Video Streaming!
+                    <span
+                      className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 via-white to-blue-300 drop-shadow"
+                      style={{
+                        WebkitTextStroke: "1px #7c3aed33"
+                      }}
+                    >
+                      Live Audio &amp; Video Streaming!
+                    </span>
                   </span>
                 </div>
               </div>
