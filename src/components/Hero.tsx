@@ -219,9 +219,7 @@ export default function Hero() {
                       {/* Tip */}
                       <ellipse cx="12.6" cy="18.3" rx="1.1" ry="0.9" fill="#bb9300" />
                     </svg>
-                    <span className="ml-1 font-semibold drop-shadow-sm">
-                      Live Audio &amp; Video Streaming!
-                    </span>
+                    Live Audio &amp; Video Streaming!
                   </span>
                 </div>
                 {/* Decorative waves under badge */}
