@@ -1,7 +1,12 @@
-
 import { useState } from "react";
 import SettingsSidebar, { settingsSections } from "./components/SettingsSidebar";
 import PlatformSettingsSection from "./components/sections/PlatformSettingsSection";
+import BotDefaultsSettingsSection from "./components/sections/BotDefaultsSettingsSection";
+import PaymentsSettingsSection from "./components/sections/PaymentsSettingsSection";
+import NotificationsSettingsSection from "./components/sections/NotificationsSettingsSection";
+import SecuritySettingsSection from "./components/sections/SecuritySettingsSection";
+import SystemSettingsSection from "./components/sections/SystemSettingsSection";
+import SocialSettingsSection from "./components/sections/SocialSettingsSection";
 import OpenAIKeyManager from "./components/OpenAIKeyManager";
 
 // Short placeholder components for illustration. Baad mein, yahi approach baaki sab par bhi use ho sakti hai.
@@ -20,12 +25,12 @@ export default function AdminSettings() {
   // Section content mapping
   const sectionComponents: { [key: string]: React.ReactNode } = {
     platform: <PlatformSettingsSection />,
-    bot: <PlaceholderSection label="Bot Defaults" />,
-    payments: <PlaceholderSection label="Payments" />,
-    notifications: <PlaceholderSection label="Notifications" />,
-    security: <PlaceholderSection label="Security" />,
-    system: <PlaceholderSection label="System" />,
-    social: <PlaceholderSection label="Social Media" />,
+    bot: <BotDefaultsSettingsSection />,
+    payments: <PaymentsSettingsSection />,
+    notifications: <NotificationsSettingsSection />,
+    security: <SecuritySettingsSection />,
+    system: <SystemSettingsSection />,
+    social: <SocialSettingsSection />,
     ai: <OpenAIKeyManager />,
   };
 
