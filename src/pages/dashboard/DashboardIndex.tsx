@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Card,
@@ -24,6 +23,7 @@ import {
 } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SessionGenerator from "@/components/SessionGenerator";
 
 // Sample data for charts
 const messagesData = [
@@ -66,6 +66,8 @@ export default function DashboardIndex() {
 
   return (
     <div>
+      {/* Insert SessionGenerator at the top of dashboard */}
+      <SessionGenerator />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <div className="flex items-center gap-2">
