@@ -57,8 +57,9 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             {/* <ThemeToggle /> Removed */}
-            <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
-
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md text-base font-semibold shadow-sm transition-all duration-200">
+              Get Started
+            </Button>
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center">
               <button
