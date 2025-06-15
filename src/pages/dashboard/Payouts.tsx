@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,9 +11,18 @@ import { Banknote, CreditCard, DollarSign, Circle } from "lucide-react";
 import { useProfile } from "@/hooks/useProfile";
 
 const methodOptions = [
-  { label: "Bank Transfer", value: "bank", icon: Banknote },
-  { label: "UPI", value: "upi", icon: CreditCard },
-  { label: "USDT (TRC20)", value: "usdt_trc20", icon: DollarSign },
+  { label: <span className="flex flex-col items-center"><span>Bank</span><span className="hidden sm:inline"> Transfer</span></span>, value: "bank", icon: Banknote },
+  { label: <span>UPI</span>, value: "upi", icon: CreditCard },
+  {
+    label: (
+      <span className="flex flex-col items-center leading-tight">
+        <span>USDT</span>
+        <span className="text-[9px] sm:text-xs -mt-0.5 text-muted-foreground">(TRC20)</span>
+      </span>
+    ),
+    value: "usdt_trc20",
+    icon: DollarSign,
+  },
 ];
 
 function getMethodFields(method: string) {
@@ -154,7 +162,7 @@ export default function Payouts() {
       <Card>
         <CardHeader className="py-3 sm:py-4">
           <CardTitle>
-            <span className="flex items-center gap-2 text-base sm:text-lg">
+            <span className="flex items-center gap-2 text-sm sm:text-lg">
               <Banknote className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Request Payout
             </span>
@@ -163,7 +171,7 @@ export default function Payouts() {
         <CardContent className="py-3 sm:py-5">
           <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <Label className="text-xs sm:text-sm">Amount</Label>
+              <Label className="text-[11px] sm:text-sm">Amount</Label>
               <Input
                 name="amount"
                 type="number"
@@ -173,16 +181,20 @@ export default function Payouts() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Amount (INR/USDT)"
-                className="text-[13px] sm:text-base py-2 px-3"
+                className="text-xs sm:text-base py-2 px-3"
               />
             </div>
             <div>
-              <Label className="text-xs sm:text-sm">Payout Method</Label>
+              <Label className="text-[11px] sm:text-sm">Payout Method</Label>
               <Tabs value={method} onValueChange={setMethod} className="w-full mt-1 sm:mt-2">
-                <TabsList className="grid grid-cols-3 mb-1 sm:mb-2 h-9">
+                <TabsList className="grid grid-cols-3 mb-1 sm:mb-2 h-8 sm:h-9">
                   {methodOptions.map((opt) => (
-                    <TabsTrigger key={opt.value} value={opt.value} className="flex gap-2 items-center text-xs sm:text-sm py-1 sm:py-2">
-                      <opt.icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <TabsTrigger
+                      key={typeof opt.label === 'string' ? opt.label : opt.value}
+                      value={opt.value}
+                      className="flex flex-col gap-0.5 items-center justify-center text-[11px] sm:text-xs py-1 sm:py-2 px-1 sm:px-2 min-h-0 h-8 sm:h-9"
+                    >
+                      <opt.icon className="h-3 w-3 sm:h-4 sm:w-4 mb-0.5" />
                       {opt.label}
                     </TabsTrigger>
                   ))}
@@ -247,4 +259,3 @@ export default function Payouts() {
     </div>
   );
 }
-
