@@ -104,6 +104,33 @@ export type Database = {
           },
         ]
       }
+      bot_sessions: {
+        Row: {
+          bot_status: string | null
+          created_at: string | null
+          id: string
+          phone: string | null
+          session_string: string
+          user_id: string | null
+        }
+        Insert: {
+          bot_status?: string | null
+          created_at?: string | null
+          id?: string
+          phone?: string | null
+          session_string: string
+          user_id?: string | null
+        }
+        Update: {
+          bot_status?: string | null
+          created_at?: string | null
+          id?: string
+          phone?: string | null
+          session_string?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       bots: {
         Row: {
           container_id: string | null
@@ -469,6 +496,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_otp_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          otp_attempts: number
+          phone: string
+          phone_code_hash: string
+          user_id: string | null
+          verified: boolean
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          otp_attempts?: number
+          phone: string
+          phone_code_hash: string
+          user_id?: string | null
+          verified?: boolean
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          otp_attempts?: number
+          phone?: string
+          phone_code_hash?: string
+          user_id?: string | null
+          verified?: boolean
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
