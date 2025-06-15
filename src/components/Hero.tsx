@@ -144,25 +144,84 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30">
-                  <rect width="200" height="200" rx="20" fill="#E6F0FF"/>
+                
+                {/* Upgraded SVG illustration */}
+                <svg
+                  viewBox="0 0 200 200"
+                  width="200"
+                  height="200"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full max-w-md rounded-xl shadow-2xl border-4 border-purple-500/30 bg-white"
+                  style={{ background: "linear-gradient(135deg,#ede9fe 60%,#dbebff 100%)" }}
+                >
+                  <defs>
+                    <radialGradient id="faceGlow" cx="70%" cy="40%" r="70%">
+                      <stop offset="0%" stopColor="#c7d2fe" stopOpacity="0.8" />
+                      <stop offset="90%" stopColor="#ede9fe" stopOpacity="0.1" />
+                    </radialGradient>
+                    <linearGradient id="visor" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="10%" stopColor="#a78bfa" />
+                      <stop offset="100%" stopColor="#60a5fa" />
+                    </linearGradient>
+                    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+                      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  {/* Background */}
+                  <rect width="200" height="200" rx="26" fill="url(#faceGlow)" />
+                  {/* Main Music Bot Shape */}
                   <g transform="translate(30, 40)">
-                    <path d="M70 0C95 0 110 15 110 40V60C110 70 105 80 95 85L100 90V110H80V100C75 105 65 110 50 110C25 110 10 95 10 70V40C10 15 25 0 50 0H70Z" fill="#7B3FE4"/>
-                    <circle cx="60" cy="60" r="5" fill="white"/>
-                    <circle cx="90" cy="60" r="5" fill="white"/>
-                    <path d="M65 80C70 85 80 85 85 80" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-                    <path d="M95 70L130 60V90C130 100 120 110 110 110C100 110 95 100 95 90V70Z" fill="white"/>
-                    <circle cx="110" cy="110" r="7" fill="#7B3FE4"/>
-                    <circle cx="130" cy="100" r="7" fill="#7B3FE4"/>
-                    <rect x="68" y="-20" width="4" height="20" fill="#7B3FE4"/>
-                    <circle cx="70" cy="-20" r="5" fill="#7B3FE4"/>
+                    <path
+                      d="M70 0C95 0 110 15 110 40V60C110 70 105 80 95 85L100 90V110H80V100C75 105 65 110 50 110C25 110 10 95 10 70V40C10 15 25 0 50 0H70Z"
+                      fill="url(#visor)"
+                      filter="url(#softGlow)"
+                    />
+                    {/* Eyes */}
+                    <ellipse cx="60" cy="60" rx="6" ry="6" fill="white" opacity="0.95" />
+                    <ellipse cx="90" cy="62" rx="5.2" ry="6" fill="#fff" opacity="0.95" />
+                    {/* Smile */}
+                    <path d="M65 80C70 85 80 85 85 80" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
+                    {/* Music Note */}
+                    <g filter="url(#softGlow)">
+                      <rect x="68" y="-19" width="4" height="20" rx="2" fill="#7B3FE4" />
+                      <circle cx="70" cy="-20" r="6" fill="#a78bfa" stroke="#7B3FE4" strokeWidth="1" />
+                    </g>
+                    {/* Side flair (audio waves) */}
+                    <g>
+                      <ellipse cx="110" cy="110" rx="8" ry="7" fill="#7B3FE4" opacity="0.7" />
+                      <ellipse cx="130" cy="100" rx="6.7" ry="7" fill="#a78bfa" opacity="0.8" />
+                      <ellipse cx="98" cy="105" rx="2" ry="4" fill="#a5b4fc" opacity="0.55" />
+                    </g>
+                    {/* Additional face light */}
+                    <ellipse cx="80" cy="22" rx="42" ry="16" fill="#fff" fillOpacity="0.11" />
                   </g>
+                  {/* Decorative sound waves */}
+                  <path
+                    d="M24 185 Q 60 175 100 190 Q 140 206 176 185"
+                    stroke="#a78bfa"
+                    strokeWidth="4"
+                    fill="none"
+                    opacity="0.3"
+                  />
+                  <path
+                    d="M20 198 Q 65 192 100 200 Q 135 207 180 194"
+                    stroke="#6366f1"
+                    strokeWidth="2"
+                    fill="none"
+                    opacity="0.18"
+                  />
                 </svg>
+                {/* Badge remains the same */}
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
                   <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
                     Live Audio &amp; Video Streaming!
                   </span>
                 </div>
+                {/* Decorative waves under badge remain the same */}
                 <svg
                   width="180"
                   height="32"
