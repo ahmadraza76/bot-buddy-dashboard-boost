@@ -207,18 +207,6 @@ export default function Hero() {
                       border: "1.5px solid #a78bfa",
                     }}
                   >
-                    {/* Flat minimal headphones icon, no background shape */}
-                    <svg width="26" height="26" aria-hidden="true" viewBox="0 0 32 32" fill="none">
-                      {/* Red flat badge background behind icon—no white here, already correct */}
-                      <rect x="2" y="2" width="22" height="22" rx="7" fill="#ea353a"/>
-                      <path d="M10 17a6 6 0 0 1 12 0" stroke="#7c3aed" strokeWidth="2" fill="none"/>
-                      <rect x="6" y="17" width="3.5" height="5" rx="1.3" fill="#7c3aed" />
-                      <rect x="16.5" y="17" width="3.5" height="5" rx="1.3" fill="#6366f1" />
-                      {/* Left wire */}
-                      <rect x="12" y="13" width="1.1" height="5" rx="0.54" fill="#facc15" />
-                      {/* Tip */}
-                      <ellipse cx="12.6" cy="18.3" rx="1.1" ry="0.9" fill="#bb9300" />
-                    </svg>
                     Live Audio &amp; Video Streaming!
                   </span>
                 </div>
