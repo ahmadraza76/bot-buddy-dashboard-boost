@@ -66,90 +66,92 @@ export default function Hero() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-black via-purple-950 to-black text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="py-10 md:py-24 bg-gradient-to-br from-black via-purple-950 to-black text-white">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <div className="flex items-center mb-6">
-              <Music size={40} className="text-purple-400 mr-3" />
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+            <div className="flex items-center mb-4 md:mb-6">
+              <Music size={32} className="text-purple-400 mr-2 md:mr-3" />
+              <h2 className="text-lg md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
                 BotifyHost
               </h2>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Launch Your Telegram Music Bot in 60 Seconds <span className="block text-xl md:text-2xl lg:text-3xl mt-3 text-purple-300 font-medium">Audio &amp; Video Live Streaming Supported</span>
+            <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-2 md:mb-4 leading-tight md:leading-tight">
+              Launch Your Telegram Music Bot in 60 Seconds
+              <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl mt-2 md:mt-3 text-purple-300 font-medium">
+                Audio &amp; Video Live Streaming Supported
+              </span>
             </h1>
-            
-            <p className="text-xl text-purple-200 mb-2 font-semibold">
+            <p className="text-base sm:text-lg md:text-xl text-purple-200 mb-1 md:mb-2 font-semibold">
               No Coding, No VPS, No Hassle!
             </p>
-            
-            <p className="mt-6 text-lg text-gray-300 max-w-xl">
+            <p className="mt-3 md:mt-6 text-sm sm:text-base md:text-lg text-gray-300 max-w-xl">
               Play songs <span className="font-semibold text-purple-300">live</span> from <span className="font-semibold text-purple-300">YouTube</span>, <span className="font-semibold text-purple-300">Spotify</span>, and more. Your Telegram music bot supports <span className="font-semibold text-blue-300">HD audio &amp; video streaming</span> direct in your group.<br /> Just ₹599/month — your bot will be fully installed, hosted, and running 24/7 with all music features ready to use.
             </p>
-            
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4 bg-black/50 p-6 rounded-xl backdrop-blur-sm border border-purple-500/10">
+            <form onSubmit={handleSubmit} className="mt-6 md:mt-8 space-y-3 md:space-y-4 bg-black/50 p-4 md:p-6 rounded-xl backdrop-blur-sm border border-purple-500/10">
               <div>
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={cn(emailError && "border-red-500", "bg-black/50 border-white/10 text-white placeholder:text-gray-400")}
+                  className={cn(
+                    emailError && "border-red-500",
+                    "bg-black/50 border-white/10 text-white placeholder:text-gray-400 text-sm md:text-base py-2 md:py-3"
+                  )}
                   aria-label="Email"
                   aria-invalid={!!emailError}
                   aria-describedby="email-error"
                 />
                 {emailError && (
-                  <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+                  <p id="email-error" className="mt-1 text-xs md:text-sm text-red-400" role="alert">
                     {emailError}
                   </p>
                 )}
               </div>
-              
               <div>
                 <Input
                   type="text"
                   placeholder="Enter your Telegram bot token"
                   value={botToken}
                   onChange={(e) => setBotToken(e.target.value)}
-                  className={cn(botTokenError && "border-red-500", "bg-black/50 border-white/10 text-white placeholder:text-gray-400")}
+                  className={cn(
+                    botTokenError && "border-red-500",
+                    "bg-black/50 border-white/10 text-white placeholder:text-gray-400 text-sm md:text-base py-2 md:py-3"
+                  )}
                   aria-label="Bot token"
                   aria-invalid={!!botTokenError}
                   aria-describedby="token-error"
                 />
                 {botTokenError && (
-                  <p id="token-error" className="mt-1 text-sm text-red-400" role="alert">
+                  <p id="token-error" className="mt-1 text-xs md:text-sm text-red-400" role="alert">
                     {botTokenError}
                   </p>
                 )}
               </div>
-              
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium"
+                className="w-full text-sm md:text-base py-2 md:py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-medium"
                 disabled={isLoading}
               >
                 {isLoading ? "Setting up..." : "Get Started for ₹599/month"}
               </Button>
-              
               <p className="text-center text-xs text-gray-400 mt-2">
                 No setup fee. Cancel anytime.
               </p>
             </form>
           </div>
-          
           {/* Illustration and streaming badge */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
                 <svg
-                  width="280"
-                  height="280"
+                  width="180"
+                  height="180"
                   viewBox="0 0 280 280"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-full max-w-md"
+                  className="w-40 h-40 sm:w-64 sm:h-64 md:w-full md:h-full max-w-md"
                   aria-hidden="true"
                 >
                   <defs>
@@ -187,14 +189,14 @@ export default function Hero() {
                   <circle cx="162" cy="123" r="2" fill="#60a5fa" />
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
                 </svg>
-                <div className="mt-6 w-full flex justify-center animate-fade-in">
+                <div className="mt-3 md:mt-6 w-full flex justify-center animate-fade-in">
                   <span
                     className="
                       inline-flex items-center justify-center
                       rounded-full select-none
                       bg-gradient-to-r from-purple-700 to-blue-500
-                      text-sm md:text-base font-medium
-                      px-4 py-1
+                      text-xs sm:text-sm md:text-base font-medium
+                      px-3 py-1 md:px-4 md:py-1
                       text-white
                       border border-white/10
                       shadow-none
