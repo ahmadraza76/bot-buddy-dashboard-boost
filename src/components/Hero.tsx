@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -164,10 +165,18 @@ export default function Hero() {
                       <stop offset="0%" stopColor="#6366f1" />
                       <stop offset="100%" stopColor="#4f46e5" />
                     </linearGradient>
+                    <linearGradient id="antennaGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#60a5fa" />
+                      <stop offset="100%" stopColor="#3b82f6" />
+                    </linearGradient>
                   </defs>
                   
                   {/* Main bot face - perfect circle */}
                   <circle cx="140" cy="140" r="90" fill="url(#botFaceGradient)" />
+                  
+                  {/* Antenna - positioned at the very top center */}
+                  <rect x="137" y="45" width="6" height="18" rx="3" fill="url(#antennaGradient)" />
+                  <circle cx="140" cy="42" r="5" fill="#60a5fa" />
                   
                   {/* Headphones */}
                   <g>
@@ -189,10 +198,6 @@ export default function Hero() {
                   
                   {/* Simple smile */}
                   <path d="M120 160 Q140 175 160 160" stroke="#1e1b4b" strokeWidth="3" strokeLinecap="round" fill="none" />
-                  
-                  {/* Small antenna */}
-                  <rect x="137" y="55" width="6" height="20" rx="3" fill="#6366f1" />
-                  <circle cx="140" cy="50" r="4" fill="#60a5fa" />
                 </svg>
                 
                 {/* Badge */}
