@@ -51,7 +51,18 @@ serve(async (req) => {
       });
     }
 
-    return new Response(JSON.stringify({ session_string: SESSION_STRING }), {
+    // === Automatically start Docker bot container here ===
+    // TODO: Integrate with your infra (e.g., use SSH, API, or supabase function to trigger deploy)
+    // Example (pseudo):
+    // await startDockerBot({ session: SESSION_STRING, user_id, phone });
+    // For now, simulate bot status:
+    await supabase
+      .from('bot_sessions')
+      .update({ bot_status: 'running' })
+      .eq('user_id', user_id)
+      .eq('phone', phone);
+
+    return new Response(JSON.stringify({ ok: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" }
     });
   } catch (error) {

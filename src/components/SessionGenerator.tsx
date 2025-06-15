@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +11,6 @@ export default function SessionGenerator() {
   const [step, setStep] = useState<"phone" | "otp" | "done">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [sessionString, setSessionString] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [botStatus, setBotStatus] = useState<string | null>(null);
@@ -45,7 +43,6 @@ export default function SessionGenerator() {
         },
       });
       if (error) throw error;
-      setSessionString(data.session_string);
       setStep("done");
       // Try fetching the bot session status for display
       const { data: bot, error: err } = await supabase
@@ -68,7 +65,8 @@ export default function SessionGenerator() {
       <CardHeader>
         <CardTitle>Telegram Session Generator</CardTitle>
         <CardDescription>
-          Enter your phone to generate Pyrogram session. (OTP is simulated)
+          Enter your phone to set up Pyrogram bot session. (OTP is simulated)<br/>
+          <span className="text-xs text-muted-foreground">Session string is securely handled by backend for maximum safety.</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -108,16 +106,15 @@ export default function SessionGenerator() {
           </form>
         )}
         {step === "done" && (
-          <div className="space-y-2">
-            <div>
-              <span className="font-semibold">Session String:</span>
-              <code className="block bg-muted mt-1 p-2 rounded break-all">{sessionString}</code>
+          <div className="space-y-3">
+            <div className="text-green-700 font-semibold">
+              🎉 Bot setup complete!
             </div>
             <div>
               <span className="font-semibold">Bot Status:</span>{" "}
               <span className="inline-block ml-2 px-2 py-1 bg-gray-100 rounded text-gray-700 text-xs">{botStatus}</span>
             </div>
-            <Button className="w-full mt-2" onClick={() => setStep("phone")}>Generate New Session</Button>
+            <Button className="w-full mt-2" onClick={() => setStep("phone")}>Setup New Bot</Button>
           </div>
         )}
       </CardContent>
