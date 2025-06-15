@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +8,7 @@ import { useUserPayoutRequests, useCreatePayoutRequest } from "@/hooks/usePayout
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Banknote, CreditCard, DollarSign, Circle } from "lucide-react";
+import { useProfile } from "@/hooks/useProfile";
 
 const methodOptions = [
   { label: "Bank Transfer", value: "bank", icon: Banknote },
@@ -93,6 +93,10 @@ export default function Payouts() {
   const { data: payoutRequests = [], isLoading } = useUserPayoutRequests();
   const { toast } = useToast();
 
+  // Fetch the profile to display wallet balance
+  const { data: profile, isLoading: isProfileLoading, error: profileError } = useProfile();
+  const walletAmount = profile?.balance ?? 0;
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -130,6 +134,24 @@ export default function Payouts() {
 
   return (
     <div className="max-w-xl mx-auto my-8">
+      {/* WALLET AMOUNT DISPLAY */}
+      <Card className="mb-6">
+        <CardContent className="flex items-center gap-4 py-4">
+          <DollarSign className="h-7 w-7 text-primary" />
+          <div>
+            <div className="text-xs text-muted-foreground">Wallet Amount</div>
+            {isProfileLoading ? (
+              <span className="text-base font-semibold">Loading...</span>
+            ) : profileError ? (
+              <span className="text-base text-red-500">Unable to fetch</span>
+            ) : (
+              <span className="text-2xl font-bold">
+                ₹{Number(walletAmount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+              </span>
+            )}
+          </div>
+        </CardContent>
+      </Card>
       <Card>
         <CardHeader>
           <CardTitle>

@@ -415,6 +415,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          balance: number
           bot_token: string | null
           created_at: string | null
           email: string
@@ -429,6 +430,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          balance?: number
           bot_token?: string | null
           created_at?: string | null
           email: string
@@ -443,6 +445,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          balance?: number
           bot_token?: string | null
           created_at?: string | null
           email?: string
