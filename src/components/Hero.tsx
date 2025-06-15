@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { Music } from "lucide-react";
+// Removed unnecessary Music import
 
 export default function Hero() {
   const [email, setEmail] = useState("");
@@ -70,13 +71,26 @@ export default function Hero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <div className="flex items-center mb-6">
-              <Music size={40} className="text-purple-400 mr-3" />
-              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+            {/* BotifyHost Pill Badge */}
+            <div className="w-full flex justify-start mb-4">
+              <span
+                className="
+                  inline-block
+                  bg-gradient-to-r from-[#a855f7] via-[#7b61ff] to-[#2563eb]
+                  rounded-full
+                  px-6 py-2
+                  text-white text-lg font-extrabold tracking-wide
+                  shadow-lg
+                  border-2 border-white/10
+                  select-none
+                  "
+                style={{ letterSpacing: "0.03em" }}
+              >
                 BotifyHost
-              </h2>
+              </span>
             </div>
-            
+
+            {/* Heading and content */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
               Launch Your Telegram Music Bot in 60 Seconds <span className="block text-xl md:text-2xl lg:text-3xl mt-3 text-purple-300 font-medium">Audio &amp; Video Live Streaming Supported</span>
             </h1>
@@ -140,6 +154,7 @@ export default function Hero() {
             </form>
           </div>
           
+          {/* Illustration and streaming badge */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
