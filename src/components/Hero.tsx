@@ -215,19 +215,43 @@ export default function Hero() {
                     <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#6366f1" />
                   </g>
                 </svg>
-                {/* Badge remains the same */}
+                {/* New matching badge */}
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
-                  <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2">
-                    <span className="inline-block">
-                      <svg width="18" height="18" fill="none" aria-hidden="true" viewBox="0 0 20 20">
-                        <circle cx="10" cy="10" r="9" fill="#a78bfa" />
-                        <path d="M8 5v6a3 3 0 0 0 6 0V6.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
-                        <ellipse cx="15.7" cy="8.3" rx="1.6" ry="1.3" fill="#fff" opacity="0.8"/>
-                        <ellipse cx="7.2" cy="15.6" rx="1.3" ry="1" fill="#fff" opacity="0.5"/>
-                        <ellipse cx="5" cy="8" rx="1" ry="0.7" fill="#fff" opacity="0.45"/>
-                      </svg>
+                  <span
+                    className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2"
+                    style={{
+                      background: "linear-gradient(90deg, #a78bfa 15%, #6366f1 85%)",
+                      color: "#fff",
+                      boxShadow: "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170"
+                    }}
+                  >
+                    {/* Headphones + music note icon (SVG, matching hero SVG) */}
+                    <svg width="22" height="22" aria-hidden="true" viewBox="0 0 22 22" fill="none" className="drop-shadow">
+                      <ellipse cx="11" cy="11" rx="10" ry="10" fill="url(#grad1)" />
+                      <defs>
+                        <radialGradient id="grad1" cx="0.7" cy="0.35" r="1">
+                          <stop offset="0.2" stopColor="#c4b5fd"/>
+                          <stop offset="1" stopColor="#818cf8"/>
+                        </radialGradient>
+                        <linearGradient id="headband" x1="0" y1="12" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#8b5cf6"/>
+                          <stop offset="1" stopColor="#60a5fa"/>
+                        </linearGradient>
+                      </defs>
+                      {/* Headband */}
+                      <path d="M4 13a7 7 0 0 1 14 0" stroke="url(#headband)" strokeWidth="2" fill="none"/>
+                      {/* Left pad */}
+                      <rect x="2.5" y="13" width="3" height="5" rx="1.3" fill="#a78bfa" />
+                      {/* Right pad */}
+                      <rect x="16.5" y="13" width="3" height="5" rx="1.3" fill="#6366f1" />
+                      {/* Note stem */}
+                      <rect x="12" y="7" width="1.1" height="6" rx="0.54" fill="#fff" />
+                      {/* Note head */}
+                      <ellipse cx="12.7" cy="13.3" rx="1.6" ry="1.1" fill="#fef9c3" />
+                    </svg>
+                    <span className="ml-1 font-semibold drop-shadow-sm">
+                      Live Audio &amp; Video Streaming!
                     </span>
-                    Live Audio &amp; Video Streaming!
                   </span>
                 </div>
                 {/* Decorative waves under badge */}
