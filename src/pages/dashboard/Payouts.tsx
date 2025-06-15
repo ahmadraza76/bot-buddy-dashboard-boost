@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,45 +8,81 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useUserPayoutRequests, useCreatePayoutRequest } from "@/hooks/usePayoutRequests";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { Banknote, CreditCard, DollarSign, Circle } from "lucide-react";
 
 const methodOptions = [
-  { label: "Bank Transfer", value: "bank" },
-  { label: "UPI", value: "upi" },
-  { label: "USDT (TRC20)", value: "usdt_trc20" },
+  { label: "Bank Transfer", value: "bank", icon: Banknote },
+  { label: "UPI", value: "upi", icon: CreditCard },
+  { label: "USDT (TRC20)", value: "usdt_trc20", icon: DollarSign },
 ];
 
 function getMethodFields(method: string) {
   if (method === "bank") {
     return (
-      <>
+      <div className="grid gap-2">
         <Label>Account Holder Name</Label>
-        <Input name="account_holder" required />
+        <Input name="account_holder" required autoComplete="off" />
         <Label>Account Number</Label>
-        <Input name="account_number" required />
+        <Input name="account_number" required autoComplete="off" />
         <Label>Bank Name</Label>
-        <Input name="bank_name" required />
+        <Input name="bank_name" required autoComplete="off" />
         <Label>IFSC Code</Label>
-        <Input name="ifsc_code" required />
-      </>
+        <Input name="ifsc_code" required autoComplete="off" />
+      </div>
     );
   }
   if (method === "upi") {
     return (
-      <>
+      <div className="grid gap-2">
         <Label>UPI ID</Label>
-        <Input name="upi_id" required />
-      </>
+        <Input name="upi_id" required autoComplete="off" placeholder="user@bank" />
+      </div>
     );
   }
   if (method === "usdt_trc20") {
     return (
-      <>
+      <div className="grid gap-2">
         <Label>USDT (TRC20) Address</Label>
-        <Input name="usdt_address" required />
-      </>
+        <Input name="usdt_address" required autoComplete="off" />
+      </div>
     );
   }
   return null;
+}
+
+function getStatusBadge(status: string) {
+  let color = "";
+  let label = "";
+  let icon = Circle;
+  if (status === "pending") {
+    color = "bg-yellow-500";
+    label = "Pending";
+    icon = Circle;
+  } else if (status === "approved") {
+    color = "bg-green-600";
+    label = "Approved";
+    icon = DollarSign;
+  } else if (status === "declined") {
+    color = "bg-red-600";
+    label = "Declined";
+    icon = CreditCard;
+  } else if (status === "paid") {
+    color = "bg-blue-600";
+    label = "Paid";
+    icon = Banknote;
+  } else {
+    color = "bg-gray-400";
+    label = status;
+    icon = Circle;
+  }
+  return (
+    <Badge className={`${color} text-white gap-2 flex items-center`}>
+      <span>
+        <icon className="h-4 w-4" />
+      </span>
+      {label}
+    </Badge>
+  );
 }
 
 export default function Payouts() {
@@ -81,10 +118,7 @@ export default function Payouts() {
     setAmount("");
   }
 
-  // Notification for when user payout request is approved (demo toast)
-  React.useEffect(() => {
-    // Here, you would listen for realtime updates on payout_requests table for this user
-    // For now, we'll skip realtime and just show a toast on successful payout request
+  useEffect(() => {
     if (createPayout.isSuccess) {
       toast({
         title: "Withdrawal Requested",
@@ -97,10 +131,15 @@ export default function Payouts() {
     <div className="max-w-xl mx-auto my-8">
       <Card>
         <CardHeader>
-          <CardTitle>Request Payout</CardTitle>
+          <CardTitle>
+            <span className="flex items-center gap-2">
+              <Banknote className="h-5 w-5 text-primary" />
+              Request Payout
+            </span>
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <Label>Amount</Label>
               <Input
@@ -108,23 +147,25 @@ export default function Payouts() {
                 type="number"
                 required
                 min={100}
+                max={1000000}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Amount (INR/USDT)"
               />
             </div>
             <div>
-              <Label>Method</Label>
-              <Tabs value={method} onValueChange={setMethod} className="w-full">
-                <TabsList>
+              <Label>Payout Method</Label>
+              <Tabs value={method} onValueChange={setMethod} className="w-full mt-2">
+                <TabsList className="grid grid-cols-3 mb-2">
                   {methodOptions.map((opt) => (
-                    <TabsTrigger key={opt.value} value={opt.value}>
+                    <TabsTrigger key={opt.value} value={opt.value} className="flex gap-2 items-center">
+                      <opt.icon className="h-4 w-4" />
                       {opt.label}
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 {methodOptions.map((opt) => (
-                  <TabsContent key={opt.value} value={opt.value}>
+                  <TabsContent key={opt.value} value={opt.value} className="pt-2">
                     {getMethodFields(opt.value)}
                   </TabsContent>
                 ))}
@@ -162,23 +203,17 @@ export default function Payouts() {
                   key={req.id}
                   className="flex justify-between items-center border-b py-2 text-sm"
                 >
-                  <span>
-                    ₹{req.amount} ({req.method.toUpperCase()})
+                  <span className="flex items-center gap-3">
+                    {req.method === "bank" && <Banknote className="h-4 w-4 text-primary" />}
+                    {req.method === "upi" && <CreditCard className="h-4 w-4 text-blue-600" />}
+                    {req.method === "usdt_trc20" && <DollarSign className="h-4 w-4 text-green-600" />}
+                    <span className="font-medium">
+                      ₹{req.amount}{" "}
+                      <span className="uppercase text-xs text-muted-foreground ml-2">({req.method})</span>
+                    </span>
                   </span>
                   <span>
-                    <Badge
-                      className={`${
-                        req.status === "pending"
-                          ? "bg-yellow-500"
-                          : req.status === "approved"
-                          ? "bg-green-600"
-                          : req.status === "declined"
-                          ? "bg-red-600"
-                          : "bg-gray-400"
-                      } text-white`}
-                    >
-                      {req.status}
-                    </Badge>
+                    {getStatusBadge(req.status)}
                   </span>
                 </div>
               ))}

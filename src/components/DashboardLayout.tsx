@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   BarChart2,
@@ -13,6 +13,8 @@ import {
   ChevronDown,
   Activity,
   Users,
+  Banknote,
+  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -55,7 +57,7 @@ const navItems = [
   },
   {
     label: "Withdraw",
-    icon: CreditCard,
+    icon: Banknote,
     href: "/dashboard/payouts",
   },
   {
@@ -69,6 +71,7 @@ export default function DashboardLayout() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [selectedBot, setSelectedBot] = useState("My First Bot");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const bots = [
     "My First Bot",
@@ -78,7 +81,7 @@ export default function DashboardLayout() {
 
   const handleBotChange = (bot: string) => {
     setSelectedBot(bot);
-    // Here you could navigate or update state based on selected bot
+    // You can add bot switch logic here
   };
 
   return (
@@ -212,7 +215,10 @@ export default function DashboardLayout() {
               <Link
                 key={item.href}
                 to={item.href}
-                className="flex items-center px-4 py-3 text-sm rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+                className={cn(
+                  "flex items-center px-4 py-3 text-sm rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors",
+                  location.pathname === item.href ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold" : ""
+                )}
               >
                 <item.icon className="h-5 w-5 mr-3" />
                 {item.label}
