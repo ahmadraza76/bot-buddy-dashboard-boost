@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -140,16 +141,21 @@ export default function Hero() {
             </form>
           </div>
           
+          {/* IMAGE AND BADGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
+              {/* Badge moved & styled at the TOP */}
+              <div className="absolute left-1/2 -top-6 -translate-x-1/2 z-10 select-none animate-fade-in drop-shadow-lg">
+                <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
+                  Live Audio &amp; Video Streaming!
+                </span>
+              </div>
               <img
                 src="https://api.dicebear.com/6.x/shapes/svg?seed=music&backgroundColor=8B5CF6&shape1Color=60A5FA"
                 alt="Music Bot Illustration"
                 className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30"
               />
-              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">
-                Live Audio &amp; Video Streaming!
-              </div>
+              {/* Removed the old badge at the bottom */}
             </div>
           </div>
         </div>
@@ -157,3 +163,4 @@ export default function Hero() {
     </section>
   );
 }
+
