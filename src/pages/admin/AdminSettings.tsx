@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Save, Settings, Users, CreditCard, Bell, Shield, Server } from "lucide-react";
 import { usePlatformSettings, useUpdatePlatformSetting } from "@/hooks/usePlatformSettings";
 import { useToast } from "@/hooks/use-toast";
+import OpenAIKeyManager from "./components/OpenAIKeyManager";
 
 export default function AdminSettings() {
   const [maintenanceMode, setMaintenanceMode] = useState(false);
@@ -71,6 +72,10 @@ export default function AdminSettings() {
           <TabsTrigger value="social" className="flex items-center">
             <Users className="h-4 w-4 mr-2" />
             Social Media Links
+          </TabsTrigger>
+          <TabsTrigger value="ai" className="flex items-center">
+            <Server className="h-4 w-4 mr-2" />
+            AI Management
           </TabsTrigger>
         </TabsList>
 
@@ -629,6 +634,12 @@ export default function AdminSettings() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="ai">
+          <div className="max-w-xl">
+            <OpenAIKeyManager />
           </div>
         </TabsContent>
       </Tabs>
