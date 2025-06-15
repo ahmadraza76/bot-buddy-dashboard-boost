@@ -67,14 +67,7 @@ export default function ApiKeys() {
       value: 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6',
       description: 'Spotify API Client ID for music streaming',
       createdAt: '2024-01-15T10:32:00Z'
-    },
-    {
-      id: '4',
-      name: 'SESSION_STRING',
-      value: '1AABXXXXXXXXXX:abcdxxxxxxxxxxxxxxx-xxxxxxxxx==',
-      description: 'Pyrogram/Telethon SESSION_STRING for secure bot authentication',
-      createdAt: '2024-01-15T10:33:00Z'
-    },
+    }
   ]);
   const [newSecretName, setNewSecretName] = useState('');
   const [newSecretValue, setNewSecretValue] = useState('');
