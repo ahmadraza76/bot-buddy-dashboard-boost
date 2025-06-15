@@ -24,6 +24,7 @@ import UptimeMonitor from "@/pages/dashboard/UptimeMonitor";
 import ReferralSystem from "@/pages/dashboard/ReferralSystem";
 import BotStatusPage from "@/pages/BotStatusPage";
 import Payouts from "@/pages/dashboard/Payouts";
+import Analytics from "@/pages/dashboard/Analytics";
 
 // Admin Pages
 import AdminDashboard from "@/pages/admin/AdminDashboard";
@@ -71,6 +72,7 @@ const App = () => (
             <Route path="referrals" element={<ReferralSystem />} />
             <Route path="settings" element={<Settings />} />
             <Route path="payouts" element={<Payouts />} />
+            <Route path="analytics" element={<Analytics />} />
           </Route>
           
           {/* Protected Admin routes */}
