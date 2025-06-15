@@ -140,19 +140,19 @@ export default function Payouts() {
   }, [createPayout.isSuccess, toast]);
 
   return (
-    <div className="max-w-full sm:max-w-xl mx-auto my-4 px-1 sm:px-0">
+    <div className="max-w-full sm:max-w-xl mx-auto my-3 px-1 sm:px-0">
       {/* WALLET AMOUNT DISPLAY */}
-      <Card className="mb-4 sm:mb-6">
-        <CardContent className="flex items-center gap-2 py-3 sm:py-4">
-          <DollarSign className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
+      <Card className="mb-3 sm:mb-5">
+        <CardContent className="flex items-center gap-2 py-2 sm:py-3">
+          <DollarSign className="h-5 w-5 sm:h-7 sm:w-7 text-primary" />
           <div>
-            <div className="text-[11px] sm:text-xs text-muted-foreground">Wallet Amount</div>
+            <div className="text-[10px] sm:text-xs text-muted-foreground">Wallet Amount</div>
             {isProfileLoading ? (
-              <span className="text-sm font-semibold">Loading...</span>
+              <span className="text-xs font-semibold">Loading...</span>
             ) : profileError ? (
-              <span className="text-sm text-red-500">Unable to fetch</span>
+              <span className="text-xs text-red-500">Unable to fetch</span>
             ) : (
-              <span className="text-xl sm:text-2xl font-bold">
+              <span className="text-base sm:text-xl font-bold">
                 ₹{Number(walletAmount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
               </span>
             )}
@@ -160,18 +160,18 @@ export default function Payouts() {
         </CardContent>
       </Card>
       <Card>
-        <CardHeader className="py-3 sm:py-4">
+        <CardHeader className="py-2 sm:py-3">
           <CardTitle>
-            <span className="flex items-center gap-2 text-sm sm:text-lg">
-              <Banknote className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+            <span className="flex items-center gap-1 text-xs sm:text-lg">
+              <Banknote className="h-3 w-3 sm:h-5 sm:w-5 text-primary" />
               Request Payout
             </span>
           </CardTitle>
         </CardHeader>
         <CardContent className="py-3 sm:py-5">
-          <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-3 sm:space-y-5" onSubmit={handleSubmit}>
             <div>
-              <Label className="text-[11px] sm:text-sm">Amount</Label>
+              <Label className="text-[10px] sm:text-sm">Amount</Label>
               <Input
                 name="amount"
                 type="number"
@@ -185,17 +185,26 @@ export default function Payouts() {
               />
             </div>
             <div>
-              <Label className="text-[11px] sm:text-sm">Payout Method</Label>
+              <Label className="text-[10px] sm:text-sm">Payout Method</Label>
               <Tabs value={method} onValueChange={setMethod} className="w-full mt-1 sm:mt-2">
-                <TabsList className="grid grid-cols-3 mb-1 sm:mb-2 h-8 sm:h-9">
+                <TabsList className="grid grid-cols-3 mb-1 sm:mb-2 h-7 sm:h-8">
                   {methodOptions.map((opt) => (
                     <TabsTrigger
-                      key={typeof opt.label === 'string' ? opt.label : opt.value}
+                      key={typeof opt.label === "string" ? opt.label : opt.value}
                       value={opt.value}
-                      className="flex flex-col gap-0.5 items-center justify-center text-[11px] sm:text-xs py-1 sm:py-2 px-1 sm:px-2 min-h-0 h-8 sm:h-9"
+                      className="flex flex-col gap-0.5 items-center justify-center text-[10px] sm:text-xs py-1 sm:py-2 px-1 sm:px-2 min-h-0 h-7 sm:h-8"
                     >
                       <opt.icon className="h-3 w-3 sm:h-4 sm:w-4 mb-0.5" />
-                      {opt.label}
+                      {opt.value === "bank" && <span>Bank</span>}
+                      {opt.value === "upi" && <span>UPI</span>}
+                      {opt.value === "usdt_trc20" && (
+                        <span className="leading-tight">
+                          USDT
+                          <span className="text-[9px] sm:text-[11px] -mt-0.5 text-muted-foreground block">
+                            (TRC20)
+                          </span>
+                        </span>
+                      )}
                     </TabsTrigger>
                   ))}
                 </TabsList>
@@ -208,7 +217,7 @@ export default function Payouts() {
             </div>
             <Button
               type="submit"
-              className="w-full text-sm sm:text-base py-2 sm:py-3 rounded-lg"
+              className="w-full text-xs sm:text-base py-2 sm:py-3 rounded-lg"
               disabled={createPayout.isPending}
             >
               {createPayout.isPending ? "Requesting..." : "Request Payout"}
@@ -222,11 +231,11 @@ export default function Payouts() {
           </form>
         </CardContent>
       </Card>
-      <Card className="mt-5 sm:mt-8">
-        <CardHeader className="py-3 sm:py-4">
-          <CardTitle className="text-base sm:text-lg">Your Payout Requests</CardTitle>
+      <Card className="mt-4 sm:mt-6">
+        <CardHeader className="py-2 sm:py-3">
+          <CardTitle className="text-xs sm:text-lg">Your Payout Requests</CardTitle>
         </CardHeader>
-        <CardContent className="py-3 sm:py-5">
+        <CardContent className="py-2 sm:py-4">
           {isLoading ? (
             <div className="text-xs sm:text-base">Loading...</div>
           ) : payoutRequests.length === 0 ? (
@@ -236,7 +245,7 @@ export default function Payouts() {
               {payoutRequests.map((req: any) => (
                 <div
                   key={req.id}
-                  className="flex justify-between items-center border-b py-2 text-xs sm:text-sm"
+                  className="flex justify-between items-center border-b py-2 text-[10px] sm:text-sm"
                 >
                   <span className="flex items-center gap-2 sm:gap-3">
                     {req.method === "bank" && <Banknote className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />}
@@ -244,7 +253,7 @@ export default function Payouts() {
                     {req.method === "usdt_trc20" && <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />}
                     <span className="font-medium">
                       ₹{req.amount}{" "}
-                      <span className="uppercase text-[10px] sm:text-xs text-muted-foreground ml-1 sm:ml-2">({req.method})</span>
+                      <span className="uppercase text-[9px] sm:text-xs text-muted-foreground ml-1 sm:ml-2">({req.method})</span>
                     </span>
                   </span>
                   <span>

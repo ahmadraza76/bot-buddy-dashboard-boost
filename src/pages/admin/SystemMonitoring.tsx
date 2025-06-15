@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Activity, Server, HardDrive, Cpu, MemoryStick, AlertTriangle } from "lucide-react";
@@ -29,53 +28,53 @@ export default function SystemMonitoring() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">System Monitoring</h1>
-        <div className="text-sm text-muted-foreground">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-base sm:text-3xl font-bold">System Monitoring</h1>
+        <div className="text-xs sm:text-sm text-muted-foreground">
           Auto-refresh: Every 30 seconds
         </div>
       </div>
 
       {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Overall CPU</CardDescription>
-            <Cpu className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+            <CardDescription className="text-xs">Overall CPU</CardDescription>
+            <Cpu className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">42%</div>
-            <p className="text-xs text-muted-foreground">Across all servers</p>
+            <div className="text-base sm:text-2xl font-bold">42%</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">Across all servers</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Overall Memory</CardDescription>
-            <MemoryStick className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+            <CardDescription className="text-xs">Overall Memory</CardDescription>
+            <MemoryStick className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">63%</div>
-            <p className="text-xs text-muted-foreground">247GB / 392GB used</p>
+            <div className="text-base sm:text-2xl font-bold">63%</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">247GB / 392GB used</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Overall Disk</CardDescription>
-            <HardDrive className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+            <CardDescription className="text-xs">Overall Disk</CardDescription>
+            <HardDrive className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">45%</div>
-            <p className="text-xs text-muted-foreground">1.8TB / 4TB used</p>
+            <div className="text-base sm:text-2xl font-bold">45%</div>
+            <p className="text-[10px] sm:text-xs text-muted-foreground">1.8TB / 4TB used</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>System Uptime</CardDescription>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+            <CardDescription className="text-xs">System Uptime</CardDescription>
+            <Activity className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">99.8%</div>
-            <p className="text-xs text-green-600">45 days, 12 hours</p>
+            <div className="text-base sm:text-2xl font-bold">99.8%</div>
+            <p className="text-[10px] sm:text-green-600">45 days, 12 hours</p>
           </CardContent>
         </Card>
       </div>

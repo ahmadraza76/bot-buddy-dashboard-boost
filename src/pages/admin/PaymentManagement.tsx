@@ -35,15 +35,15 @@ export default function PaymentManagement() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Payment Management</h1>
-        <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
-            <Download className="h-4 w-4 mr-2" />
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-base sm:text-3xl font-bold">Payment Management</h1>
+        <div className="flex items-center space-x-1">
+          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7" onClick={() => window.location.reload()}>
+            <Download className="h-4 w-4 mr-1" />
             Export
           </Button>
-          <Button variant="outline" size="sm" onClick={() => refetch()}>
-            <RefreshCw className="h-4 w-4 mr-2" />
+          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7" onClick={() => refetch()}>
+            <RefreshCw className="h-4 w-4 mr-1" />
             Sync
           </Button>
         </div>

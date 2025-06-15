@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -66,22 +65,22 @@ export default function UserManagement() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">User Management</h1>
-        <div className="flex items-center space-x-2">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-base sm:text-3xl font-bold">User Management</h1>
+        <div className="flex items-center space-x-1">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-3 w-3" />
             <Input
               placeholder="Search users..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-64"
+              className="pl-8 w-44 text-xs h-7"
             />
           </div>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 border rounded-md"
+            className="px-2 py-1 border rounded-md text-xs h-7"
           >
             <option value="all">All Status</option>
             <option value="active">Active</option>
@@ -92,37 +91,37 @@ export default function UserManagement() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Total Users</CardDescription>
+          <CardHeader className="pb-1">
+            <CardDescription className="text-xs">Total Users</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1,247</div>
+            <div className="text-base sm:text-2xl font-bold">1,247</div>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Active Users</CardDescription>
+          <CardHeader className="pb-1">
+            <CardDescription className="text-xs">Active Users</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">892</div>
+            <div className="text-base sm:text-2xl font-bold text-green-600">892</div>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Inactive Users</CardDescription>
+          <CardHeader className="pb-1">
+            <CardDescription className="text-xs">Inactive Users</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-yellow-600">320</div>
+            <div className="text-base sm:text-2xl font-bold text-yellow-600">320</div>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Banned Users</CardDescription>
+          <CardHeader className="pb-1">
+            <CardDescription className="text-xs">Banned Users</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-red-600">35</div>
+            <div className="text-base sm:text-2xl font-bold text-red-600">35</div>
           </CardContent>
         </Card>
       </div>
@@ -130,8 +129,8 @@ export default function UserManagement() {
       {/* Users Table */}
       <Card>
         <CardHeader>
-          <CardTitle>All Users</CardTitle>
-          <CardDescription>Manage and monitor all registered users</CardDescription>
+          <CardTitle className="text-xs sm:text-lg">All Users</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">Manage and monitor all registered users</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>

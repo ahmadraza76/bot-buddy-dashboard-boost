@@ -14,12 +14,12 @@ export default function PayoutManagement() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Payout Requests</h1>
+      <div className="flex justify-between items-center mb-3">
+        <h1 className="text-base sm:text-3xl font-bold">Payout Requests</h1>
       </div>
       <Card>
         <CardHeader>
-          <CardTitle>All User Payout Requests</CardTitle>
+          <CardTitle className="text-xs sm:text-lg">All User Payout Requests</CardTitle>
         </CardHeader>
         <CardContent>
           <PayoutRequestTable

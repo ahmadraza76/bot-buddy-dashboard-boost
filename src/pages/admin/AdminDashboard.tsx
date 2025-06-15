@@ -26,20 +26,20 @@ export default function AdminDashboard() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <div className="text-sm text-muted-foreground">Last updated: {new Date().toLocaleString()}</div>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-base sm:text-3xl font-bold">Admin Dashboard</h1>
+        <div className="text-xs sm:text-sm text-muted-foreground">Last updated: {new Date().toLocaleString()}</div>
       </div>
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
         {stats.map((item) => (
           <Card key={item.label}>
-            <CardHeader className="pb-2 flex flex-row items-center justify-between">
-              <CardDescription>{item.label}</CardDescription>
-              <item.icon className={`h-5 w-5 ${item.color}`} />
+            <CardHeader className="pb-1 flex flex-row items-center justify-between">
+              <CardDescription className="text-xs">{item.label}</CardDescription>
+              <item.icon className={`h-4 w-4 ${item.color}`} />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{item.value}</div>
+              <div className="text-base sm:text-2xl font-bold">{item.value}</div>
             </CardContent>
           </Card>
         ))}
