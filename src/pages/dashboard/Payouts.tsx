@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,30 +21,30 @@ function getMethodFields(method: string) {
   if (method === "bank") {
     return (
       <div className="grid gap-2">
-        <Label>Account Holder Name</Label>
-        <Input name="account_holder" required autoComplete="off" />
-        <Label>Account Number</Label>
-        <Input name="account_number" required autoComplete="off" />
-        <Label>Bank Name</Label>
-        <Input name="bank_name" required autoComplete="off" />
-        <Label>IFSC Code</Label>
-        <Input name="ifsc_code" required autoComplete="off" />
+        <Label className="text-xs md:text-sm">Account Holder Name</Label>
+        <Input name="account_holder" required autoComplete="off" className="text-xs md:text-sm py-2" />
+        <Label className="text-xs md:text-sm">Account Number</Label>
+        <Input name="account_number" required autoComplete="off" className="text-xs md:text-sm py-2" />
+        <Label className="text-xs md:text-sm">Bank Name</Label>
+        <Input name="bank_name" required autoComplete="off" className="text-xs md:text-sm py-2" />
+        <Label className="text-xs md:text-sm">IFSC Code</Label>
+        <Input name="ifsc_code" required autoComplete="off" className="text-xs md:text-sm py-2" />
       </div>
     );
   }
   if (method === "upi") {
     return (
       <div className="grid gap-2">
-        <Label>UPI ID</Label>
-        <Input name="upi_id" required autoComplete="off" placeholder="user@bank" />
+        <Label className="text-xs md:text-sm">UPI ID</Label>
+        <Input name="upi_id" required autoComplete="off" placeholder="user@bank" className="text-xs md:text-sm py-2" />
       </div>
     );
   }
   if (method === "usdt_trc20") {
     return (
       <div className="grid gap-2">
-        <Label>USDT (TRC20) Address</Label>
-        <Input name="usdt_address" required autoComplete="off" />
+        <Label className="text-xs md:text-sm">USDT (TRC20) Address</Label>
+        <Input name="usdt_address" required autoComplete="off" className="text-xs md:text-sm py-2" />
       </div>
     );
   }
@@ -53,7 +54,7 @@ function getMethodFields(method: string) {
 function getStatusBadge(status: string) {
   let color = "";
   let label = "";
-  let Icon = Circle; // note the uppercase
+  let Icon = Circle;
 
   if (status === "pending") {
     color = "bg-yellow-500";
@@ -77,9 +78,9 @@ function getStatusBadge(status: string) {
     Icon = Circle;
   }
   return (
-    <Badge className={`${color} text-white gap-2 flex items-center`}>
+    <Badge className={`${color} text-white gap-2 flex items-center text-[10px] sm:text-xs px-2 py-1`}>
       <span>
-        <Icon className="h-4 w-4" />
+        <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
       </span>
       {label}
     </Badge>
@@ -92,8 +93,6 @@ export default function Payouts() {
   const createPayout = useCreatePayoutRequest();
   const { data: payoutRequests = [], isLoading } = useUserPayoutRequests();
   const { toast } = useToast();
-
-  // Fetch the profile to display wallet balance
   const { data: profile, isLoading: isProfileLoading, error: profileError } = useProfile();
   const walletAmount = profile?.balance ?? 0;
 
@@ -133,19 +132,19 @@ export default function Payouts() {
   }, [createPayout.isSuccess, toast]);
 
   return (
-    <div className="max-w-xl mx-auto my-8">
+    <div className="max-w-full sm:max-w-xl mx-auto my-4 px-1 sm:px-0">
       {/* WALLET AMOUNT DISPLAY */}
-      <Card className="mb-6">
-        <CardContent className="flex items-center gap-4 py-4">
-          <DollarSign className="h-7 w-7 text-primary" />
+      <Card className="mb-4 sm:mb-6">
+        <CardContent className="flex items-center gap-2 py-3 sm:py-4">
+          <DollarSign className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
           <div>
-            <div className="text-xs text-muted-foreground">Wallet Amount</div>
+            <div className="text-[11px] sm:text-xs text-muted-foreground">Wallet Amount</div>
             {isProfileLoading ? (
-              <span className="text-base font-semibold">Loading...</span>
+              <span className="text-sm font-semibold">Loading...</span>
             ) : profileError ? (
-              <span className="text-base text-red-500">Unable to fetch</span>
+              <span className="text-sm text-red-500">Unable to fetch</span>
             ) : (
-              <span className="text-2xl font-bold">
+              <span className="text-xl sm:text-2xl font-bold">
                 ₹{Number(walletAmount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
               </span>
             )}
@@ -153,18 +152,18 @@ export default function Payouts() {
         </CardContent>
       </Card>
       <Card>
-        <CardHeader>
+        <CardHeader className="py-3 sm:py-4">
           <CardTitle>
-            <span className="flex items-center gap-2">
-              <Banknote className="h-5 w-5 text-primary" />
+            <span className="flex items-center gap-2 text-base sm:text-lg">
+              <Banknote className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Request Payout
             </span>
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <CardContent className="py-3 sm:py-5">
+          <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
             <div>
-              <Label>Amount</Label>
+              <Label className="text-xs sm:text-sm">Amount</Label>
               <Input
                 name="amount"
                 type="number"
@@ -174,21 +173,22 @@ export default function Payouts() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Amount (INR/USDT)"
+                className="text-[13px] sm:text-base py-2 px-3"
               />
             </div>
             <div>
-              <Label>Payout Method</Label>
-              <Tabs value={method} onValueChange={setMethod} className="w-full mt-2">
-                <TabsList className="grid grid-cols-3 mb-2">
+              <Label className="text-xs sm:text-sm">Payout Method</Label>
+              <Tabs value={method} onValueChange={setMethod} className="w-full mt-1 sm:mt-2">
+                <TabsList className="grid grid-cols-3 mb-1 sm:mb-2 h-9">
                   {methodOptions.map((opt) => (
-                    <TabsTrigger key={opt.value} value={opt.value} className="flex gap-2 items-center">
-                      <opt.icon className="h-4 w-4" />
+                    <TabsTrigger key={opt.value} value={opt.value} className="flex gap-2 items-center text-xs sm:text-sm py-1 sm:py-2">
+                      <opt.icon className="h-3 w-3 sm:h-4 sm:w-4" />
                       {opt.label}
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 {methodOptions.map((opt) => (
-                  <TabsContent key={opt.value} value={opt.value} className="pt-2">
+                  <TabsContent key={opt.value} value={opt.value} className="pt-1 sm:pt-2">
                     {getMethodFields(opt.value)}
                   </TabsContent>
                 ))}
@@ -196,43 +196,43 @@ export default function Payouts() {
             </div>
             <Button
               type="submit"
-              className="w-full"
+              className="w-full text-sm sm:text-base py-2 sm:py-3 rounded-lg"
               disabled={createPayout.isPending}
             >
               {createPayout.isPending ? "Requesting..." : "Request Payout"}
             </Button>
             {createPayout.error && (
-              <div className="text-red-600 text-sm">{(createPayout.error as any).message}</div>
+              <div className="text-red-600 text-xs sm:text-sm">{(createPayout.error as any).message}</div>
             )}
             {createPayout.isSuccess && (
-              <div className="text-green-600 text-sm">Request placed successfully!</div>
+              <div className="text-green-600 text-xs sm:text-sm">Request placed successfully!</div>
             )}
           </form>
         </CardContent>
       </Card>
-      <Card className="mt-8">
-        <CardHeader>
-          <CardTitle>Your Payout Requests</CardTitle>
+      <Card className="mt-5 sm:mt-8">
+        <CardHeader className="py-3 sm:py-4">
+          <CardTitle className="text-base sm:text-lg">Your Payout Requests</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="py-3 sm:py-5">
           {isLoading ? (
-            <div>Loading...</div>
+            <div className="text-xs sm:text-base">Loading...</div>
           ) : payoutRequests.length === 0 ? (
-            <div className="text-muted-foreground">No payout requests yet.</div>
+            <div className="text-muted-foreground text-xs sm:text-base">No payout requests yet.</div>
           ) : (
             <div className="space-y-2">
               {payoutRequests.map((req: any) => (
                 <div
                   key={req.id}
-                  className="flex justify-between items-center border-b py-2 text-sm"
+                  className="flex justify-between items-center border-b py-2 text-xs sm:text-sm"
                 >
-                  <span className="flex items-center gap-3">
-                    {req.method === "bank" && <Banknote className="h-4 w-4 text-primary" />}
-                    {req.method === "upi" && <CreditCard className="h-4 w-4 text-blue-600" />}
-                    {req.method === "usdt_trc20" && <DollarSign className="h-4 w-4 text-green-600" />}
+                  <span className="flex items-center gap-2 sm:gap-3">
+                    {req.method === "bank" && <Banknote className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />}
+                    {req.method === "upi" && <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />}
+                    {req.method === "usdt_trc20" && <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />}
                     <span className="font-medium">
                       ₹{req.amount}{" "}
-                      <span className="uppercase text-xs text-muted-foreground ml-2">({req.method})</span>
+                      <span className="uppercase text-[10px] sm:text-xs text-muted-foreground ml-1 sm:ml-2">({req.method})</span>
                     </span>
                   </span>
                   <span>
@@ -247,3 +247,4 @@ export default function Payouts() {
     </div>
   );
 }
+
