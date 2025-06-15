@@ -143,12 +143,21 @@ export default function Hero() {
           {/* IMAGE AND BADGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
-              <img
-                src="/brand-logo.png"
-                alt="Music Bot Illustration"
-                className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30"
-              />
               <div className="flex flex-col items-center">
+                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30">
+                  <rect width="200" height="200" rx="20" fill="#E6F0FF"/>
+                  <g transform="translate(30, 40)">
+                    <path d="M70 0C95 0 110 15 110 40V60C110 70 105 80 95 85L100 90V110H80V100C75 105 65 110 50 110C25 110 10 95 10 70V40C10 15 25 0 50 0H70Z" fill="#7B3FE4"/>
+                    <circle cx="60" cy="60" r="5" fill="white"/>
+                    <circle cx="90" cy="60" r="5" fill="white"/>
+                    <path d="M65 80C70 85 80 85 85 80" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                    <path d="M95 70L130 60V90C130 100 120 110 110 110C100 110 95 100 95 90V70Z" fill="white"/>
+                    <circle cx="110" cy="110" r="7" fill="#7B3FE4"/>
+                    <circle cx="130" cy="100" r="7" fill="#7B3FE4"/>
+                    <rect x="68" y="-20" width="4" height="20" fill="#7B3FE4"/>
+                    <circle cx="70" cy="-20" r="5" fill="#7B3FE4"/>
+                  </g>
+                </svg>
                 <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
                   <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
                     Live Audio &amp; Video Streaming!
