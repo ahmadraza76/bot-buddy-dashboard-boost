@@ -1,11 +1,8 @@
 
-/**
- * API Route only for ADMINs: get, set, delete the OPENAI key secret in Supabase.
- */
-import type { NextApiRequest, NextApiResponse } from "next";
+// This is a placeholder simulation for admin API; not a Next.js API route.
+// Do NOT use Next.js types, just export a standard JS function.
 
-// These are pseudo-implementations; replace with your actual Supabase SDK logic as needed.
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: any, res: any) {
   // Only allow requests from admins
   // Replace this check with your real admin check, e.g. from Supabase JWT/session
   const userIsAdmin = true; // TODO: Replace with proper check

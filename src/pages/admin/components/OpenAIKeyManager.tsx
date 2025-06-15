@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,8 +28,8 @@ export default function OpenAIKeyManager() {
     setLoading(false);
   }
 
-  // On mount, check if exists
-  useState(() => {
+  // On mount, check if exists (useEffect is correct here)
+  useEffect(() => {
     fetchKey();
     // eslint-disable-next-line
   }, []);
