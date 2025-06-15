@@ -140,11 +140,11 @@ export default function Payouts() {
   }, [createPayout.isSuccess, toast]);
 
   return (
-    <div className="max-w-full sm:max-w-xl mx-auto my-3 px-1 sm:px-0">
+    <div className="max-w-full sm:max-w-xl mx-auto my-3 px-2 sm:px-0">
       {/* WALLET AMOUNT DISPLAY */}
       <Card className="mb-3 sm:mb-5">
         <CardContent className="flex items-center gap-2 py-2 sm:py-3">
-          <DollarSign className="h-5 w-5 sm:h-7 sm:w-7 text-primary" />
+          <DollarSign className="h-4 w-4 sm:h-7 sm:w-7 text-primary" />
           <div>
             <div className="text-[10px] sm:text-xs text-muted-foreground">Wallet Amount</div>
             {isProfileLoading ? (
@@ -163,7 +163,7 @@ export default function Payouts() {
         <CardHeader className="py-2 sm:py-3">
           <CardTitle>
             <span className="flex items-center gap-1 text-xs sm:text-lg">
-              <Banknote className="h-3 w-3 sm:h-5 sm:w-5 text-primary" />
+              <Banknote className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Request Payout
             </span>
           </CardTitle>
@@ -200,7 +200,7 @@ export default function Payouts() {
                       {opt.value === "usdt_trc20" && (
                         <span className="leading-tight">
                           USDT
-                          <span className="text-[9px] sm:text-[11px] -mt-0.5 text-muted-foreground block">
+                          <span className="text-[8px] sm:text-[11px] -mt-0.5 text-muted-foreground block">
                             (TRC20)
                           </span>
                         </span>
@@ -245,15 +245,15 @@ export default function Payouts() {
               {payoutRequests.map((req: any) => (
                 <div
                   key={req.id}
-                  className="flex justify-between items-center border-b py-2 text-[10px] sm:text-sm"
+                  className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b py-2 text-[10px] sm:text-sm gap-1"
                 >
                   <span className="flex items-center gap-2 sm:gap-3">
                     {req.method === "bank" && <Banknote className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />}
                     {req.method === "upi" && <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />}
                     {req.method === "usdt_trc20" && <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />}
-                    <span className="font-medium">
-                      ₹{req.amount}{" "}
-                      <span className="uppercase text-[9px] sm:text-xs text-muted-foreground ml-1 sm:ml-2">({req.method})</span>
+                    <span className="font-medium truncate">
+                      ₹{req.amount}
+                      <span className="uppercase text-[8px] sm:text-xs text-muted-foreground ml-1 sm:ml-2">({req.method})</span>
                     </span>
                   </span>
                   <span>

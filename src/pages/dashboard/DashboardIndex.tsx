@@ -65,35 +65,35 @@ export default function DashboardIndex() {
   ];
 
   return (
-    <div>
+    <div className="px-2 py-2 sm:px-0">
       {/* Insert SessionGenerator at the top of dashboard */}
       <SessionGenerator />
       {/* Title and filter row */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center mb-4 mt-2">
-        <h1 className="font-bold text-base sm:text-2xl leading-none sm:leading-tight">
-          <span className="block sm:inline text-[1rem] sm:text-2xl">Dashboard</span>
+      <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center mb-2 sm:mb-4 mt-1">
+        <h1 className="font-bold text-sm sm:text-2xl leading-none sm:leading-tight break-words">
+          <span className="block sm:inline">dashboard</span>
         </h1>
-        <div className="flex items-center gap-1 flex-row">
+        <div className="flex items-center gap-1">
           <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
-            <TabsList className="flex px-0 py-0 bg-transparent gap-0">
-              <TabsTrigger value="day" className="text-[10px] sm:text-xs px-2 py-1 h-6 sm:h-8 rounded-none">Day</TabsTrigger>
-              <TabsTrigger value="week" className="text-[10px] sm:text-xs px-2 py-1 h-6 sm:h-8 rounded-none">Week</TabsTrigger>
-              <TabsTrigger value="month" className="text-[10px] sm:text-xs px-2 py-1 h-6 sm:h-8 rounded-none">Month</TabsTrigger>
-              <TabsTrigger value="year" className="text-[10px] sm:text-xs px-2 py-1 h-6 sm:h-8 rounded-none">Year</TabsTrigger>
+            <TabsList className="flex px-0 py-0 bg-transparent gap-0 h-6 sm:h-8">
+              <TabsTrigger value="day" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Day</TabsTrigger>
+              <TabsTrigger value="week" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Week</TabsTrigger>
+              <TabsTrigger value="month" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Month</TabsTrigger>
+              <TabsTrigger value="year" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Year</TabsTrigger>
             </TabsList>
           </Tabs>
-          <Button variant="outline" className="text-[10px] sm:text-xs px-2 py-1 h-6 sm:h-8">
+          <Button variant="outline" className="text-[9px] sm:text-xs px-2 py-1 h-6 sm:h-8 ml-1">
             Refresh
           </Button>
         </div>
       </div>
 
       {/* Stats overview */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-3 sm:mb-4">
         {stats.map((stat) => (
           <Card key={stat.label}>
             <CardHeader className="pb-2">
-              <CardDescription className="text-xs sm:text-sm">{stat.label}</CardDescription>
+              <CardDescription className="text-[10px] sm:text-xs">{stat.label}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-base sm:text-2xl font-bold">{stat.value}</div>

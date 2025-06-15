@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, Activity, Bot, CreditCard, Users } from "lucide-react";
@@ -25,17 +24,17 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-base sm:text-3xl font-bold">Admin Dashboard</h1>
-        <div className="text-xs sm:text-sm text-muted-foreground">Last updated: {new Date().toLocaleString()}</div>
+    <div className="px-2 py-2 sm:px-0">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-2 sm:mb-4">
+        <h1 className="text-sm sm:text-3xl font-bold">Admin Dashboard</h1>
+        <div className="text-[11px] sm:text-sm text-muted-foreground">Last updated: {new Date().toLocaleString()}</div>
       </div>
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 sm:gap-2 mb-3 sm:mb-4">
         {stats.map((item) => (
           <Card key={item.label}>
             <CardHeader className="pb-1 flex flex-row items-center justify-between">
-              <CardDescription className="text-xs">{item.label}</CardDescription>
+              <CardDescription className="text-[10px]">{item.label}</CardDescription>
               <item.icon className={`h-4 w-4 ${item.color}`} />
             </CardHeader>
             <CardContent>
@@ -44,8 +43,7 @@ export default function AdminDashboard() {
           </Card>
         ))}
       </div>
-      {/* Bots Table with all controls */}
-      <div className="mb-10">
+      <div className="mb-8 sm:mb-10">
         <BotAdminTable bots={bots} loading={botsLoading} error={botsError} />
       </div>
     </div>

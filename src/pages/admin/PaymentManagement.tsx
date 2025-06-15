@@ -34,15 +34,15 @@ export default function PaymentManagement() {
   });
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-base sm:text-3xl font-bold">Payment Management</h1>
+    <div className="px-2 py-2 sm:px-0">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-3 sm:mb-4 gap-1">
+        <h1 className="text-sm sm:text-3xl font-bold">Payment Management</h1>
         <div className="flex items-center space-x-1">
-          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7" onClick={() => window.location.reload()}>
+          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7">
             <Download className="h-4 w-4 mr-1" />
             Export
           </Button>
-          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7" onClick={() => refetch()}>
+          <Button variant="outline" size="sm" className="text-xs px-2 py-1 h-7">
             <RefreshCw className="h-4 w-4 mr-1" />
             Sync
           </Button>
@@ -65,15 +65,15 @@ export default function PaymentManagement() {
       {/* Payments Table */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <CreditCard className="h-5 w-5 mr-2" />
+          <CardTitle className="flex items-center text-xs sm:text-lg">
+            <CreditCard className="h-4 w-4 mr-2" />
             Payment Transactions
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xs sm:text-sm">
             All payment transactions and billing history
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-x-auto">
           <PaymentTable
             payments={filteredPayments}
             isLoading={isLoading}
