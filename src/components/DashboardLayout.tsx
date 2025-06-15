@@ -54,6 +54,11 @@ const navItems = [
     href: "/dashboard/billing",
   },
   {
+    label: "Withdraw",
+    icon: CreditCard,
+    href: "/dashboard/payouts",
+  },
+  {
     label: "Settings",
     icon: Settings,
     href: "/dashboard/settings",

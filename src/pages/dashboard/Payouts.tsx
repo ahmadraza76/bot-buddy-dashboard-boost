@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useUserPayoutRequests, useCreatePayoutRequest } from "@/hooks/usePayoutRequests";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 
 const methodOptions = [
   { label: "Bank Transfer", value: "bank" },
@@ -53,6 +53,7 @@ export default function Payouts() {
   const [amount, setAmount] = useState("");
   const createPayout = useCreatePayoutRequest();
   const { data: payoutRequests = [], isLoading } = useUserPayoutRequests();
+  const { toast } = useToast();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -79,6 +80,18 @@ export default function Payouts() {
     form.reset();
     setAmount("");
   }
+
+  // Notification for when user payout request is approved (demo toast)
+  React.useEffect(() => {
+    // Here, you would listen for realtime updates on payout_requests table for this user
+    // For now, we'll skip realtime and just show a toast on successful payout request
+    if (createPayout.isSuccess) {
+      toast({
+        title: "Withdrawal Requested",
+        description: "Your payout request has been submitted and is pending admin approval.",
+      });
+    }
+  }, [createPayout.isSuccess, toast]);
 
   return (
     <div className="max-w-xl mx-auto my-8">
