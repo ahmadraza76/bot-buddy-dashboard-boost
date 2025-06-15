@@ -220,12 +220,14 @@ export default function Hero() {
                   <span
                     className="px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm flex items-center gap-2"
                     style={{
-                      background: "linear-gradient(90deg, #a78bfa 15%, #6366f1 85%)",
+                      background:
+                        "linear-gradient(90deg, rgba(17,0,36,0.95) 0%, rgba(88,28,135,0.88) 60%, rgba(29,78,216,0.75) 100%)",
                       color: "#fff",
-                      boxShadow: "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170"
+                      boxShadow:
+                        "0 2px 14px 0 #a78bfa55, 0 1.5px 8px 1px #6366f170",
+                      border: "1.5px solid rgba(168,139,250,0.07)",
                     }}
                   >
-                    {/* Headphones + music note icon (SVG, matching hero SVG) */}
                     <svg width="22" height="22" aria-hidden="true" viewBox="0 0 22 22" fill="none" className="drop-shadow">
                       <ellipse cx="11" cy="11" rx="10" ry="10" fill="url(#grad1)" />
                       <defs>
@@ -238,15 +240,10 @@ export default function Hero() {
                           <stop offset="1" stopColor="#60a5fa"/>
                         </linearGradient>
                       </defs>
-                      {/* Headband */}
                       <path d="M4 13a7 7 0 0 1 14 0" stroke="url(#headband)" strokeWidth="2" fill="none"/>
-                      {/* Left pad */}
                       <rect x="2.5" y="13" width="3" height="5" rx="1.3" fill="#a78bfa" />
-                      {/* Right pad */}
                       <rect x="16.5" y="13" width="3" height="5" rx="1.3" fill="#6366f1" />
-                      {/* Note stem */}
                       <rect x="12" y="7" width="1.1" height="6" rx="0.54" fill="#fff" />
-                      {/* Note head */}
                       <ellipse cx="12.7" cy="13.3" rx="1.6" ry="1.1" fill="#fef9c3" />
                     </svg>
                     <span className="ml-1 font-semibold drop-shadow-sm">
