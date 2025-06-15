@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,7 +78,7 @@ export default function Hero() {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Launch Your Telegram Music Bot in 60 Seconds
+              Launch Your Telegram Music Bot in 60 Seconds <span className="block text-xl md:text-2xl lg:text-3xl mt-3 text-purple-300 font-medium">Audio &amp; Video Live Streaming Supported</span>
             </h1>
             
             <p className="text-xl text-purple-200 mb-2 font-semibold">
@@ -87,7 +86,7 @@ export default function Hero() {
             </p>
             
             <p className="mt-6 text-lg text-gray-300 max-w-xl">
-              Just ₹599/month — your bot will be fully installed, hosted, and running 24/7 with all music features ready to use.
+              Play songs <span className="font-semibold text-purple-300">live</span> from <span className="font-semibold text-purple-300">YouTube</span>, <span className="font-semibold text-purple-300">Spotify</span>, and more. Your Telegram music bot supports <span className="font-semibold text-blue-300">HD audio &amp; video streaming</span> direct in your group.<br /> Just ₹599/month — your bot will be fully installed, hosted, and running 24/7 with all music features ready to use.
             </p>
             
             <form onSubmit={handleSubmit} className="mt-8 space-y-4 bg-black/50 p-6 rounded-xl backdrop-blur-sm border border-purple-500/10">
@@ -149,7 +148,7 @@ export default function Hero() {
                 className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30"
               />
               <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-purple-600 to-blue-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">
-                Live in 60 seconds!
+                Live Audio &amp; Video Streaming!
               </div>
             </div>
           </div>
