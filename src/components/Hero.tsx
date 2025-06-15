@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { Music } from "lucide-react";
 
 export default function Hero() {
   const [email, setEmail] = useState("");
@@ -70,11 +71,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <div className="flex items-center mb-6">
-              <img
-                src="/brand-logo.png"
-                alt="BotifyHost Logo"
-                className="w-12 h-12 rounded-full bg-purple-800 shadow-lg border-2 border-purple-400 object-cover mr-3"
-              />
+              <Music size={40} className="text-purple-400 mr-3" />
               <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
                 BotifyHost
               </h2>
