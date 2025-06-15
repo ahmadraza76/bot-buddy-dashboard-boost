@@ -176,12 +176,12 @@ export default function Hero() {
                       <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#a78bfa" floodOpacity="0.19"/>
                     </filter>
                   </defs>
-                  {/* Background */}
-                  <rect width="220" height="220" rx="32" fill="url(#botGlow)" />
+                  {/* Background - REMOVED unwanted white/lavender bubble/ellipse */}
+                  {/* <rect width="220" height="220" rx="32" fill="url(#botGlow)" /> */}
                   {/* Main bot head */}
                   <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradient)" filter="url(#botShadow)" />
-                  {/* Face highlight */}
-                  <ellipse cx="110" cy="110" rx="48" ry="36" fill="#f5f3ff" fillOpacity="0.10" /> {/* soft lavender highlight */}
+                  {/* Face highlight removed */}
+                  {/* <ellipse cx="110" cy="110" rx="48" ry="36" fill="#f5f3ff" fillOpacity="0.10" /> */}
                   {/* Headphones */}
                   <g>
                     <rect x="38" y="90" width="16" height="52" rx="8" fill="url(#headphonesGradient)" opacity="0.58"/>
@@ -189,12 +189,12 @@ export default function Hero() {
                     <path d="M54 105 Q40 110 54 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
                     <path d="M166 105 Q180 110 166 145" stroke="#a78bfa" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
-                  {/* Bot eyes - replaced white with soft cyan/light purple */}
+                  {/* Bot eyes */}
                   <ellipse cx="90" cy="128" rx="10" ry="11" fill="#c7d2fe" />
                   <ellipse cx="130" cy="128" rx="10" ry="11" fill="#c7d2fe" />
                   <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#a78bfa" />
                   <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#a78bfa" />
-                  {/* Smile - use blue-violet */}
+                  {/* Smile */}
                   <path d="M96 151 Q110 163 124 151" stroke="#a5b4fc" strokeWidth="4" strokeLinecap="round" />
                   {/* Music note (right side) */}
                   <g>
