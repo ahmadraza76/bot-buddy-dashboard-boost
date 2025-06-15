@@ -179,11 +179,17 @@ export default function Hero() {
                   
                   {/* Headphones */}
                   <g>
-                    {/* Centered left and right headphone earpieces */}
-                    <rect x="32" y="125" width="22" height="40" rx="11" fill="url(#headphoneGradient)" />
-                    <rect x="226" y="125" width="22" height="40" rx="11" fill="url(#headphoneGradient)" />
-                    {/* Headphone band - perfectly semicircular and centered */}
-                    <path d="M43 145 Q140 70 237 145" stroke="url(#headphoneGradient)" strokeWidth="12" strokeLinecap="round" fill="none" />
+                    {/* Earpieces placed naturally at side-of-head, at "ear" level */}
+                    <rect x="38" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
+                    <rect x="220" y="120" width="22" height="44" rx="11" fill="url(#headphoneGradient)" />
+                    {/* Headphone band: attaches to tops of earpieces, smooth arc over the head */}
+                    <path
+                      d="M49 128 Q140 55 231 128"
+                      stroke="url(#headphoneGradient)"
+                      strokeWidth="12"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
                   </g>
                   
                   {/* Bot eyes - simple dots */}
