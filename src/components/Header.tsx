@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ThemeToggle } from "./ThemeToggle";
+// import { ThemeToggle } from "./ThemeToggle"; // Removed
 import { Button } from "@/components/ui/button";
 
 export default function Header() {
@@ -56,7 +56,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <ThemeToggle />
+            {/* <ThemeToggle /> Removed */}
             <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
 
             {/* Mobile menu button */}
@@ -147,3 +147,4 @@ export default function Header() {
     </header>
   );
 }
+

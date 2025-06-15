@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
@@ -15,7 +14,6 @@ import {
   Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "./ThemeToggle";
 
 const adminNavItems = [
   {
@@ -82,8 +80,6 @@ export default function AdminLayout() {
           </div>
           
           <div className="flex items-center">
-            <ThemeToggle />
-            
             <div className="ml-4 relative">
               <button 
                 className="flex items-center gap-2"
