@@ -143,18 +143,41 @@ export default function Hero() {
           {/* IMAGE AND BADGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
-              {/* Badge styled at the TOP */}
-              <div className="absolute left-1/2 -top-6 -translate-x-1/2 z-10 select-none animate-fade-in drop-shadow-lg">
-                <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
-                  Live Audio &amp; Video Streaming!
-                </span>
-              </div>
               <img
                 src="/brand-logo.png"
                 alt="Music Bot Illustration"
                 className="w-full max-w-md rounded-xl shadow-lg border-4 border-purple-500/30"
               />
-              {/* Badge remains at the top as requested */}
+              <div className="flex flex-col items-center">
+                <div className="mt-3 select-none animate-fade-in drop-shadow-lg">
+                  <span className="bg-gradient-to-r from-purple-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-lg text-base font-semibold border-2 border-white/10 backdrop-blur-sm">
+                    Live Audio &amp; Video Streaming!
+                  </span>
+                </div>
+                <svg
+                  width="180"
+                  height="32"
+                  viewBox="0 0 180 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mt-2 w-44"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M0,20 Q30,32 60,20 T120,20 T180,20"
+                    stroke="#a78bfa"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <path
+                    d="M0,28 Q30,40 60,28 T120,28 T180,28"
+                    stroke="#60a5fa"
+                    strokeWidth="2"
+                    fill="none"
+                    opacity="0.5"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
