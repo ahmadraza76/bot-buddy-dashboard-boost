@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -144,7 +145,7 @@ export default function Hero() {
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="flex flex-col items-center">
-                {/* Updated Music Bot SVG illustration: ALL white/cream/lavender (and their shades) colors removed */}
+                {/* Updated Music Bot SVG illustration: removed circular elements */}
                 <svg
                   width="220"
                   height="220"
@@ -156,14 +157,13 @@ export default function Hero() {
                   aria-hidden="true"
                 >
                   <defs>
-                    {/* Remove botGlow, botGradient, headphonesGradient, noteGradient, etc with white/cream/lavender */}
                     <linearGradient id="botGradientDark" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0%" stopColor="#6d28d9" />
                       <stop offset="100%" stopColor="#312e81" />
                     </linearGradient>
                   </defs>
-                  {/* Main bot head */}
-                  <ellipse cx="110" cy="110" rx="65" ry="60" fill="url(#botGradientDark)" />
+                  {/* Main bot head - changed from ellipse to rectangle */}
+                  <rect x="45" y="50" width="130" height="120" rx="15" fill="url(#botGradientDark)" />
                   {/* --- Headphones --- */}
                   <g>
                     <rect x="38" y="90" width="16" height="52" rx="8" fill="#3730a3" opacity="0.67"/>
@@ -171,27 +171,26 @@ export default function Hero() {
                     <path d="M54 105 Q40 110 54 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
                     <path d="M166 105 Q180 110 166 145" stroke="#8b5cf6" strokeWidth="8" strokeLinecap="round" fill="none" />
                   </g>
-                  {/* Bot eyes */}
-                  <ellipse cx="90" cy="128" rx="10" ry="11" fill="#312e81" />
-                  <ellipse cx="130" cy="128" rx="10" ry="11" fill="#312e81" />
-                  <ellipse cx="90" cy="128" rx="5.2" ry="5.8" fill="#8b5cf6" />
-                  <ellipse cx="130" cy="128" rx="5.3" ry="5.7" fill="#6366f1" />
+                  {/* Bot eyes - changed from ellipses to rectangles */}
+                  <rect x="80" y="117" width="20" height="22" rx="3" fill="#312e81" />
+                  <rect x="120" y="117" width="20" height="22" rx="3" fill="#312e81" />
+                  <rect x="84.8" y="122.2" width="10.4" height="11.6" rx="2" fill="#8b5cf6" />
+                  <rect x="124.7" y="122.3" width="10.6" height="11.4" rx="2" fill="#6366f1" />
                   {/* Smile */}
                   <path d="M96 151 Q110 163 124 151" stroke="#6366f1" strokeWidth="4" strokeLinecap="round" />
-                  {/* Music note (right side) -- no yellow/cream */}
+                  {/* Music note (right side) */}
                   <g>
                     <rect x="152" y="65" width="5.5" height="28" rx="2.7" fill="#60a5fa" />
-                    <ellipse cx="154.7" cy="63" rx="8" ry="7.5" fill="#312e81" stroke="#6366f1" strokeWidth="1.4" />
-                    <ellipse cx="157" cy="97" rx="7" ry="4.5" fill="#6366f1" opacity="0.32" />
+                    <rect x="146.7" y="55.5" width="16" height="15" rx="7.5" fill="#312e81" stroke="#6366f1" strokeWidth="1.4" />
+                    <rect x="150" y="93" width="14" height="9" rx="4.5" fill="#6366f1" opacity="0.32" />
                   </g>
-                  {/* Audio waves, all darker */}
+                  {/* Audio waves */}
                   <path d="M60 190 Q110 210 160 190" stroke="#8b5cf6" strokeWidth="6" fill="none" opacity="0.17" />
                   <path d="M45 203 Q110 222 175 203" stroke="#312e81" strokeWidth="3" fill="none" opacity="0.15" />
-                  {/* NO sparkles/cream/yellow/light ellipses */}
-                  {/* Left mini music note, no lavender nor cream */}
+                  {/* Left mini music note */}
                   <g>
                     <rect x="62" y="70" width="3" height="13" rx="1.3" fill="#3730a3" />
-                    <ellipse cx="63.5" cy="70" rx="4.2" ry="3.5" fill="#4f46e5" />
+                    <rect x="58.8" y="66.5" width="8.4" height="7" rx="3.5" fill="#4f46e5" />
                   </g>
                 </svg>
                 {/* Matching badge */}
