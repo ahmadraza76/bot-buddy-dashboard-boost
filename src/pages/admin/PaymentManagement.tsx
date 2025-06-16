@@ -4,7 +4,7 @@ import { useAdminPayments } from "@/hooks/useAdmin";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, CreditCard, RefreshCw, Download, DollarSign, AlertCircle, Clock, Filter, Plus } from "lucide-react";
+import { Search, CreditCard, RefreshCw, Download, DollarSign, AlertCircle, Clock, Filter } from "lucide-react";
 import ModernTable from "./components/ModernTable";
 import CompactStatsGrid from "./components/CompactStatsGrid";
 
@@ -71,43 +71,43 @@ export default function PaymentManagement() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-green-600 rounded-2xl">
-              <CreditCard className="h-8 w-8 text-white" />
+        <div className="text-center space-y-3">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="p-2 bg-green-600 rounded-xl">
+              <CreditCard className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
               Payment Management
             </h1>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Monitor all payment transactions, manage revenue, and track financial metrics
+          <p className="text-sm text-gray-600 max-w-xl mx-auto">
+            Monitor transactions, manage revenue, and track financial metrics
           </p>
         </div>
 
         {/* Action Bar */}
-        <Card className="bg-white shadow-lg border-0">
-          <CardContent className="p-6">
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                <div className="relative flex-1 lg:w-80">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+        <Card className="bg-white shadow-sm border">
+          <CardContent className="p-4">
+            <div className="flex flex-col lg:flex-row gap-3 items-center justify-between">
+              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <div className="relative flex-1 lg:w-64">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
-                    placeholder="Search payments by email or transaction ID..."
+                    placeholder="Search payments..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-12 h-12 text-base border-gray-200 focus:border-green-500 rounded-xl"
+                    className="pl-10 h-9 text-sm border-gray-200 focus:border-green-500 rounded-lg"
                   />
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-base bg-white focus:border-green-500 focus:outline-none min-w-[140px]"
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:border-green-500 focus:outline-none min-w-[120px]"
                   >
                     <option value="all">All Status</option>
                     <option value="completed">Completed</option>
@@ -117,7 +117,7 @@ export default function PaymentManagement() {
                   <select
                     value={methodFilter}
                     onChange={(e) => setMethodFilter(e.target.value)}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-base bg-white focus:border-green-500 focus:outline-none min-w-[140px]"
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:border-green-500 focus:outline-none min-w-[120px]"
                   >
                     <option value="all">All Methods</option>
                     <option value="razorpay">Razorpay</option>
@@ -126,13 +126,13 @@ export default function PaymentManagement() {
                   </select>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <Button variant="outline" className="h-12 px-6 rounded-xl border-gray-200">
-                  <Download className="h-4 w-4 mr-2" />
+              <div className="flex gap-2">
+                <Button variant="outline" className="h-9 px-4 rounded-lg border-gray-200 text-sm">
+                  <Download className="h-4 w-4 mr-1" />
                   Export
                 </Button>
-                <Button variant="outline" className="h-12 px-6 rounded-xl border-gray-200" onClick={() => refetch()}>
-                  <RefreshCw className="h-4 w-4 mr-2" />
+                <Button variant="outline" className="h-9 px-4 rounded-lg border-gray-200 text-sm" onClick={() => refetch()}>
+                  <RefreshCw className="h-4 w-4 mr-1" />
                   Sync
                 </Button>
               </div>
@@ -144,26 +144,26 @@ export default function PaymentManagement() {
         <CompactStatsGrid stats={stats} />
 
         {/* Payments Table */}
-        <Card className="bg-white shadow-lg border-0">
-          <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-3">
-              <CreditCard className="h-6 w-6 text-green-600" />
+        <Card className="bg-white shadow-sm border">
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="text-lg font-semibold text-gray-900 flex items-center justify-center gap-2">
+              <CreditCard className="h-5 w-5 text-green-600" />
               Payment Transactions
             </CardTitle>
-            <CardDescription className="text-gray-600 text-lg">
-              {filteredPayments.length} transactions found • Total Revenue: ₹{totalRevenue.toLocaleString()}
+            <CardDescription className="text-sm text-gray-600">
+              {filteredPayments.length} transactions found • Total: ₹{totalRevenue.toLocaleString()}
             </CardDescription>
           </CardHeader>
-          <CardContent className="px-6 pb-6">
+          <CardContent className="px-4 pb-4">
             {isLoading ? (
-              <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
-                <span className="ml-3 text-gray-600">Loading payments...</span>
+              <div className="flex items-center justify-center py-8">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-600"></div>
+                <span className="ml-2 text-sm text-gray-600">Loading payments...</span>
               </div>
             ) : error ? (
-              <div className="text-center py-12">
-                <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-                <p className="text-red-600 font-medium">Failed to load payments</p>
+              <div className="text-center py-8">
+                <AlertCircle className="h-8 w-8 text-red-500 mx-auto mb-2" />
+                <p className="text-sm text-red-600">Failed to load payments</p>
               </div>
             ) : (
               <ModernTable 

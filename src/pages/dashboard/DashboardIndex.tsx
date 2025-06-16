@@ -90,57 +90,57 @@ export default function DashboardIndex() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+        <div className="text-center space-y-3">
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
             Bot Dashboard
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-sm text-gray-600 max-w-xl mx-auto">
             Monitor your bot performance, track user engagement, and analyze metrics in real-time
           </p>
         </div>
 
         {/* Session Generator */}
         <div className="flex justify-center">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-3xl">
             <SessionGenerator />
           </div>
         </div>
 
         {/* Time Range Controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white rounded-2xl p-6 shadow-sm border">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white rounded-xl p-4 shadow-sm border">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-gray-700">Live Monitoring Active</span>
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-xs font-medium text-gray-700">Live Monitoring Active</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
               <TabsList className="bg-gray-100">
-                <TabsTrigger value="day" className="px-6 py-2">Day</TabsTrigger>
-                <TabsTrigger value="week" className="px-6 py-2">Week</TabsTrigger>
-                <TabsTrigger value="month" className="px-6 py-2">Month</TabsTrigger>
-                <TabsTrigger value="year" className="px-6 py-2">Year</TabsTrigger>
+                <TabsTrigger value="day" className="px-4 py-1 text-xs">Day</TabsTrigger>
+                <TabsTrigger value="week" className="px-4 py-1 text-xs">Week</TabsTrigger>
+                <TabsTrigger value="month" className="px-4 py-1 text-xs">Month</TabsTrigger>
+                <TabsTrigger value="year" className="px-4 py-1 text-xs">Year</TabsTrigger>
               </TabsList>
             </Tabs>
-            <Button variant="outline" className="px-6 py-2">
+            <Button variant="outline" className="px-4 py-1 text-xs h-8">
               Refresh Data
             </Button>
           </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
-            <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border-0">
-              <CardHeader className="pb-3">
+            <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
+              <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <div className="p-3 rounded-full bg-gray-50">
-                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  <div className="p-2 rounded-lg bg-gray-50">
+                    <stat.icon className={`h-5 w-5 ${stat.color}`} />
                   </div>
-                  <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
+                  <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                     stat.change.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                   }`}>
                     {stat.change}
@@ -148,9 +148,9 @@ export default function DashboardIndex() {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="space-y-2">
-                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                <div className="space-y-1">
+                  <p className="text-xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-xs text-gray-600">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -158,18 +158,18 @@ export default function DashboardIndex() {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           {/* Main Chart - Full Width on Large Screens */}
-          <Card className="lg:col-span-2 bg-white shadow-lg border-0">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl font-bold text-gray-900">Message Activity</CardTitle>
-              <CardDescription className="text-gray-600">
+          <Card className="lg:col-span-2 bg-white shadow-sm border">
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-lg font-semibold text-gray-900">Message Activity</CardTitle>
+              <CardDescription className="text-sm text-gray-600">
                 Daily message processing trends and user engagement
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-80">
+              <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={messagesData}>
                     <defs>
@@ -194,15 +194,15 @@ export default function DashboardIndex() {
                       contentStyle={{
                         backgroundColor: 'white',
                         border: '1px solid #E5E7EB',
-                        borderRadius: '12px',
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+                        borderRadius: '8px',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                       }}
                     />
                     <Area
                       type="monotone"
                       dataKey="value"
                       stroke="#3B82F6"
-                      strokeWidth={3}
+                      strokeWidth={2}
                       fillOpacity={1}
                       fill="url(#colorValue)"
                     />
@@ -213,18 +213,18 @@ export default function DashboardIndex() {
           </Card>
 
           {/* Side Charts */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             
             {/* Uptime Chart */}
-            <Card className="bg-white shadow-lg border-0">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl font-bold text-gray-900">Bot Uptime</CardTitle>
-                <CardDescription className="text-gray-600">
+            <Card className="bg-white shadow-sm border">
+              <CardHeader className="text-center pb-3">
+                <CardTitle className="text-md font-semibold text-gray-900">Bot Uptime</CardTitle>
+                <CardDescription className="text-xs text-gray-600">
                   System reliability metrics
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-48">
+                <div className="h-40">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={uptimeData}>
                       <XAxis 
@@ -246,16 +246,16 @@ export default function DashboardIndex() {
                         contentStyle={{
                           backgroundColor: 'white',
                           border: '1px solid #E5E7EB',
-                          borderRadius: '8px',
-                          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                          borderRadius: '6px',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                         }}
                       />
                       <Line
                         type="monotone"
                         dataKey="value"
                         stroke="#10B981"
-                        strokeWidth={3}
-                        dot={{ fill: '#10B981', strokeWidth: 2, r: 4 }}
+                        strokeWidth={2}
+                        dot={{ fill: '#10B981', strokeWidth: 2, r: 3 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -264,23 +264,23 @@ export default function DashboardIndex() {
             </Card>
 
             {/* Commands Usage */}
-            <Card className="bg-white shadow-lg border-0">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl font-bold text-gray-900">Command Usage</CardTitle>
-                <CardDescription className="text-gray-600">
+            <Card className="bg-white shadow-sm border">
+              <CardHeader className="text-center pb-3">
+                <CardTitle className="text-md font-semibold text-gray-900">Command Usage</CardTitle>
+                <CardDescription className="text-xs text-gray-600">
                   Most popular bot commands
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-48">
+                <div className="h-40">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={commandsData}
                         cx="50%"
                         cy="50%"
-                        innerRadius={40}
-                        outerRadius={70}
+                        innerRadius={30}
+                        outerRadius={60}
                         paddingAngle={5}
                         dataKey="value"
                       >
@@ -293,14 +293,14 @@ export default function DashboardIndex() {
                         contentStyle={{
                           backgroundColor: 'white',
                           border: '1px solid #E5E7EB',
-                          borderRadius: '8px',
-                          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                          borderRadius: '6px',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                         }}
                       />
                       <Legend 
                         verticalAlign="bottom" 
-                        height={36}
-                        wrapperStyle={{ fontSize: '12px' }}
+                        height={24}
+                        wrapperStyle={{ fontSize: '10px' }}
                       />
                     </PieChart>
                   </ResponsiveContainer>

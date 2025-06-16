@@ -90,58 +90,58 @@ export default function UserManagement() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 lg:p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-blue-600 rounded-2xl">
-              <Users className="h-8 w-8 text-white" />
+        <div className="text-center space-y-3">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="p-2 bg-blue-600 rounded-xl">
+              <Users className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
               User Management
             </h1>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Manage and monitor all registered users, their subscriptions, and activity
+          <p className="text-sm text-gray-600 max-w-xl mx-auto">
+            Manage and monitor all registered users and their activity
           </p>
         </div>
 
         {/* Search and Filter Section */}
-        <Card className="bg-white shadow-lg border-0">
-          <CardContent className="p-6">
-            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                <div className="relative flex-1 lg:w-80">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+        <Card className="bg-white shadow-sm border">
+          <CardContent className="p-4">
+            <div className="flex flex-col lg:flex-row gap-3 items-center justify-between">
+              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <div className="relative flex-1 lg:w-64">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
-                    placeholder="Search users by email or telegram..."
+                    placeholder="Search users..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-12 h-12 text-base border-gray-200 focus:border-blue-500 rounded-xl"
+                    className="pl-10 h-9 text-sm border-gray-200 focus:border-blue-500 rounded-lg"
                   />
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="px-4 py-3 border border-gray-200 rounded-xl text-base bg-white focus:border-blue-500 focus:outline-none min-w-[140px]"
+                    className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:border-blue-500 focus:outline-none min-w-[120px]"
                   >
                     <option value="all">All Status</option>
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                     <option value="banned">Banned</option>
                   </select>
-                  <Button variant="outline" className="h-12 px-6 rounded-xl border-gray-200">
-                    <Filter className="h-4 w-4 mr-2" />
-                    More Filters
+                  <Button variant="outline" className="h-9 px-4 rounded-lg border-gray-200 text-sm">
+                    <Filter className="h-4 w-4 mr-1" />
+                    Filters
                   </Button>
                 </div>
               </div>
-              <Button className="h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700">
-                <Plus className="h-4 w-4 mr-2" />
-                Add New User
+              <Button className="h-9 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 text-sm">
+                <Plus className="h-4 w-4 mr-1" />
+                Add User
               </Button>
             </div>
           </CardContent>
@@ -151,17 +151,17 @@ export default function UserManagement() {
         <CompactStatsGrid stats={stats} />
 
         {/* Users Table */}
-        <Card className="bg-white shadow-lg border-0">
-          <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-3">
-              <Users className="h-6 w-6 text-blue-600" />
+        <Card className="bg-white shadow-sm border">
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="text-lg font-semibold text-gray-900 flex items-center justify-center gap-2">
+              <Users className="h-5 w-5 text-blue-600" />
               All Users
             </CardTitle>
-            <CardDescription className="text-gray-600 text-lg">
-              {filteredUsers.length} users found • Last updated: {new Date().toLocaleTimeString()}
+            <CardDescription className="text-sm text-gray-600">
+              {filteredUsers.length} users found • Updated: {new Date().toLocaleTimeString()}
             </CardDescription>
           </CardHeader>
-          <CardContent className="px-6 pb-6">
+          <CardContent className="px-4 pb-4">
             <ModernTable 
               data={filteredUsers} 
               type="users" 

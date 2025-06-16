@@ -17,9 +17,9 @@ interface CompactStatsGridProps {
 
 export default function CompactStatsGrid({ stats }: CompactStatsGridProps) {
   const getTrendIcon = (change?: number) => {
-    if (!change) return <Minus className="h-4 w-4 text-gray-400" />;
-    if (change > 0) return <TrendingUp className="h-4 w-4 text-green-500" />;
-    return <TrendingDown className="h-4 w-4 text-red-500" />;
+    if (!change) return <Minus className="h-3 w-3 text-gray-400" />;
+    if (change > 0) return <TrendingUp className="h-3 w-3 text-green-500" />;
+    return <TrendingDown className="h-3 w-3 text-red-500" />;
   };
 
   const getTrendColor = (change?: number) => {
@@ -29,18 +29,18 @@ export default function CompactStatsGrid({ stats }: CompactStatsGridProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat, index) => (
-        <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 border-0 group">
-          <CardHeader className="pb-3">
+        <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
+          <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <div className="p-3 rounded-xl bg-gray-50 group-hover:scale-110 transition-transform duration-200">
-                {stat.icon && <stat.icon className={`h-6 w-6 ${stat.color || 'text-gray-600'}`} />}
+              <div className="p-2 rounded-lg bg-gray-50">
+                {stat.icon && <stat.icon className={`h-5 w-5 ${stat.color || 'text-gray-600'}`} />}
               </div>
               {stat.change !== undefined && (
                 <div className="flex items-center gap-1">
                   {getTrendIcon(stat.change)}
-                  <span className={`text-sm font-semibold ${getTrendColor(stat.change)}`}>
+                  <span className={`text-xs font-medium ${getTrendColor(stat.change)}`}>
                     {Math.abs(stat.change)}%
                   </span>
                 </div>
@@ -48,9 +48,9 @@ export default function CompactStatsGrid({ stats }: CompactStatsGridProps) {
             </div>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="space-y-2">
-              <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-              <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+            <div className="space-y-1">
+              <p className="text-xl font-bold text-gray-900">{stat.value}</p>
+              <p className="text-xs text-gray-600">{stat.label}</p>
             </div>
           </CardContent>
         </Card>
