@@ -3,11 +3,10 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Users, UserCheck, UserX, Crown } from "lucide-react";
+import { Search, Users, UserCheck, UserX, Crown, Plus, Filter } from "lucide-react";
 import ModernTable from "./components/ModernTable";
 import CompactStatsGrid from "./components/CompactStatsGrid";
 
-// Sample user data
 const users = [
   {
     id: 1,
@@ -57,66 +56,120 @@ export default function UserManagement() {
 
   const handleUserAction = (action: string, user: any) => {
     console.log(`${action} action for user:`, user);
-    // Handle user actions here
   };
 
   const stats = [
-    { label: "Total Users", value: "1,247", icon: Users, color: "text-blue-500", change: 12 },
-    { label: "Active Users", value: "892", icon: UserCheck, color: "text-green-500", change: 8 },
-    { label: "Inactive Users", value: "320", icon: UserX, color: "text-yellow-500", change: -3 },
-    { label: "Premium Users", value: "156", icon: Crown, color: "text-purple-500", change: 15 },
+    { 
+      label: "Total Users", 
+      value: "1,247",
+      change: 12,
+      icon: Users, 
+      color: "text-blue-600" 
+    },
+    { 
+      label: "Active Users", 
+      value: "892",
+      change: 8,
+      icon: UserCheck, 
+      color: "text-green-600" 
+    },
+    { 
+      label: "Inactive Users", 
+      value: "320",
+      change: -3,
+      icon: UserX, 
+      color: "text-yellow-600" 
+    },
+    { 
+      label: "Premium Users", 
+      value: "156",
+      change: 15,
+      icon: Crown, 
+      color: "text-purple-600" 
+    },
   ];
 
   return (
-    <div className="px-2 py-2 sm:px-0 space-y-4">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-        <div>
-          <h1 className="text-lg sm:text-2xl font-bold text-gray-900">User Management</h1>
-          <p className="text-xs sm:text-sm text-gray-500">Manage and monitor all registered users</p>
-        </div>
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <div className="relative flex-1 sm:flex-initial">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-3 w-3" />
-            <Input
-              placeholder="Search users..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-8 w-full sm:w-44 text-xs h-8"
-            />
+    <div className="min-h-screen bg-gray-50 p-4 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        
+        {/* Header Section */}
+        <div className="text-center space-y-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="p-3 bg-blue-600 rounded-2xl">
+              <Users className="h-8 w-8 text-white" />
+            </div>
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+              User Management
+            </h1>
           </div>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-2 py-1 border rounded-md text-xs h-8 bg-white"
-          >
-            <option value="all">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="banned">Banned</option>
-          </select>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Manage and monitor all registered users, their subscriptions, and activity
+          </p>
         </div>
+
+        {/* Search and Filter Section */}
+        <Card className="bg-white shadow-lg border-0">
+          <CardContent className="p-6">
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <div className="relative flex-1 lg:w-80">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <Input
+                    placeholder="Search users by email or telegram..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-12 h-12 text-base border-gray-200 focus:border-blue-500 rounded-xl"
+                  />
+                </div>
+                <div className="flex gap-3">
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="px-4 py-3 border border-gray-200 rounded-xl text-base bg-white focus:border-blue-500 focus:outline-none min-w-[140px]"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="banned">Banned</option>
+                  </select>
+                  <Button variant="outline" className="h-12 px-6 rounded-xl border-gray-200">
+                    <Filter className="h-4 w-4 mr-2" />
+                    More Filters
+                  </Button>
+                </div>
+              </div>
+              <Button className="h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700">
+                <Plus className="h-4 w-4 mr-2" />
+                Add New User
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Stats Grid */}
+        <CompactStatsGrid stats={stats} />
+
+        {/* Users Table */}
+        <Card className="bg-white shadow-lg border-0">
+          <CardHeader className="text-center pb-6">
+            <CardTitle className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-3">
+              <Users className="h-6 w-6 text-blue-600" />
+              All Users
+            </CardTitle>
+            <CardDescription className="text-gray-600 text-lg">
+              {filteredUsers.length} users found • Last updated: {new Date().toLocaleTimeString()}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="px-6 pb-6">
+            <ModernTable 
+              data={filteredUsers} 
+              type="users" 
+              onAction={handleUserAction}
+            />
+          </CardContent>
+        </Card>
       </div>
-
-      <CompactStatsGrid stats={stats} />
-
-      <Card>
-        <CardHeader className="pb-4">
-          <CardTitle className="text-sm sm:text-lg flex items-center gap-2">
-            <Users className="h-4 w-4" />
-            All Users
-          </CardTitle>
-          <CardDescription className="text-xs sm:text-sm">
-            {filteredUsers.length} users found
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ModernTable 
-            data={filteredUsers} 
-            type="users" 
-            onAction={handleUserAction}
-          />
-        </CardContent>
-      </Card>
     </div>
   );
 }

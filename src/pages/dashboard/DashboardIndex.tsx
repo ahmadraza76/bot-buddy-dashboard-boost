@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Card,
@@ -24,6 +25,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SessionGenerator from "@/components/SessionGenerator";
+import { TrendingUp, Users, MessageSquare, Clock } from "lucide-react";
 
 // Sample data for charts
 const messagesData = [
@@ -56,156 +58,257 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 export default function DashboardIndex() {
   const [timeRange, setTimeRange] = useState("week");
 
-  // Stats for the current bot
   const stats = [
-    { label: "Total Users", value: "1,234" },
-    { label: "Active Today", value: "456" },
-    { label: "Total Messages", value: "23.4k" },
-    { label: "Response Time", value: "1.2s" },
+    { 
+      label: "Total Users", 
+      value: "1,234",
+      change: "+12%",
+      icon: Users,
+      color: "text-blue-600"
+    },
+    { 
+      label: "Active Today", 
+      value: "456",
+      change: "+8%",
+      icon: TrendingUp,
+      color: "text-green-600"
+    },
+    { 
+      label: "Total Messages", 
+      value: "23.4k",
+      change: "+24%",
+      icon: MessageSquare,
+      color: "text-purple-600"
+    },
+    { 
+      label: "Response Time", 
+      value: "1.2s",
+      change: "-5%",
+      icon: Clock,
+      color: "text-orange-600"
+    },
   ];
 
   return (
-    <div className="px-2 py-2 sm:px-0">
-      {/* Insert SessionGenerator at the top of dashboard */}
-      <SessionGenerator />
-      {/* Title and filter row */}
-      <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center mb-2 sm:mb-4 mt-1">
-        <h1 className="font-bold text-sm sm:text-2xl leading-none sm:leading-tight break-words">
-          <span className="block sm:inline">dashboard</span>
-        </h1>
-        <div className="flex items-center gap-1">
-          <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
-            <TabsList className="flex px-0 py-0 bg-transparent gap-0 h-6 sm:h-8">
-              <TabsTrigger value="day" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Day</TabsTrigger>
-              <TabsTrigger value="week" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Week</TabsTrigger>
-              <TabsTrigger value="month" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Month</TabsTrigger>
-              <TabsTrigger value="year" className="text-[9px] sm:text-xs px-1.5 py-1 h-6 sm:h-8">Year</TabsTrigger>
-            </TabsList>
-          </Tabs>
-          <Button variant="outline" className="text-[9px] sm:text-xs px-2 py-1 h-6 sm:h-8 ml-1">
-            Refresh
-          </Button>
+    <div className="min-h-screen bg-gray-50 p-4 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-8">
+        
+        {/* Header Section */}
+        <div className="text-center space-y-4">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+            Bot Dashboard
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Monitor your bot performance, track user engagement, and analyze metrics in real-time
+          </p>
         </div>
-      </div>
 
-      {/* Stats overview */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-3 sm:mb-4">
-        {stats.map((stat) => (
-          <Card key={stat.label}>
-            <CardHeader className="pb-2">
-              <CardDescription className="text-[10px] sm:text-xs">{stat.label}</CardDescription>
+        {/* Session Generator */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-4xl">
+            <SessionGenerator />
+          </div>
+        </div>
+
+        {/* Time Range Controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white rounded-2xl p-6 shadow-sm border">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium text-gray-700">Live Monitoring Active</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
+              <TabsList className="bg-gray-100">
+                <TabsTrigger value="day" className="px-6 py-2">Day</TabsTrigger>
+                <TabsTrigger value="week" className="px-6 py-2">Week</TabsTrigger>
+                <TabsTrigger value="month" className="px-6 py-2">Month</TabsTrigger>
+                <TabsTrigger value="year" className="px-6 py-2">Year</TabsTrigger>
+              </TabsList>
+            </Tabs>
+            <Button variant="outline" className="px-6 py-2">
+              Refresh Data
+            </Button>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 border-0">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div className="p-3 rounded-full bg-gray-50">
+                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  </div>
+                  <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
+                    stat.change.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  }`}>
+                    {stat.change}
+                  </span>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="space-y-2">
+                  <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Main Chart - Full Width on Large Screens */}
+          <Card className="lg:col-span-2 bg-white shadow-lg border-0">
+            <CardHeader className="text-center pb-6">
+              <CardTitle className="text-2xl font-bold text-gray-900">Message Activity</CardTitle>
+              <CardDescription className="text-gray-600">
+                Daily message processing trends and user engagement
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="text-base sm:text-2xl font-bold">{stat.value}</div>
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={messagesData}>
+                    <defs>
+                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.1} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis 
+                      dataKey="name" 
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fill: '#6B7280', fontSize: 12 }}
+                    />
+                    <YAxis 
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fill: '#6B7280', fontSize: 12 }}
+                    />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                    <Tooltip 
+                      contentStyle={{
+                        backgroundColor: 'white',
+                        border: '1px solid #E5E7EB',
+                        borderRadius: '12px',
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+                      }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#3B82F6"
+                      strokeWidth={3}
+                      fillOpacity={1}
+                      fill="url(#colorValue)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
             </CardContent>
           </Card>
-        ))}
-      </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="col-span-1 lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Message Activity</CardTitle>
-            <CardDescription>Number of messages processed over time</CardDescription>
-          </CardHeader>
-          <CardContent className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={messagesData}>
-                <defs>
-                  <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <Tooltip 
-                  contentStyle={{
-                    backgroundColor: 'var(--background)',
-                    borderColor: 'var(--border)',
-                    borderRadius: '0.5rem',
-                  }}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="hsl(var(--primary))"
-                  fillOpacity={1}
-                  fill="url(#colorValue)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+          {/* Side Charts */}
+          <div className="space-y-8">
+            
+            {/* Uptime Chart */}
+            <Card className="bg-white shadow-lg border-0">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-xl font-bold text-gray-900">Bot Uptime</CardTitle>
+                <CardDescription className="text-gray-600">
+                  System reliability metrics
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={uptimeData}>
+                      <XAxis 
+                        dataKey="name" 
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#6B7280', fontSize: 10 }}
+                      />
+                      <YAxis 
+                        domain={[99.9, 100]} 
+                        tickFormatter={(value) => `${value}%`}
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#6B7280', fontSize: 10 }}
+                      />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <Tooltip 
+                        formatter={(value) => [`${value}%`, 'Uptime']}
+                        contentStyle={{
+                          backgroundColor: 'white',
+                          border: '1px solid #E5E7EB',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                        }}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="value"
+                        stroke="#10B981"
+                        strokeWidth={3}
+                        dot={{ fill: '#10B981', strokeWidth: 2, r: 4 }}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Uptime</CardTitle>
-            <CardDescription>Bot uptime performance</CardDescription>
-          </CardHeader>
-          <CardContent className="h-72">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={uptimeData}>
-                <XAxis dataKey="name" />
-                <YAxis domain={[99.9, 100]} tickFormatter={(value) => `${value}%`} />
-                <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <Tooltip 
-                  formatter={(value) => [`${value}%`, 'Uptime']}
-                  contentStyle={{
-                    backgroundColor: 'var(--background)',
-                    borderColor: 'var(--border)',
-                    borderRadius: '0.5rem',
-                  }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="hsl(var(--primary))"
-                  activeDot={{ r: 8 }}
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Commands Usage</CardTitle>
-            <CardDescription>Most used bot commands</CardDescription>
-          </CardHeader>
-          <CardContent className="h-72">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={commandsData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={90}
-                  paddingAngle={5}
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {commandsData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(value, name) => [`${value} uses`, name]}
-                  contentStyle={{
-                    backgroundColor: 'var(--background)',
-                    borderColor: 'var(--border)',
-                    borderRadius: '0.5rem',
-                  }}
-                />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+            {/* Commands Usage */}
+            <Card className="bg-white shadow-lg border-0">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-xl font-bold text-gray-900">Command Usage</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Most popular bot commands
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={commandsData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={40}
+                        outerRadius={70}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {commandsData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip
+                        formatter={(value, name) => [`${value} uses`, name]}
+                        contentStyle={{
+                          backgroundColor: 'white',
+                          border: '1px solid #E5E7EB',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                        }}
+                      />
+                      <Legend 
+                        verticalAlign="bottom" 
+                        height={36}
+                        wrapperStyle={{ fontSize: '12px' }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
