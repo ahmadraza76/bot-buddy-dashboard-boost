@@ -4,13 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, RefreshCcw, Eye, EyeOff, Plus, Trash2, Save } from "lucide-react";
+import { Copy, RefreshCcw, Eye, EyeOff, Plus, Trash2, Key, Shield, FileText, Globe } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 // Generate a random API key
 const generateApiKey = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const segments = [12, 8, 8, 8, 14]; // Format like: xxxxxxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxxxxxxxx
+  const segments = [12, 8, 8, 8, 14];
   
   return segments.map(length => {
     let segment = '';
@@ -43,7 +43,6 @@ export default function ApiKeys() {
   const [webhookUrl, setWebhookUrl] = useState(generateWebhookUrl());
   const [showPrimaryKey, setShowPrimaryKey] = useState(false);
   const [showSecondaryKey, setShowSecondaryKey] = useState(false);
-  const [showWebhook, setShowWebhook] = useState(true);
 
   // Secrets management state
   const [secrets, setSecrets] = useState<Secret[]>([
@@ -167,395 +166,442 @@ export default function ApiKeys() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">API Keys & Secrets</h1>
-      </div>
-
-      <Tabs defaultValue="api-keys">
-        <TabsList className="mb-6">
-          <TabsTrigger value="api-keys">API Keys</TabsTrigger>
-          <TabsTrigger value="secrets">Manage Secrets</TabsTrigger>
-          <TabsTrigger value="webhooks">Webhook URL</TabsTrigger>
-          <TabsTrigger value="documentation">Documentation</TabsTrigger>
-        </TabsList>
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-6xl mx-auto space-y-4">
         
-        <TabsContent value="api-keys">
-          <div className="grid gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Primary API Key</CardTitle>
-                <CardDescription>
-                  This is your main API key for authenticating API requests. Keep this secure and do not share it.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="grid flex-1 gap-2">
-                      <Label htmlFor="primary-api-key">API Key</Label>
-                      <div className="flex">
-                        <Input
-                          id="primary-api-key"
-                          value={showPrimaryKey ? primaryApiKey : "•".repeat(primaryApiKey.length)}
-                          readOnly
-                          className="font-mono"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="ml-2"
-                          onClick={() => setShowPrimaryKey(!showPrimaryKey)}
-                        >
-                          {showPrimaryKey ? <EyeOff size={16} /> : <Eye size={16} />}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="ml-2"
-                          onClick={() => copyToClipboard(primaryApiKey, "Primary API key")}
-                        >
-                          <Copy size={16} />
-                        </Button>
-                      </div>
+        {/* Header Section */}
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="p-2 bg-blue-600 rounded-lg">
+              <Key className="h-4 w-4 text-white" />
+            </div>
+            <h1 className="text-lg font-semibold text-gray-900">
+              API Keys & Secrets
+            </h1>
+          </div>
+          <p className="text-sm text-gray-600 max-w-xl mx-auto">
+            Manage your API keys, secrets, and webhook configurations securely
+          </p>
+        </div>
+
+        <Tabs defaultValue="api-keys" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-4 bg-white border shadow-sm">
+            <TabsTrigger value="api-keys" className="flex items-center gap-2 text-sm py-2">
+              <Key className="h-3 w-3" />
+              API Keys
+            </TabsTrigger>
+            <TabsTrigger value="secrets" className="flex items-center gap-2 text-sm py-2">
+              <Shield className="h-3 w-3" />
+              Secrets
+            </TabsTrigger>
+            <TabsTrigger value="webhooks" className="flex items-center gap-2 text-sm py-2">
+              <Globe className="h-3 w-3" />
+              Webhook
+            </TabsTrigger>
+            <TabsTrigger value="documentation" className="flex items-center gap-2 text-sm py-2">
+              <FileText className="h-3 w-3" />
+              Docs
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="api-keys">
+            <div className="grid gap-4">
+              <Card className="bg-white shadow-sm border">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                    <Key className="h-4 w-4 text-blue-600" />
+                    Primary API Key
+                  </CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    Main API key for authenticating requests. Keep this secure and do not share it.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="primary-api-key" className="text-sm font-medium">API Key</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="primary-api-key"
+                        value={showPrimaryKey ? primaryApiKey : "•".repeat(primaryApiKey.length)}
+                        readOnly
+                        className="font-mono text-sm"
+                      />
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setShowPrimaryKey(!showPrimaryKey)}
+                        className="h-9 w-9"
+                      >
+                        {showPrimaryKey ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => copyToClipboard(primaryApiKey, "Primary API key")}
+                        className="h-9 w-9"
+                      >
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => handleRegenerateKey('primary')}
+                        className="h-9 px-3 text-sm"
+                      >
+                        <RefreshCcw className="mr-1 h-3 w-3" />
+                        Regenerate
+                      </Button>
                     </div>
-                    <Button
-                      variant="outline"
-                      className="ml-auto"
-                      onClick={() => handleRegenerateKey('primary')}
-                    >
-                      <RefreshCcw className="mr-2 h-4 w-4" />
-                      Regenerate
-                    </Button>
                   </div>
                   
-                  <div>
-                    <h4 className="text-sm font-medium mb-2">Example API Request</h4>
-                    <pre className="p-4 rounded-md bg-muted overflow-x-auto text-xs">
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium">Example API Request</h4>
+                    <pre className="p-3 rounded-md bg-gray-100 overflow-x-auto text-xs border">
 {`curl -X POST https://api.botbuddy.dev/v1/bots/messages \\
   -H "Authorization: Bearer ${showPrimaryKey ? primaryApiKey : "YOUR_PRIMARY_API_KEY"}" \\
   -H "Content-Type: application/json" \\
   -d '{"chat_id": 123456789, "text": "Hello from API!"}'`}
                     </pre>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Secondary API Key</CardTitle>
-                <CardDescription>
-                  Use this key for development or as a backup. You can regenerate it without affecting your primary key.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <Label htmlFor="secondary-api-key">API Key</Label>
-                    <div className="flex">
+              <Card className="bg-white shadow-sm border">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                    <Key className="h-4 w-4 text-green-600" />
+                    Secondary API Key
+                  </CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    Use this key for development or as a backup. Can be regenerated without affecting primary key.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <Label htmlFor="secondary-api-key" className="text-sm font-medium">API Key</Label>
+                    <div className="flex gap-2">
                       <Input
                         id="secondary-api-key"
                         value={showSecondaryKey ? secondaryApiKey : "•".repeat(secondaryApiKey.length)}
                         readOnly
-                        className="font-mono"
+                        className="font-mono text-sm"
                       />
                       <Button
-                        variant="ghost"
+                        variant="outline"
                         size="icon"
-                        className="ml-2"
                         onClick={() => setShowSecondaryKey(!showSecondaryKey)}
+                        className="h-9 w-9"
                       >
-                        {showSecondaryKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                        {showSecondaryKey ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                       </Button>
                       <Button
-                        variant="ghost"
+                        variant="outline"
                         size="icon"
-                        className="ml-2"
                         onClick={() => copyToClipboard(secondaryApiKey, "Secondary API key")}
+                        className="h-9 w-9"
                       >
-                        <Copy size={16} />
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => handleRegenerateKey('secondary')}
+                        className="h-9 px-3 text-sm"
+                      >
+                        <RefreshCcw className="mr-1 h-3 w-3" />
+                        Regenerate
                       </Button>
                     </div>
                   </div>
-                  <Button
-                    variant="outline"
-                    className="ml-auto"
-                    onClick={() => handleRegenerateKey('secondary')}
-                  >
-                    <RefreshCcw className="mr-2 h-4 w-4" />
-                    Regenerate
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
 
-        <TabsContent value="secrets">
-          <div className="grid gap-6">
-            {/* Add New Secret Card */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Add New Secret</CardTitle>
-                <CardDescription>
-                  Store sensitive configuration values like Bot Tokens, API keys, and other secrets securely.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
+          <TabsContent value="secrets">
+            <div className="grid gap-4">
+              {/* Add New Secret Card */}
+              <Card className="bg-white shadow-sm border">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                    <Plus className="h-4 w-4 text-blue-600" />
+                    Add New Secret
+                  </CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    Store sensitive configuration values like Bot Tokens, API keys, and other secrets securely.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="secret-name">Secret Name</Label>
+                      <Label htmlFor="secret-name" className="text-sm font-medium">Secret Name</Label>
                       <Input
                         id="secret-name"
                         placeholder="e.g., BOT_TOKEN, SPOTIFY_CLIENT_ID"
                         value={newSecretName}
                         onChange={(e) => setNewSecretName(e.target.value)}
+                        className="text-sm"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="secret-value">Secret Value</Label>
+                      <Label htmlFor="secret-value" className="text-sm font-medium">Secret Value</Label>
                       <Input
                         id="secret-value"
                         type="password"
                         placeholder="Enter the secret value"
                         value={newSecretValue}
                         onChange={(e) => setNewSecretValue(e.target.value)}
+                        className="text-sm"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="secret-description">Description (Optional)</Label>
+                    <Label htmlFor="secret-description" className="text-sm font-medium">Description (Optional)</Label>
                     <Input
                       id="secret-description"
                       placeholder="Brief description of what this secret is used for"
                       value={newSecretDescription}
                       onChange={(e) => setNewSecretDescription(e.target.value)}
+                      className="text-sm"
                     />
                   </div>
-                  <Button onClick={addSecret} className="w-fit">
-                    <Plus className="mr-2 h-4 w-4" />
+                  <Button onClick={addSecret} className="w-fit h-9 px-4 text-sm">
+                    <Plus className="mr-2 h-3 w-3" />
                     Add Secret
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Existing Secrets */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Stored Secrets</CardTitle>
-                <CardDescription>
-                  Manage your bot's configuration secrets. These are automatically injected into your bot's environment.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
+              {/* Existing Secrets */}
+              <Card className="bg-white shadow-sm border">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-green-600" />
+                    Stored Secrets
+                  </CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    Manage your bot's configuration secrets. These are automatically injected into your bot's environment.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
                   {secrets.map((secret) => (
-                    <div key={secret.id} className="border rounded-lg p-4">
+                    <div key={secret.id} className="border rounded-lg p-3 bg-gray-50">
                       <div className="flex items-center justify-between mb-2">
                         <div>
-                          <h4 className="font-medium">{secret.name}</h4>
-                          <p className="text-sm text-muted-foreground">{secret.description}</p>
+                          <h4 className="font-medium text-sm">{secret.name}</h4>
+                          <p className="text-xs text-gray-600">{secret.description}</p>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-1">
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => toggleSecretVisibility(secret.id)}
+                            className="h-7 w-7"
                           >
-                            {visibleSecrets.has(secret.id) ? <EyeOff size={16} /> : <Eye size={16} />}
+                            {visibleSecrets.has(secret.id) ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => copyToClipboard(secret.value, secret.name)}
+                            className="h-7 w-7"
                           >
-                            <Copy size={16} />
+                            <Copy className="h-3 w-3" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => deleteSecret(secret.id)}
-                            className="text-destructive hover:text-destructive"
+                            className="h-7 w-7 text-red-600 hover:text-red-700"
                           >
-                            <Trash2 size={16} />
+                            <Trash2 className="h-3 w-3" />
                           </Button>
                         </div>
                       </div>
-                      <div className="flex">
-                        <Input
-                          value={visibleSecrets.has(secret.id) ? secret.value : "•".repeat(secret.value.length)}
-                          readOnly
-                          className="font-mono"
-                        />
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-2">
+                      <Input
+                        value={visibleSecrets.has(secret.id) ? secret.value : "•".repeat(secret.value.length)}
+                        readOnly
+                        className="font-mono text-xs h-8"
+                      />
+                      <div className="text-xs text-gray-500 mt-1">
                         Created: {new Date(secret.createdAt).toLocaleDateString()}
                       </div>
                     </div>
                   ))}
                   {secrets.length === 0 && (
-                    <div className="text-center py-8 text-muted-foreground">
-                      No secrets stored yet. Add your first secret above.
+                    <div className="text-center py-6 text-gray-500">
+                      <Shield className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+                      <p className="text-sm">No secrets stored yet. Add your first secret above.</p>
                     </div>
                   )}
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Security Information */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Security Information</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <p>All secrets are encrypted at rest using AES-256 encryption</p>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <p>Secrets are only accessible by your bot containers</p>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <p>Environment variables are automatically generated for your bot</p>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <p>Secrets are never logged or stored in plain text</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="webhooks">
-          <Card>
-            <CardHeader>
-              <CardTitle>Webhook URL</CardTitle>
-              <CardDescription>
-                Set this URL in your Telegram bot settings to receive updates from Telegram.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-2">
-                  <div className="grid flex-1 gap-2">
-                    <Label htmlFor="webhook-url">Webhook URL</Label>
-                    <div className="flex">
-                      <Input
-                        id="webhook-url"
-                        value={webhookUrl}
-                        readOnly
-                        className="font-mono"
-                      />
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="ml-2"
-                        onClick={() => copyToClipboard(webhookUrl, "Webhook URL")}
-                      >
-                        <Copy size={16} />
-                      </Button>
+              {/* Security Information */}
+              <Card className="bg-white shadow-sm border">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-amber-600" />
+                    Security Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <p>All secrets are encrypted at rest using AES-256 encryption</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <p>Secrets are only accessible by your bot containers</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <p>Environment variables are automatically generated for your bot</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                      <p>Secrets are never logged or stored in plain text</p>
                     </div>
                   </div>
-                  <Button
-                    variant="outline"
-                    className="ml-auto"
-                    onClick={handleRegenerateWebhook}
-                  >
-                    <RefreshCcw className="mr-2 h-4 w-4" />
-                    Regenerate
-                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="webhooks">
+            <Card className="bg-white shadow-sm border">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-purple-600" />
+                  Webhook URL
+                </CardTitle>
+                <CardDescription className="text-sm text-gray-600">
+                  Set this URL in your Telegram bot settings to receive updates from Telegram.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="webhook-url" className="text-sm font-medium">Webhook URL</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="webhook-url"
+                      value={webhookUrl}
+                      readOnly
+                      className="font-mono text-sm"
+                    />
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => copyToClipboard(webhookUrl, "Webhook URL")}
+                      className="h-9 w-9"
+                    >
+                      <Copy className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={handleRegenerateWebhook}
+                      className="h-9 px-3 text-sm"
+                    >
+                      <RefreshCcw className="mr-1 h-3 w-3" />
+                      Regenerate
+                    </Button>
+                  </div>
                 </div>
                 
-                <div>
-                  <h4 className="text-sm font-medium mb-2">Set Webhook Command</h4>
-                  <pre className="p-4 rounded-md bg-muted overflow-x-auto text-xs">
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium">Set Webhook Command</h4>
+                  <pre className="p-3 rounded-md bg-gray-100 overflow-x-auto text-xs border">
 {`curl -F "url=${webhookUrl}" https://api.telegram.org/bot<YOUR_BOT_TOKEN>/setWebhook`}
                   </pre>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        
-        <TabsContent value="documentation">
-          <Card>
-            <CardHeader>
-              <CardTitle>API Documentation</CardTitle>
-              <CardDescription>
-                Learn how to use the BotBuddy API to interact with your Telegram bot programmatically.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="prose prose-sm dark:prose-invert max-w-none">
-                <h3>Getting Started</h3>
-                <p>
-                  All API requests require authentication using your API key. Include your API key in the request header as follows:
-                </p>
-                <pre className="p-4 rounded-md bg-muted overflow-x-auto">
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="documentation">
+            <Card className="bg-white shadow-sm border">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-indigo-600" />
+                  API Documentation
+                </CardTitle>
+                <CardDescription className="text-sm text-gray-600">
+                  Learn how to use the BotBuddy API to interact with your Telegram bot programmatically.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="prose prose-sm max-w-none space-y-4">
+                  <div>
+                    <h3 className="text-base font-semibold mb-2">Getting Started</h3>
+                    <p className="text-sm text-gray-600 mb-3">
+                      All API requests require authentication using your API key. Include your API key in the request header as follows:
+                    </p>
+                    <pre className="p-3 rounded-md bg-gray-100 overflow-x-auto text-xs border">
 {`Authorization: Bearer YOUR_API_KEY`}
-                </pre>
-                
-                <h3 className="mt-6">Available Endpoints</h3>
-                <table className="w-full">
-                  <thead>
-                    <tr>
-                      <th>Endpoint</th>
-                      <th>Method</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>/v1/bots/messages</code></td>
-                      <td>POST</td>
-                      <td>Send a message to a user from your bot</td>
-                    </tr>
-                    <tr>
-                      <td><code>/v1/bots/status</code></td>
-                      <td>GET</td>
-                      <td>Get the status of your bot</td>
-                    </tr>
-                    <tr>
-                      <td><code>/v1/bots/users</code></td>
-                      <td>GET</td>
-                      <td>List all users who have interacted with your bot</td>
-                    </tr>
-                    <tr>
-                      <td><code>/v1/bots/restart</code></td>
-                      <td>POST</td>
-                      <td>Restart your bot</td>
-                    </tr>
-                  </tbody>
-                </table>
-                
-                <h3 className="mt-6">Rate Limits</h3>
-                <p>
-                  The API has the following rate limits:
-                </p>
-                <ul>
-                  <li>60 requests per minute for the free plan</li>
-                  <li>300 requests per minute for the Pro plan</li>
-                  <li>1000 requests per minute for the Business plan</li>
-                </ul>
-                
-                <p className="mt-6">
-                  <a href="#" className="text-primary hover:underline">
-                    Read the full API documentation →
-                  </a>
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+                    </pre>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-base font-semibold mb-3">Available Endpoints</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-xs border border-gray-200 rounded-lg">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-3 py-2 text-left font-medium">Endpoint</th>
+                            <th className="px-3 py-2 text-left font-medium">Method</th>
+                            <th className="px-3 py-2 text-left font-medium">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                          <tr>
+                            <td className="px-3 py-2 font-mono text-xs">/v1/bots/messages</td>
+                            <td className="px-3 py-2 text-green-600 font-medium">POST</td>
+                            <td className="px-3 py-2">Send a message to a user from your bot</td>
+                          </tr>
+                          <tr>
+                            <td className="px-3 py-2 font-mono text-xs">/v1/bots/status</td>
+                            <td className="px-3 py-2 text-blue-600 font-medium">GET</td>
+                            <td className="px-3 py-2">Get the status of your bot</td>
+                          </tr>
+                          <tr>
+                            <td className="px-3 py-2 font-mono text-xs">/v1/bots/users</td>
+                            <td className="px-3 py-2 text-blue-600 font-medium">GET</td>
+                            <td className="px-3 py-2">List all users who have interacted with your bot</td>
+                          </tr>
+                          <tr>
+                            <td className="px-3 py-2 font-mono text-xs">/v1/bots/restart</td>
+                            <td className="px-3 py-2 text-amber-600 font-medium">POST</td>
+                            <td className="px-3 py-2">Restart your bot</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-base font-semibold mb-2">Rate Limits</h3>
+                    <p className="text-sm text-gray-600 mb-2">The API has the following rate limits:</p>
+                    <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
+                      <li>60 requests per minute for the free plan</li>
+                      <li>300 requests per minute for the Pro plan</li>
+                      <li>1000 requests per minute for the Business plan</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <p className="text-sm text-blue-800">
+                      📚 Need more help? Check out our{" "}
+                      <a href="#" className="text-blue-600 hover:underline font-medium">
+                        complete API documentation
+                      </a>{" "}
+                      for detailed examples and advanced usage.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }
