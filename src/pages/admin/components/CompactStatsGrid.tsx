@@ -35,7 +35,7 @@ export default function CompactStatsGrid({ stats }: CompactStatsGridProps) {
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div className="p-2 rounded-lg bg-gray-50">
-                {stat.icon && <stat.icon className={`h-5 w-5 ${stat.color || 'text-gray-600'}`} />}
+                {stat.icon && <stat.icon className={`h-4 w-4 ${stat.color || 'text-gray-600'}`} />}
               </div>
               {stat.change !== undefined && (
                 <div className="flex items-center gap-1">
@@ -49,7 +49,7 @@ export default function CompactStatsGrid({ stats }: CompactStatsGridProps) {
           </CardHeader>
           <CardContent className="pt-0">
             <div className="space-y-1">
-              <p className="text-xl font-bold text-gray-900">{stat.value}</p>
+              <p className="text-lg font-bold text-gray-900">{stat.value}</p>
               <p className="text-xs text-gray-600">{stat.label}</p>
             </div>
           </CardContent>

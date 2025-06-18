@@ -94,12 +94,12 @@ export default function UserManagement() {
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-3">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="p-2 bg-blue-600 rounded-xl">
-              <Users className="h-6 w-6 text-white" />
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="p-2 bg-blue-600 rounded-lg">
+              <Users className="h-5 w-5 text-white" />
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+            <h1 className="text-xl font-semibold text-gray-900">
               User Management
             </h1>
           </div>
@@ -152,12 +152,12 @@ export default function UserManagement() {
 
         {/* Users Table */}
         <Card className="bg-white shadow-sm border">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-lg font-semibold text-gray-900 flex items-center justify-center gap-2">
-              <Users className="h-5 w-5 text-blue-600" />
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-semibold text-gray-900 flex items-center justify-center gap-2">
+              <Users className="h-4 w-4 text-blue-600" />
               All Users
             </CardTitle>
-            <CardDescription className="text-sm text-gray-600">
+            <CardDescription className="text-sm text-gray-600 text-center">
               {filteredUsers.length} users found • Updated: {new Date().toLocaleTimeString()}
             </CardDescription>
           </CardHeader>

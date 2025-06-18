@@ -94,12 +94,12 @@ export default function DashboardIndex() {
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-3">
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+        <div className="text-center space-y-2">
+          <h1 className="text-xl font-semibold text-gray-900">
             Bot Dashboard
           </h1>
           <p className="text-sm text-gray-600 max-w-xl mx-auto">
-            Monitor your bot performance, track user engagement, and analyze metrics in real-time
+            Monitor your bot performance, track user engagement, and analyze metrics
           </p>
         </div>
 
@@ -111,21 +111,21 @@ export default function DashboardIndex() {
         </div>
 
         {/* Time Range Controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white rounded-xl p-4 shadow-sm border">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white rounded-lg p-3 shadow-sm border">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-xs font-medium text-gray-700">Live Monitoring Active</span>
           </div>
           <div className="flex items-center gap-3">
             <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
-              <TabsList className="bg-gray-100">
-                <TabsTrigger value="day" className="px-4 py-1 text-xs">Day</TabsTrigger>
-                <TabsTrigger value="week" className="px-4 py-1 text-xs">Week</TabsTrigger>
-                <TabsTrigger value="month" className="px-4 py-1 text-xs">Month</TabsTrigger>
-                <TabsTrigger value="year" className="px-4 py-1 text-xs">Year</TabsTrigger>
+              <TabsList className="bg-gray-100 h-8">
+                <TabsTrigger value="day" className="px-3 py-1 text-xs">Day</TabsTrigger>
+                <TabsTrigger value="week" className="px-3 py-1 text-xs">Week</TabsTrigger>
+                <TabsTrigger value="month" className="px-3 py-1 text-xs">Month</TabsTrigger>
+                <TabsTrigger value="year" className="px-3 py-1 text-xs">Year</TabsTrigger>
               </TabsList>
             </Tabs>
-            <Button variant="outline" className="px-4 py-1 text-xs h-8">
+            <Button variant="outline" className="px-3 py-1 text-xs h-8">
               Refresh Data
             </Button>
           </div>
@@ -138,7 +138,7 @@ export default function DashboardIndex() {
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <div className="p-2 rounded-lg bg-gray-50">
-                    <stat.icon className={`h-5 w-5 ${stat.color}`} />
+                    <stat.icon className={`h-4 w-4 ${stat.color}`} />
                   </div>
                   <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                     stat.change.startsWith('+') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
@@ -149,7 +149,7 @@ export default function DashboardIndex() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="space-y-1">
-                  <p className="text-xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-lg font-bold text-gray-900">{stat.value}</p>
                   <p className="text-xs text-gray-600">{stat.label}</p>
                 </div>
               </CardContent>
@@ -160,10 +160,10 @@ export default function DashboardIndex() {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
-          {/* Main Chart - Full Width on Large Screens */}
+          {/* Main Chart */}
           <Card className="lg:col-span-2 bg-white shadow-sm border">
-            <CardHeader className="text-center pb-4">
-              <CardTitle className="text-lg font-semibold text-gray-900">Message Activity</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold text-gray-900">Message Activity</CardTitle>
               <CardDescription className="text-sm text-gray-600">
                 Daily message processing trends and user engagement
               </CardDescription>
@@ -217,8 +217,8 @@ export default function DashboardIndex() {
             
             {/* Uptime Chart */}
             <Card className="bg-white shadow-sm border">
-              <CardHeader className="text-center pb-3">
-                <CardTitle className="text-md font-semibold text-gray-900">Bot Uptime</CardTitle>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold text-gray-900">Bot Uptime</CardTitle>
                 <CardDescription className="text-xs text-gray-600">
                   System reliability metrics
                 </CardDescription>
@@ -265,8 +265,8 @@ export default function DashboardIndex() {
 
             {/* Commands Usage */}
             <Card className="bg-white shadow-sm border">
-              <CardHeader className="text-center pb-3">
-                <CardTitle className="text-md font-semibold text-gray-900">Command Usage</CardTitle>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold text-gray-900">Command Usage</CardTitle>
                 <CardDescription className="text-xs text-gray-600">
                   Most popular bot commands
                 </CardDescription>

@@ -30,16 +30,16 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
 
   const renderUserCard = (user: any) => (
     <Card key={user.id} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-xs">
               {user.email?.[0]?.toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-gray-900 truncate">{user.email}</p>
               <p className="text-xs text-gray-500 truncate">{user.telegramId}</p>
-              <div className="flex items-center gap-3 mt-1 text-xs text-gray-600">
+              <div className="flex items-center gap-2 mt-1 text-xs text-gray-600">
                 <span>Joined: {user.joinDate}</span>
                 <span>•</span>
                 <span>{user.botCount} bots</span>
@@ -60,7 +60,7 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="h-8 px-2 text-xs rounded-md border-gray-200 hover:bg-gray-50"
+                className="h-7 px-2 text-xs rounded-md border-gray-200 hover:bg-gray-50"
                 onClick={() => onAction?.('view', user)}
               >
                 <Eye className="h-3 w-3" />
@@ -68,7 +68,7 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
               <Button 
                 variant="outline" 
                 size="sm"
-                className={`h-8 px-2 text-xs rounded-md border-gray-200 ${
+                className={`h-7 px-2 text-xs rounded-md border-gray-200 ${
                   user.status === "active" ? "hover:bg-red-50 hover:border-red-200 hover:text-red-600" : "hover:bg-green-50 hover:border-green-200 hover:text-green-600"
                 }`}
                 onClick={() => onAction?.(user.status === "active" ? 'deactivate' : 'activate', user)}
@@ -84,16 +84,16 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
 
   const renderPaymentCard = (payment: any) => (
     <Card key={payment.id} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center text-white font-semibold text-sm">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center text-white font-semibold text-xs">
               ₹
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-lg font-bold text-gray-900">₹{payment.amount}</p>
+              <p className="text-base font-bold text-gray-900">₹{payment.amount}</p>
               <p className="text-xs text-gray-500 truncate">{payment.profiles?.email}</p>
-              <div className="flex items-center gap-3 mt-1 text-xs text-gray-600">
+              <div className="flex items-center gap-2 mt-1 text-xs text-gray-600">
                 <span>Plan: {payment.plan}</span>
                 <span>•</span>
                 <span>Method: {payment.method}</span>
@@ -110,7 +110,7 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
             <Button 
               variant="outline" 
               size="sm" 
-              className="h-8 px-2 text-xs rounded-md border-gray-200 hover:bg-gray-50"
+              className="h-7 px-2 text-xs rounded-md border-gray-200 hover:bg-gray-50"
               onClick={() => onAction?.('view', payment)}
             >
               <Eye className="h-3 w-3" />
@@ -123,16 +123,16 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
 
   const renderPayoutCard = (payout: any) => (
     <Card key={payout.id} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white font-semibold text-sm">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white font-semibold text-xs">
               💰
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-lg font-bold text-gray-900">₹{payout.amount}</p>
+              <p className="text-base font-bold text-gray-900">₹{payout.amount}</p>
               <p className="text-xs text-gray-500 truncate">{payout.profiles?.email}</p>
-              <div className="flex items-center gap-3 mt-1 text-xs text-gray-600">
+              <div className="flex items-center gap-2 mt-1 text-xs text-gray-600">
                 <span>Method: {payout.method?.toUpperCase()}</span>
                 <span>•</span>
                 <span>Requested: {new Date(payout.created_at).toLocaleDateString()}</span>
@@ -148,7 +148,7 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
               <div className="flex gap-1">
                 <Button
                   size="sm"
-                  className="h-8 px-3 bg-green-600 hover:bg-green-700 text-white text-xs rounded-md"
+                  className="h-7 px-2 bg-green-600 hover:bg-green-700 text-white text-xs rounded-md"
                   onClick={() => onAction?.('approve', payout)}
                 >
                   <CheckCircle className="h-3 w-3 mr-1" />
@@ -157,7 +157,7 @@ export default function ModernTable({ data, type, onAction }: ModernTableProps) 
                 <Button
                   size="sm"
                   variant="outline"
-                  className="h-8 px-3 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 text-xs rounded-md"
+                  className="h-7 px-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 text-xs rounded-md"
                   onClick={() => onAction?.('decline', payout)}
                 >
                   <XCircle className="h-3 w-3 mr-1" />

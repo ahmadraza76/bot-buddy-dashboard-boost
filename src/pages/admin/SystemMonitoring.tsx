@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { Activity, Server, HardDrive, Cpu, MemoryStick, AlertTriangle } from "lucide-react";
@@ -27,155 +28,159 @@ export default function SystemMonitoring() {
   ];
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-base sm:text-3xl font-bold">System Monitoring</h1>
-        <div className="text-xs sm:text-sm text-muted-foreground">
-          Auto-refresh: Every 30 seconds
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
+        
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-semibold text-gray-900">System Monitoring</h1>
+          <div className="text-sm text-muted-foreground">
+            Auto-refresh: Every 30 seconds
+          </div>
         </div>
-      </div>
 
-      {/* Overview Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-            <CardDescription className="text-xs">Overall CPU</CardDescription>
-            <Cpu className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-base sm:text-2xl font-bold">42%</div>
-            <p className="text-[10px] sm:text-xs text-muted-foreground">Across all servers</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-            <CardDescription className="text-xs">Overall Memory</CardDescription>
-            <MemoryStick className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-base sm:text-2xl font-bold">63%</div>
-            <p className="text-[10px] sm:text-xs text-muted-foreground">247GB / 392GB used</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-            <CardDescription className="text-xs">Overall Disk</CardDescription>
-            <HardDrive className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-base sm:text-2xl font-bold">45%</div>
-            <p className="text-[10px] sm:text-xs text-muted-foreground">1.8TB / 4TB used</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-            <CardDescription className="text-xs">System Uptime</CardDescription>
-            <Activity className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-base sm:text-2xl font-bold">99.8%</div>
-            <p className="text-[10px] sm:text-green-600">45 days, 12 hours</p>
-          </CardContent>
-        </Card>
-      </div>
+        {/* Overview Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Overall CPU</CardDescription>
+              <Cpu className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">42%</div>
+              <p className="text-xs text-muted-foreground">Across all servers</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Overall Memory</CardDescription>
+              <MemoryStick className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">63%</div>
+              <p className="text-xs text-muted-foreground">247GB / 392GB used</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Overall Disk</CardDescription>
+              <HardDrive className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">45%</div>
+              <p className="text-xs text-muted-foreground">1.8TB / 4TB used</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">System Uptime</CardDescription>
+              <Activity className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">99.8%</div>
+              <p className="text-xs text-green-600">45 days, 12 hours</p>
+            </CardContent>
+          </Card>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        {/* Performance Chart */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Performance Chart */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold">System Performance (24h)</CardTitle>
+              <CardDescription className="text-sm">CPU, Memory, and Disk usage over time</CardDescription>
+            </CardHeader>
+            <CardContent className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={serverMetrics}>
+                  <XAxis dataKey="time" tick={{ fontSize: 12 }} />
+                  <YAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
+                  <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                  <Tooltip formatter={(value) => [`${value}%`, '']} />
+                  <Line
+                    type="monotone"
+                    dataKey="cpu"
+                    stroke="#3b82f6"
+                    strokeWidth={2}
+                    name="CPU"
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="memory"
+                    stroke="#ef4444"
+                    strokeWidth={2}
+                    name="Memory"
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="disk"
+                    stroke="#10b981"
+                    strokeWidth={2}
+                    name="Disk"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {/* Server Status */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold flex items-center">
+                <Server className="h-4 w-4 mr-2" />
+                Server Status
+              </CardTitle>
+              <CardDescription className="text-sm">Individual server health and metrics</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {serverStats.map((server, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
+                    <div className="flex items-center">
+                      <div className={`w-3 h-3 rounded-full mr-3 ${
+                        server.status === 'healthy' ? 'bg-green-500' : 'bg-yellow-500'
+                      }`} />
+                      <span className="font-medium text-sm">{server.name}</span>
+                    </div>
+                    <div className="flex items-center space-x-4 text-xs">
+                      <span>CPU: {server.cpu}</span>
+                      <span>RAM: {server.memory}</span>
+                      <span>Disk: {server.disk}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* System Alerts */}
         <Card>
           <CardHeader>
-            <CardTitle>System Performance (24h)</CardTitle>
-            <CardDescription>CPU, Memory, and Disk usage over time</CardDescription>
-          </CardHeader>
-          <CardContent className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={serverMetrics}>
-                <XAxis dataKey="time" />
-                <YAxis domain={[0, 100]} />
-                <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                <Tooltip formatter={(value) => [`${value}%`, '']} />
-                <Line
-                  type="monotone"
-                  dataKey="cpu"
-                  stroke="#3b82f6"
-                  strokeWidth={2}
-                  name="CPU"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="memory"
-                  stroke="#ef4444"
-                  strokeWidth={2}
-                  name="Memory"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="disk"
-                  stroke="#10b981"
-                  strokeWidth={2}
-                  name="Disk"
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* Server Status */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Server className="h-5 w-5 mr-2" />
-              Server Status
+            <CardTitle className="text-base font-semibold flex items-center">
+              <AlertTriangle className="h-4 w-4 mr-2" />
+              System Alerts
             </CardTitle>
-            <CardDescription>Individual server health and metrics</CardDescription>
+            <CardDescription className="text-sm">Recent system alerts and notifications</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {serverStats.map((server, index) => (
+            <div className="space-y-3">
+              {systemAlerts.map((alert, index) => (
                 <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
                   <div className="flex items-center">
-                    <div className={`w-3 h-3 rounded-full mr-3 ${
-                      server.status === 'healthy' ? 'bg-green-500' : 'bg-yellow-500'
+                    <div className={`w-2 h-2 rounded-full mr-3 ${
+                      alert.level === 'critical' ? 'bg-red-500' :
+                      alert.level === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
                     }`} />
-                    <span className="font-medium">{server.name}</span>
+                    <span className="text-sm">{alert.message}</span>
                   </div>
-                  <div className="flex items-center space-x-4 text-sm">
-                    <span>CPU: {server.cpu}</span>
-                    <span>RAM: {server.memory}</span>
-                    <span>Disk: {server.disk}</span>
-                  </div>
+                  <span className="text-xs text-muted-foreground">{alert.time}</span>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
       </div>
-
-      {/* System Alerts */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <AlertTriangle className="h-5 w-5 mr-2" />
-            System Alerts
-          </CardTitle>
-          <CardDescription>Recent system alerts and notifications</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {systemAlerts.map((alert, index) => (
-              <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
-                <div className="flex items-center">
-                  <div className={`w-2 h-2 rounded-full mr-3 ${
-                    alert.level === 'critical' ? 'bg-red-500' :
-                    alert.level === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
-                  }`} />
-                  <span className="text-sm">{alert.message}</span>
-                </div>
-                <span className="text-xs text-muted-foreground">{alert.time}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }

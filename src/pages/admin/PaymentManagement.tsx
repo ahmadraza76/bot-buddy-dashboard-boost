@@ -75,12 +75,12 @@ export default function PaymentManagement() {
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Section */}
-        <div className="text-center space-y-3">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="p-2 bg-green-600 rounded-xl">
-              <CreditCard className="h-6 w-6 text-white" />
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="p-2 bg-green-600 rounded-lg">
+              <CreditCard className="h-5 w-5 text-white" />
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
+            <h1 className="text-xl font-semibold text-gray-900">
               Payment Management
             </h1>
           </div>
@@ -145,12 +145,12 @@ export default function PaymentManagement() {
 
         {/* Payments Table */}
         <Card className="bg-white shadow-sm border">
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-lg font-semibold text-gray-900 flex items-center justify-center gap-2">
-              <CreditCard className="h-5 w-5 text-green-600" />
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base font-semibold text-gray-900 flex items-center justify-center gap-2">
+              <CreditCard className="h-4 w-4 text-green-600" />
               Payment Transactions
             </CardTitle>
-            <CardDescription className="text-sm text-gray-600">
+            <CardDescription className="text-sm text-gray-600 text-center">
               {filteredPayments.length} transactions found • Total: ₹{totalRevenue.toLocaleString()}
             </CardDescription>
           </CardHeader>

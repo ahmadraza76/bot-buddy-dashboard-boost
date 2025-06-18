@@ -48,164 +48,169 @@ export default function HealingDashboard() {
   ).length;
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">AI Healing System Dashboard</h1>
-        <div className="flex items-center space-x-2">
-          <Shield className="h-5 w-5 text-green-500" />
-          <span className="text-sm font-medium">Auto-Healing Active</span>
-        </div>
-      </div>
-
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Active Alerts</CardDescription>
-            <AlertTriangle className="h-4 w-4 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{alerts.length}</div>
-            <p className="text-xs text-muted-foreground">
-              {criticalAlerts} critical
-            </p>
-          </CardContent>
-        </Card>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Today's Alerts</CardDescription>
-            <TrendingUp className="h-4 w-4 text-blue-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{todayAlerts}</div>
-            <p className="text-xs text-muted-foreground">
-              New issues detected
-            </p>
-          </CardContent>
-        </Card>
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-semibold text-gray-900">AI Healing System Dashboard</h1>
+          <div className="flex items-center space-x-2">
+            <Shield className="h-4 w-4 text-green-500" />
+            <span className="text-sm font-medium">Auto-Healing Active</span>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Auto-Heal Success</CardDescription>
-            <CheckCircle className="h-4 w-4 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">94.2%</div>
-            <p className="text-xs text-muted-foreground">
-              Last 30 days
-            </p>
-          </CardContent>
-        </Card>
+        {/* Stats Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Active Alerts</CardDescription>
+              <AlertTriangle className="h-4 w-4 text-red-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">{alerts.length}</div>
+              <p className="text-xs text-muted-foreground">
+                {criticalAlerts} critical
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Today's Alerts</CardDescription>
+              <TrendingUp className="h-4 w-4 text-blue-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">{todayAlerts}</div>
+              <p className="text-xs text-muted-foreground">
+                New issues detected
+              </p>
+            </CardContent>
+          </Card>
 
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Auto-Heal Success</CardDescription>
+              <CheckCircle className="h-4 w-4 text-green-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">94.2%</div>
+              <p className="text-xs text-muted-foreground">
+                Last 30 days
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardDescription className="text-xs">Manual Interventions</CardDescription>
+              <Clock className="h-4 w-4 text-yellow-500" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-lg font-bold">
+                {alerts.filter(a => a.type === 'manual_intervention_required').length}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Require attention
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Active Alerts Table */}
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardDescription>Manual Interventions</CardDescription>
-            <Clock className="h-4 w-4 text-yellow-500" />
+          <CardHeader>
+            <CardTitle className="text-base font-semibold flex items-center">
+              <AlertTriangle className="h-4 w-4 mr-2" />
+              Active Alerts & Manual Interventions
+            </CardTitle>
+            <CardDescription className="text-sm">
+              Issues that require admin attention or couldn't be auto-fixed
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {alerts.filter(a => a.type === 'manual_intervention_required').length}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Require attention
-            </p>
+            {alerts.length === 0 ? (
+              <div className="text-center p-8">
+                <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-500" />
+                <h3 className="text-base font-medium mb-2">All Clear!</h3>
+                <p className="text-muted-foreground text-sm">
+                  No active alerts. The AI healing system is working perfectly.
+                </p>
+              </div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">Type</TableHead>
+                    <TableHead className="text-xs">Bot</TableHead>
+                    <TableHead className="text-xs">User</TableHead>
+                    <TableHead className="text-xs">Error</TableHead>
+                    <TableHead className="text-xs">Severity</TableHead>
+                    <TableHead className="text-xs">Message</TableHead>
+                    <TableHead className="text-xs">Created</TableHead>
+                    <TableHead className="text-xs">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {alerts.map((alert) => (
+                    <TableRow key={alert.id}>
+                      <TableCell>
+                        <div className="flex items-center">
+                          {getAlertTypeIcon(alert.type)}
+                          <span className="ml-2 text-xs">
+                            {alert.type.replace('_', ' ').toLowerCase()}
+                          </span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <code className="text-xs bg-muted px-2 py-1 rounded">
+                          {(alert as any).bots?.username || 'Unknown'}
+                        </code>
+                      </TableCell>
+                      <TableCell className="text-xs">
+                        {(alert as any).profiles?.email || 'Unknown'}
+                      </TableCell>
+                      <TableCell>
+                        {alert.error_type ? (
+                          <Badge variant="outline" className="text-xs">
+                            {alert.error_type.replace('_', ' ').toLowerCase()}
+                          </Badge>
+                        ) : (
+                          '-'
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {alert.severity && (
+                          <Badge className={getSeverityColor(alert.severity) + " text-xs"}>
+                            {alert.severity}
+                          </Badge>
+                        )}
+                      </TableCell>
+                      <TableCell className="max-w-xs truncate text-xs">
+                        {alert.message}
+                      </TableCell>
+                      <TableCell className="text-xs text-muted-foreground">
+                        {new Date(alert.created_at).toLocaleString()}
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleResolveAlert(alert.id)}
+                          disabled={resolveAlert.isPending}
+                          className="h-7 px-2 text-xs"
+                        >
+                          Resolve
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
       </div>
-
-      {/* Active Alerts Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center">
-            <AlertTriangle className="h-5 w-5 mr-2" />
-            Active Alerts & Manual Interventions
-          </CardTitle>
-          <CardDescription>
-            Issues that require admin attention or couldn't be auto-fixed
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {alerts.length === 0 ? (
-            <div className="text-center p-8">
-              <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-500" />
-              <h3 className="text-lg font-medium mb-2">All Clear!</h3>
-              <p className="text-muted-foreground">
-                No active alerts. The AI healing system is working perfectly.
-              </p>
-            </div>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Bot</TableHead>
-                  <TableHead>User</TableHead>
-                  <TableHead>Error</TableHead>
-                  <TableHead>Severity</TableHead>
-                  <TableHead>Message</TableHead>
-                  <TableHead>Created</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {alerts.map((alert) => (
-                  <TableRow key={alert.id}>
-                    <TableCell>
-                      <div className="flex items-center">
-                        {getAlertTypeIcon(alert.type)}
-                        <span className="ml-2 text-sm">
-                          {alert.type.replace('_', ' ').toLowerCase()}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <code className="text-xs bg-muted px-2 py-1 rounded">
-                        {(alert as any).bots?.username || 'Unknown'}
-                      </code>
-                    </TableCell>
-                    <TableCell>
-                      {(alert as any).profiles?.email || 'Unknown'}
-                    </TableCell>
-                    <TableCell>
-                      {alert.error_type ? (
-                        <Badge variant="outline">
-                          {alert.error_type.replace('_', ' ').toLowerCase()}
-                        </Badge>
-                      ) : (
-                        '-'
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {alert.severity && (
-                        <Badge className={getSeverityColor(alert.severity)}>
-                          {alert.severity}
-                        </Badge>
-                      )}
-                    </TableCell>
-                    <TableCell className="max-w-xs truncate">
-                      {alert.message}
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {new Date(alert.created_at).toLocaleString()}
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleResolveAlert(alert.id)}
-                        disabled={resolveAlert.isPending}
-                      >
-                        Resolve
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-        </CardContent>
-      </Card>
     </div>
   );
 }
