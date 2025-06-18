@@ -33,41 +33,55 @@ export default function ApiKeys() {
   } = useApiKeysState();
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background p-4 md:p-6">
+      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6">
         
-        {/* Header Section */}
-        <div className="text-center space-y-3">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="p-3 bg-blue-600 rounded-lg">
-              <Key className="h-5 w-5 text-white" />
+        {/* Header Section - Mobile Optimized */}
+        <div className="text-center space-y-2 md:space-y-3">
+          <div className="flex items-center justify-center gap-2 md:gap-3 mb-2 md:mb-3">
+            <div className="p-2 md:p-3 bg-primary rounded-lg">
+              <Key className="h-4 w-4 md:h-5 md:w-5 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-xl md:text-2xl font-bold text-foreground">
               API Keys & Secrets
             </h1>
           </div>
-          <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xs md:text-sm text-muted-foreground max-w-2xl mx-auto px-4">
             Manage your API keys, secrets, and webhook configurations securely
           </p>
         </div>
 
-        <Tabs defaultValue="api-keys" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 bg-white border shadow-sm h-12">
-            <TabsTrigger value="api-keys" className="flex items-center gap-2 text-sm py-3">
-              <Key className="h-4 w-4" />
-              API Keys
+        <Tabs defaultValue="api-keys" className="space-y-4 md:space-y-6">
+          {/* Mobile-First Tab Navigation */}
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-card border shadow-sm h-auto p-1">
+            <TabsTrigger 
+              value="api-keys" 
+              className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-xs md:text-sm py-2 md:py-3 px-2"
+            >
+              <Key className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden md:inline">API Keys</span>
+              <span className="md:hidden">Keys</span>
             </TabsTrigger>
-            <TabsTrigger value="secrets" className="flex items-center gap-2 text-sm py-3">
-              <Shield className="h-4 w-4" />
-              Secrets
+            <TabsTrigger 
+              value="secrets" 
+              className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-xs md:text-sm py-2 md:py-3 px-2"
+            >
+              <Shield className="h-3 w-3 md:h-4 md:w-4" />
+              <span>Secrets</span>
             </TabsTrigger>
-            <TabsTrigger value="webhooks" className="flex items-center gap-2 text-sm py-3">
-              <Globe className="h-4 w-4" />
-              Webhook
+            <TabsTrigger 
+              value="webhooks" 
+              className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-xs md:text-sm py-2 md:py-3 px-2"
+            >
+              <Globe className="h-3 w-3 md:h-4 md:w-4" />
+              <span>Webhook</span>
             </TabsTrigger>
-            <TabsTrigger value="documentation" className="flex items-center gap-2 text-sm py-3">
-              <FileText className="h-4 w-4" />
-              Docs
+            <TabsTrigger 
+              value="documentation" 
+              className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-xs md:text-sm py-2 md:py-3 px-2"
+            >
+              <FileText className="h-3 w-3 md:h-4 md:w-4" />
+              <span>Docs</span>
             </TabsTrigger>
           </TabsList>
           
