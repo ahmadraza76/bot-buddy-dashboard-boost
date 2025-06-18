@@ -90,15 +90,15 @@ export default function DashboardIndex() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background p-4 md:p-6">
+      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6">
         
         {/* Header Section */}
         <div className="text-center space-y-2">
-          <h1 className="text-xl font-semibold text-gray-900">
+          <h1 className="text-xl md:text-2xl font-semibold text-foreground">
             Bot Dashboard
           </h1>
-          <p className="text-sm text-gray-600 max-w-xl mx-auto">
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto">
             Monitor your bot performance, track user engagement, and analyze metrics
           </p>
         </div>
@@ -111,14 +111,14 @@ export default function DashboardIndex() {
         </div>
 
         {/* Time Range Controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white rounded-lg p-3 shadow-sm border">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-card rounded-lg p-3 shadow-sm border">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-xs font-medium text-gray-700">Live Monitoring Active</span>
+            <span className="text-xs font-medium text-card-foreground">Live Monitoring Active</span>
           </div>
           <div className="flex items-center gap-3">
             <Tabs defaultValue="week" value={timeRange} onValueChange={setTimeRange}>
-              <TabsList className="bg-gray-100 h-8">
+              <TabsList className="bg-muted h-8">
                 <TabsTrigger value="day" className="px-3 py-1 text-xs">Day</TabsTrigger>
                 <TabsTrigger value="week" className="px-3 py-1 text-xs">Week</TabsTrigger>
                 <TabsTrigger value="month" className="px-3 py-1 text-xs">Month</TabsTrigger>
@@ -134,10 +134,10 @@ export default function DashboardIndex() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat, index) => (
-            <Card key={index} className="bg-white shadow-sm hover:shadow-md transition-shadow border">
+            <Card key={index} className="bg-card shadow-sm hover:shadow-md transition-shadow border">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <div className="p-2 rounded-lg bg-gray-50">
+                  <div className="p-2 rounded-lg bg-muted">
                     <stat.icon className={`h-4 w-4 ${stat.color}`} />
                   </div>
                   <span className={`text-xs font-medium px-2 py-1 rounded-full ${
@@ -149,8 +149,8 @@ export default function DashboardIndex() {
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="space-y-1">
-                  <p className="text-lg font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-xs text-gray-600">{stat.label}</p>
+                  <p className="text-lg font-bold text-card-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -161,10 +161,10 @@ export default function DashboardIndex() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           {/* Main Chart */}
-          <Card className="lg:col-span-2 bg-white shadow-sm border">
+          <Card className="lg:col-span-2 bg-card shadow-sm border">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base font-semibold text-gray-900">Message Activity</CardTitle>
-              <CardDescription className="text-sm text-gray-600">
+              <CardTitle className="text-base font-semibold text-card-foreground">Message Activity</CardTitle>
+              <CardDescription className="text-sm text-muted-foreground">
                 Daily message processing trends and user engagement
               </CardDescription>
             </CardHeader>
@@ -182,20 +182,21 @@ export default function DashboardIndex() {
                       dataKey="name" 
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: '#6B7280', fontSize: 12 }}
+                      tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                     />
                     <YAxis 
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: '#6B7280', fontSize: 12 }}
+                      tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
                     />
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <Tooltip 
                       contentStyle={{
-                        backgroundColor: 'white',
-                        border: '1px solid #E5E7EB',
+                        backgroundColor: 'hsl(var(--card))',
+                        border: '1px solid hsl(var(--border))',
                         borderRadius: '8px',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        color: 'hsl(var(--card-foreground))'
                       }}
                     />
                     <Area
@@ -216,10 +217,10 @@ export default function DashboardIndex() {
           <div className="space-y-6">
             
             {/* Uptime Chart */}
-            <Card className="bg-white shadow-sm border">
+            <Card className="bg-card shadow-sm border">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold text-gray-900">Bot Uptime</CardTitle>
-                <CardDescription className="text-xs text-gray-600">
+                <CardTitle className="text-sm font-semibold text-card-foreground">Bot Uptime</CardTitle>
+                <CardDescription className="text-xs text-muted-foreground">
                   System reliability metrics
                 </CardDescription>
               </CardHeader>
@@ -231,23 +232,24 @@ export default function DashboardIndex() {
                         dataKey="name" 
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#6B7280', fontSize: 10 }}
+                        tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
                       />
                       <YAxis 
                         domain={[99.9, 100]} 
                         tickFormatter={(value) => `${value}%`}
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fill: '#6B7280', fontSize: 10 }}
+                        tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
                       />
-                      <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                       <Tooltip 
                         formatter={(value) => [`${value}%`, 'Uptime']}
                         contentStyle={{
-                          backgroundColor: 'white',
-                          border: '1px solid #E5E7EB',
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
                           borderRadius: '6px',
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                          color: 'hsl(var(--card-foreground))'
                         }}
                       />
                       <Line
@@ -264,10 +266,10 @@ export default function DashboardIndex() {
             </Card>
 
             {/* Commands Usage */}
-            <Card className="bg-white shadow-sm border">
+            <Card className="bg-card shadow-sm border">
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-semibold text-gray-900">Command Usage</CardTitle>
-                <CardDescription className="text-xs text-gray-600">
+                <CardTitle className="text-sm font-semibold text-card-foreground">Command Usage</CardTitle>
+                <CardDescription className="text-xs text-muted-foreground">
                   Most popular bot commands
                 </CardDescription>
               </CardHeader>
@@ -291,10 +293,11 @@ export default function DashboardIndex() {
                       <Tooltip
                         formatter={(value, name) => [`${value} uses`, name]}
                         contentStyle={{
-                          backgroundColor: 'white',
-                          border: '1px solid #E5E7EB',
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
                           borderRadius: '6px',
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                          color: 'hsl(var(--card-foreground))'
                         }}
                       />
                       <Legend 

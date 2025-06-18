@@ -55,22 +55,22 @@ export default function BotStatusPage() {
 
   if (servicesLoading || incidentsLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white border-b">
+      <div className="bg-card border-b">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Globe className="h-8 w-8 text-blue-600" />
+              <Globe className="h-8 w-8 text-primary" />
               <div>
-                <h1 className="text-2xl font-bold">BotHoster Status</h1>
+                <h1 className="text-2xl font-bold text-card-foreground">BotHoster Status</h1>
                 <p className="text-sm text-muted-foreground">Real-time system status and uptime monitoring</p>
               </div>
             </div>
@@ -95,9 +95,9 @@ export default function BotStatusPage() {
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Overall Status */}
-        <Card className="mb-8">
+        <Card className="mb-8 bg-card shadow-sm border">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+            <CardTitle className="flex items-center space-x-2 text-card-foreground">
               <Activity className="h-5 w-5" />
               <span>System Overview</span>
             </CardTitle>
@@ -122,9 +122,9 @@ export default function BotStatusPage() {
         </Card>
 
         {/* Service Status */}
-        <Card className="mb-8">
+        <Card className="mb-8 bg-card shadow-sm border">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+            <CardTitle className="flex items-center space-x-2 text-card-foreground">
               <Server className="h-5 w-5" />
               <span>Service Status</span>
             </CardTitle>
@@ -133,11 +133,11 @@ export default function BotStatusPage() {
           <CardContent>
             <div className="space-y-4">
               {services.map((service) => (
-                <div key={service.id} className="flex items-center justify-between p-4 rounded-lg border">
+                <div key={service.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
                   <div className="flex items-center space-x-3">
                     {getStatusIcon(service.status || 'operational')}
                     <div>
-                      <h4 className="font-medium">{service.name}</h4>
+                      <h4 className="font-medium text-card-foreground">{service.name}</h4>
                       <p className="text-sm text-muted-foreground">{service.description}</p>
                     </div>
                   </div>
@@ -154,9 +154,9 @@ export default function BotStatusPage() {
         </Card>
 
         {/* Recent Incidents */}
-        <Card>
+        <Card className="bg-card shadow-sm border">
           <CardHeader>
-            <CardTitle>Recent Incidents</CardTitle>
+            <CardTitle className="text-card-foreground">Recent Incidents</CardTitle>
             <CardDescription>Past incidents and maintenance windows</CardDescription>
           </CardHeader>
           <CardContent>
@@ -164,7 +164,7 @@ export default function BotStatusPage() {
               {incidents.length > 0 ? incidents.map((incident) => (
                 <div key={incident.id} className="border-l-4 border-green-500 pl-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium">{incident.title}</h4>
+                    <h4 className="font-medium text-card-foreground">{incident.title}</h4>
                     <div className="flex items-center space-x-2">
                       {getIncidentBadge(incident.status || 'resolved')}
                       <span className="text-sm text-muted-foreground">
@@ -185,13 +185,13 @@ export default function BotStatusPage() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-12 p-6 bg-white rounded-lg border">
+        <div className="text-center mt-12 p-6 bg-card rounded-lg border">
           <p className="text-sm text-muted-foreground mb-2">
             Status page powered by BotHoster • Auto-updated every 30 seconds
           </p>
           <p className="text-xs text-muted-foreground">
             Subscribe to get notified about incidents: 
-            <a href="#" className="text-blue-600 hover:underline ml-1">status@bothoster.in</a>
+            <a href="#" className="text-primary hover:underline ml-1">status@bothoster.in</a>
           </p>
         </div>
       </div>
