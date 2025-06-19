@@ -147,73 +147,75 @@ export default function LogsViewer() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Live Logs</h1>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center space-x-2">
-            <Switch 
-              id="live-mode" 
-              checked={liveMode} 
-              onCheckedChange={handleLiveModeToggle} 
-            />
-            <Label htmlFor="live-mode">Live Mode</Label>
-          </div>
-          <Button variant="outline" onClick={handleClearLogs}>Clear Logs</Button>
-        </div>
-      </div>
-
-      <Card>
-        <CardHeader className="pb-3">
-          <div className="flex justify-between items-center">
-            <CardTitle>Bot Logs</CardTitle>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center space-x-2">
-                <Switch 
-                  id="auto-scroll" 
-                  checked={autoScroll} 
-                  onCheckedChange={setAutoScroll} 
-                />
-                <Label htmlFor="auto-scroll">Auto Scroll</Label>
-              </div>
-              <Select value={filter} onValueChange={setFilter}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Filter by level" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Levels</SelectItem>
-                  <SelectItem value="info">Info</SelectItem>
-                  <SelectItem value="success">Success</SelectItem>
-                  <SelectItem value="warning">Warning</SelectItem>
-                  <SelectItem value="error">Error</SelectItem>
-                </SelectContent>
-              </Select>
+    <div className="min-h-screen bg-background p-4 md:p-6">
+      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <h1 className="text-xl md:text-2xl font-bold text-foreground">Live Logs</h1>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center space-x-2">
+              <Switch 
+                id="live-mode" 
+                checked={liveMode} 
+                onCheckedChange={handleLiveModeToggle} 
+              />
+              <Label htmlFor="live-mode" className="text-sm">Live Mode</Label>
             </div>
+            <Button variant="outline" onClick={handleClearLogs} className="text-sm">Clear Logs</Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="terminal" ref={terminalRef}>
-            {filteredLogs.length === 0 ? (
-              <div className="text-center p-4 text-muted-foreground">
-                No logs to display.
-                {filter !== "all" && (
-                  <p className="mt-2">Try changing the filter or generating some activity.</p>
-                )}
-              </div>
-            ) : (
-              filteredLogs.map((log, index) => (
-                <div key={index} className="log-entry">
-                  <span className="log-timestamp">[{formatTimestamp(log.timestamp)}]</span>
-                  <span className={`log-level-${log.level} font-bold`}>
-                    [{log.level.toUpperCase()}]
-                  </span>
-                  <span className="ml-2">{log.message}</span>
+        </div>
+
+        <Card className="bg-card shadow-sm border">
+          <CardHeader className="pb-3">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <CardTitle className="text-base font-semibold text-card-foreground">Bot Logs</CardTitle>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+                <div className="flex items-center space-x-2">
+                  <Switch 
+                    id="auto-scroll" 
+                    checked={autoScroll} 
+                    onCheckedChange={setAutoScroll} 
+                  />
+                  <Label htmlFor="auto-scroll" className="text-sm">Auto Scroll</Label>
                 </div>
-              ))
-            )}
-          </div>
-        </CardContent>
-      </Card>
+                <Select value={filter} onValueChange={setFilter}>
+                  <SelectTrigger className="w-full sm:w-[180px]">
+                    <SelectValue placeholder="Filter by level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Levels</SelectItem>
+                    <SelectItem value="info">Info</SelectItem>
+                    <SelectItem value="success">Success</SelectItem>
+                    <SelectItem value="warning">Warning</SelectItem>
+                    <SelectItem value="error">Error</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="terminal" ref={terminalRef}>
+              {filteredLogs.length === 0 ? (
+                <div className="text-center p-4 text-muted-foreground">
+                  No logs to display.
+                  {filter !== "all" && (
+                    <p className="mt-2">Try changing the filter or generating some activity.</p>
+                  )}
+                </div>
+              ) : (
+                filteredLogs.map((log, index) => (
+                  <div key={index} className="log-entry">
+                    <span className="log-timestamp">[{formatTimestamp(log.timestamp)}]</span>
+                    <span className={`log-level-${log.level} font-bold`}>
+                      [{log.level.toUpperCase()}]
+                    </span>
+                    <span className="ml-2">{log.message}</span>
+                  </div>
+                ))
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
