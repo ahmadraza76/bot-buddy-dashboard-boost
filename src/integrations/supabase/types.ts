@@ -105,6 +105,60 @@ export type Database = {
           },
         ]
       }
+      ai_actions: {
+        Row: {
+          action_type: string
+          ai_confidence: number | null
+          bot_id: string | null
+          error_detected: string | null
+          id: string
+          manual_override: boolean | null
+          solution_applied: string | null
+          success: boolean | null
+          timestamp: string
+          user_id: string | null
+        }
+        Insert: {
+          action_type: string
+          ai_confidence?: number | null
+          bot_id?: string | null
+          error_detected?: string | null
+          id?: string
+          manual_override?: boolean | null
+          solution_applied?: string | null
+          success?: boolean | null
+          timestamp?: string
+          user_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          ai_confidence?: number | null
+          bot_id?: string | null
+          error_detected?: string | null
+          id?: string
+          manual_override?: boolean | null
+          solution_applied?: string | null
+          success?: boolean | null
+          timestamp?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_actions_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_actions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       api_keys: {
         Row: {
           api_key: string
@@ -146,6 +200,50 @@ export type Database = {
           },
         ]
       }
+      bot_logs: {
+        Row: {
+          action_taken: string | null
+          bot_id: string | null
+          created_at: string
+          id: string
+          log_level: string
+          message: string
+          processed_by_ai: boolean | null
+          source: string | null
+          timestamp: string
+        }
+        Insert: {
+          action_taken?: string | null
+          bot_id?: string | null
+          created_at?: string
+          id?: string
+          log_level?: string
+          message: string
+          processed_by_ai?: boolean | null
+          source?: string | null
+          timestamp?: string
+        }
+        Update: {
+          action_taken?: string | null
+          bot_id?: string | null
+          created_at?: string
+          id?: string
+          log_level?: string
+          message?: string
+          processed_by_ai?: boolean | null
+          source?: string | null
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bot_logs_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bot_sessions: {
         Row: {
           bot_status: string | null
@@ -175,39 +273,69 @@ export type Database = {
       }
       bots: {
         Row: {
+          api_key: string | null
+          auto_heal_enabled: boolean | null
+          bot_token: string | null
           container_id: string | null
+          container_logs: string | null
           cpu_usage: string | null
           created_at: string | null
+          deployment_status: string | null
+          error_count: number | null
+          health_score: number | null
           id: string
           last_activity: string | null
+          last_error: string | null
           memory_usage: string | null
+          restart_count: number | null
           status: Database["public"]["Enums"]["bot_status"] | null
+          sudo_user_id: string | null
           updated_at: string | null
           uptime_start: string | null
           user_id: string | null
           username: string
         }
         Insert: {
+          api_key?: string | null
+          auto_heal_enabled?: boolean | null
+          bot_token?: string | null
           container_id?: string | null
+          container_logs?: string | null
           cpu_usage?: string | null
           created_at?: string | null
+          deployment_status?: string | null
+          error_count?: number | null
+          health_score?: number | null
           id?: string
           last_activity?: string | null
+          last_error?: string | null
           memory_usage?: string | null
+          restart_count?: number | null
           status?: Database["public"]["Enums"]["bot_status"] | null
+          sudo_user_id?: string | null
           updated_at?: string | null
           uptime_start?: string | null
           user_id?: string | null
           username: string
         }
         Update: {
+          api_key?: string | null
+          auto_heal_enabled?: boolean | null
+          bot_token?: string | null
           container_id?: string | null
+          container_logs?: string | null
           cpu_usage?: string | null
           created_at?: string | null
+          deployment_status?: string | null
+          error_count?: number | null
+          health_score?: number | null
           id?: string
           last_activity?: string | null
+          last_error?: string | null
           memory_usage?: string | null
+          restart_count?: number | null
           status?: Database["public"]["Enums"]["bot_status"] | null
+          sudo_user_id?: string | null
           updated_at?: string | null
           uptime_start?: string | null
           user_id?: string | null
@@ -309,6 +437,57 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      notifications: {
+        Row: {
+          bot_id: string | null
+          created_at: string
+          id: string
+          message: string
+          read: boolean | null
+          sent_to_telegram: boolean | null
+          title: string
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          bot_id?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          read?: boolean | null
+          sent_to_telegram?: boolean | null
+          title: string
+          type?: string
+          user_id?: string | null
+        }
+        Update: {
+          bot_id?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          read?: boolean | null
+          sent_to_telegram?: boolean | null
+          title?: string
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       payments: {
         Row: {
@@ -542,6 +721,33 @@ export type Database = {
           },
         ]
       }
+      system_health: {
+        Row: {
+          id: string
+          metadata: Json | null
+          metric_name: string
+          metric_value: number
+          timestamp: string
+          unit: string | null
+        }
+        Insert: {
+          id?: string
+          metadata?: Json | null
+          metric_name: string
+          metric_value: number
+          timestamp?: string
+          unit?: string | null
+        }
+        Update: {
+          id?: string
+          metadata?: Json | null
+          metric_name?: string
+          metric_value?: number
+          timestamp?: string
+          unit?: string | null
+        }
+        Relationships: []
+      }
       user_otp_sessions: {
         Row: {
           created_at: string
@@ -609,9 +815,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_bot_health_score: {
+        Args: { bot_id_param: string }
+        Returns: number
+      }
       has_admin_role: {
         Args: { user_id: string }
         Returns: boolean
+      }
+      trigger_ai_healing: {
+        Args: { bot_id_param: string; error_message: string }
+        Returns: undefined
+      }
+      update_all_bot_health_scores: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
     }
     Enums: {

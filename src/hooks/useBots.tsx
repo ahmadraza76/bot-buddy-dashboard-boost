@@ -32,21 +32,35 @@ export const useCreateBot = () => {
   const { user } = useAuth();
 
   return useMutation({
-    mutationFn: async (botData: { username: string }) => {
+    mutationFn: async (botData: { 
+      username: string;
+      bot_token?: string;
+      sudo_user_id?: string;
+      api_key?: string;
+      auto_heal_enabled?: boolean;
+    }) => {
       if (!user?.id) throw new Error('No user found');
 
-      const { data, error } = await supabase
-        .from('bots')
-        .insert({
-          user_id: user.id,
-          username: botData.username,
-          status: 'stopped' as Enums<'bot_status'>,
-        })
-        .select()
-        .single();
+      // Call bot operations edge function
+      const { data, error } = await supabase.functions.invoke('bot-operations', {
+        body: {
+          action: 'deploy',
+          botId: null,
+          botData: {
+            username: botData.username,
+            bot_token: botData.bot_token || '',
+            sudo_user_id: botData.sudo_user_id || '',
+            api_key: botData.api_key || '',
+            auto_heal_enabled: botData.auto_heal_enabled ?? true
+          },
+          userId: user.id
+        }
+      });
 
       if (error) throw error;
-      return data;
+      if (!data.success) throw new Error(data.message);
+      
+      return data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bots', user?.id] });
@@ -60,19 +74,24 @@ export const useUpdateBotStatus = () => {
 
   return useMutation({
     mutationFn: async ({ botId, status }: { botId: string; status: Enums<'bot_status'> }) => {
-      const { data, error } = await supabase
-        .from('bots')
-        .update({ 
-          status,
-          uptime_start: status === 'running' ? new Date().toISOString() : null,
-          last_activity: new Date().toISOString()
-        })
-        .eq('id', botId)
-        .select()
-        .single();
+      const actionMap = {
+        'running': 'start',
+        'stopped': 'stop',
+        'error': 'restart'
+      };
+
+      const { data, error } = await supabase.functions.invoke('bot-operations', {
+        body: {
+          action: actionMap[status] || 'start',
+          botId,
+          userId: user?.id
+        }
+      });
 
       if (error) throw error;
-      return data;
+      if (!data.success) throw new Error(data.message);
+      
+      return data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bots', user?.id] });
