@@ -4,6 +4,7 @@ import { BotHealthMonitor } from '@/components/BotHealthMonitor';
 import { AIHealingDashboard } from '@/components/AIHealingDashboard';
 import { NotificationCenter } from '@/components/NotificationCenter';
 import { HealingStatsWidget } from '@/components/HealingStatsWidget';
+import { AISettingsWidget } from '@/components/AISettingsWidget';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useBots } from '@/hooks/useBots';
 
@@ -26,10 +27,11 @@ export default function BotManager() {
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="deploy">Deploy</TabsTrigger>
             <TabsTrigger value="monitor">Monitor</TabsTrigger>
             <TabsTrigger value="healing">AI Healing</TabsTrigger>
+            <TabsTrigger value="ai-settings">AI Settings</TabsTrigger>
             <TabsTrigger value="notifications">Alerts</TabsTrigger>
           </TabsList>
 
@@ -50,6 +52,10 @@ export default function BotManager() {
 
           <TabsContent value="healing" className="space-y-6">
             <AIHealingDashboard botId={activeBotId} />
+          </TabsContent>
+
+          <TabsContent value="ai-settings" className="space-y-6">
+            <AISettingsWidget />
           </TabsContent>
 
           <TabsContent value="notifications" className="space-y-6">
