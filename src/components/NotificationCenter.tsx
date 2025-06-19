@@ -10,7 +10,7 @@ import {
   AlertTriangle, 
   Info, 
   Zap,
-  MarkAsUnread,
+  Check,
   CheckCheck
 } from 'lucide-react';
 import { useNotifications, useMarkNotificationRead, useMarkAllNotificationsRead } from '@/hooks/useNotifications';
@@ -174,7 +174,7 @@ export const NotificationCenter: React.FC = () => {
                             disabled={markAsRead.isPending}
                             className="h-6 px-2 text-xs"
                           >
-                            <MarkAsUnread className="h-3 w-3 mr-1" />
+                            <Check className="h-3 w-3 mr-1" />
                             Mark Read
                           </Button>
                         )}
