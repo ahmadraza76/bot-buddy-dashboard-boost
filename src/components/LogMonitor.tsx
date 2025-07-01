@@ -50,7 +50,7 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
           { botId, logContent: errorLog },
           {
             onSuccess: (data) => {
-              if (data?.healingAction?.status === 'success') {
+              if (data?.healingAction?.success) {
                 toast({
                   title: "🤖 AI Auto-Heal Success",
                   description: `Fixed ${data.analysis?.errorType?.replace('_', ' ')?.toLowerCase() || 'error'} automatically`,
@@ -87,12 +87,11 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
     }
   };
 
-  const getActionIcon = (status: string) => {
-    switch (status) {
-      case 'success': return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'failed': return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      case 'pending': return <Clock className="h-4 w-4 text-yellow-500" />;
-      default: return <Zap className="h-4 w-4 text-blue-500" />;
+  const getActionIcon = (success: boolean) => {
+    if (success) {
+      return <CheckCircle className="h-4 w-4 text-green-500" />;
+    } else {
+      return <AlertTriangle className="h-4 w-4 text-red-500" />;
     }
   };
 
@@ -185,19 +184,19 @@ export const LogMonitor: React.FC<LogMonitorProps> = ({ botId, logs }) => {
               {healingHistory.slice(0, 10).map((action: HealingAction) => (
                 <div key={action.id} className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
-                    {getActionIcon(action.status)}
+                    {getActionIcon(action.success)}
                     <div>
                       <div className="font-medium">
-                        {action.error_type.replace('_', ' ').toLowerCase()}
+                        {action.error_detected.replace('_', ' ').toLowerCase()}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        Action: {action.action}
+                        Action: {action.action_type}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge variant={action.status === 'success' ? 'default' : 'destructive'}>
-                      {action.status}
+                    <Badge variant={action.success ? 'default' : 'destructive'}>
+                      {action.success ? 'success' : 'failed'}
                     </Badge>
                     <div className="text-xs text-muted-foreground mt-1">
                       {new Date(action.timestamp).toLocaleString()}

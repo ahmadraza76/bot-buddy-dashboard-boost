@@ -48,29 +48,19 @@ export const AIHealingDashboard: React.FC<AIHealingDashboardProps> = ({ botId })
     }
   };
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'success':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'failed':
-        return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      case 'pending':
-        return <Clock className="h-4 w-4 text-yellow-500" />;
-      default:
-        return <RefreshCw className="h-4 w-4 text-blue-500" />;
+  const getStatusIcon = (success: boolean) => {
+    if (success) {
+      return <CheckCircle className="h-4 w-4 text-green-500" />;
+    } else {
+      return <AlertTriangle className="h-4 w-4 text-red-500" />;
     }
   };
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'success':
-        return <Badge className="bg-green-100 text-green-800">Success</Badge>;
-      case 'failed':
-        return <Badge className="bg-red-100 text-red-800">Failed</Badge>;
-      case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">Pending</Badge>;
-      default:
-        return <Badge variant="outline">{status}</Badge>;
+  const getStatusBadge = (success: boolean) => {
+    if (success) {
+      return <Badge className="bg-green-100 text-green-800">Success</Badge>;
+    } else {
+      return <Badge className="bg-red-100 text-red-800">Failed</Badge>;
     }
   };
 
@@ -180,16 +170,16 @@ export const AIHealingDashboard: React.FC<AIHealingDashboardProps> = ({ botId })
             <div className="space-y-4">
               {healingHistory.slice(0, 10).map((action) => (
                 <div key={action.id} className="flex items-start space-x-3 p-3 border rounded-lg">
-                  {getStatusIcon(action.status)}
+                  {getStatusIcon(action.success)}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <h4 className="text-sm font-medium text-card-foreground truncate">
-                        {action.action}
+                        {action.action_type}
                       </h4>
-                      {getStatusBadge(action.status)}
+                      {getStatusBadge(action.success)}
                     </div>
                     <p className="text-xs text-muted-foreground mb-2">
-                      Error: {action.error_type}
+                      Error: {action.error_detected}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">
