@@ -43,7 +43,7 @@ export const DashboardLayout = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-background flex">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -54,15 +54,15 @@ export const DashboardLayout = () => {
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+        fixed inset-y-0 left-0 z-40 w-64 bg-card shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex items-center justify-between h-16 px-4 bg-blue-600">
-          <h1 className="text-white text-lg font-semibold">Bot Manager</h1>
+        <div className="flex items-center justify-between h-16 px-4 bg-primary">
+          <h1 className="text-primary-foreground text-lg font-semibold">Bot Manager</h1>
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white hover:bg-blue-700"
+            className="lg:hidden text-primary-foreground hover:bg-primary/80"
             onClick={() => setSidebarOpen(false)}
           >
             <X className="h-5 w-5" />
@@ -79,14 +79,14 @@ export const DashboardLayout = () => {
                 className={`
                   group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors
                   ${isActive
-                    ? 'bg-blue-100 text-blue-900'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-accent text-accent-foreground'
+                    : 'text-card-foreground hover:bg-accent/50 hover:text-accent-foreground'
                   }
                 `}
               >
                 <item.icon
                   className={`mr-3 h-5 w-5 ${
-                    isActive ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
+                    isActive ? 'text-accent-foreground' : 'text-muted-foreground group-hover:text-accent-foreground'
                   }`}
                 />
                 {item.name}
@@ -96,20 +96,20 @@ export const DashboardLayout = () => {
         </nav>
 
         {/* User section */}
-        <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+        <div className="flex-shrink-0 flex border-t border-border p-4">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <User className="h-8 w-8 text-gray-400" />
+              <User className="h-8 w-8 text-muted-foreground" />
             </div>
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+              <p className="text-sm font-medium text-card-foreground">
                 {user?.email}
               </p>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={signOut}
-                className="text-xs text-gray-500 hover:text-gray-700"
+                className="text-xs text-muted-foreground hover:text-card-foreground"
               >
                 <LogOut className="h-4 w-4 mr-1" />
                 Sign out
@@ -122,7 +122,7 @@ export const DashboardLayout = () => {
       {/* Main content */}
       <div className="flex-1 lg:pl-0">
         {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center justify-between h-16 px-4 bg-white shadow-sm">
+        <div className="lg:hidden flex items-center justify-between h-16 px-4 bg-card shadow-sm">
           <Button
             variant="ghost"
             size="sm"
@@ -135,7 +135,7 @@ export const DashboardLayout = () => {
         </div>
 
         {/* Page content */}
-        <main className="flex-1">
+        <main className="flex-1 bg-background">
           <Outlet />
         </main>
       </div>
