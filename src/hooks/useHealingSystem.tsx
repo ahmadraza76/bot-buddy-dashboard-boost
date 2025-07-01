@@ -8,12 +8,13 @@ export interface HealingAction {
   id: string;
   bot_id: string;
   user_id: string;
-  error_type: string;
-  action: string;
-  status: 'success' | 'failed' | 'pending';
+  error_detected: string;
+  action_type: string;
+  solution_applied: string;
+  success: boolean;
   timestamp: string;
-  logs?: string;
-  fix_details?: any;
+  ai_confidence: number;
+  manual_override: boolean;
 }
 
 export interface AdminAlert {

@@ -7,6 +7,7 @@ export interface AuthState {
   user: User | null;
   session: Session | null;
   loading: boolean;
+  signOut: () => Promise<void>;
 }
 
 export const useAuth = () => {
@@ -14,7 +15,17 @@ export const useAuth = () => {
     user: null,
     session: null,
     loading: true,
+    signOut: async () => {},
   });
+
+  const signOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   useEffect(() => {
     // Get initial session
@@ -23,6 +34,7 @@ export const useAuth = () => {
         user: session?.user ?? null,
         session,
         loading: false,
+        signOut,
       });
     });
 
@@ -33,6 +45,7 @@ export const useAuth = () => {
           user: session?.user ?? null,
           session,
           loading: false,
+          signOut,
         });
       }
     );

@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import DashboardIndex from "./pages/dashboard/DashboardIndex";
 import BotManager from "./pages/dashboard/BotManager";
@@ -29,7 +29,7 @@ import SystemMonitoring from "./pages/admin/SystemMonitoring";
 import HealingDashboard from "./pages/admin/HealingDashboard";
 import AdminSettings from "./pages/admin/AdminSettings";
 import { DashboardLayout } from "@/components/DashboardLayout";
-import { AdminLayout } from "@/components/AdminLayout";
+import AdminLayout from "@/components/AdminLayout";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +40,6 @@ const App = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-      </div>
     );
   }
 
@@ -75,7 +74,7 @@ const App = () => {
             <Route
               path="/admin"
               element={
-                <ProtectedRoute adminOnly>
+                <ProtectedRoute requireAdmin>
                   <AdminLayout />
                 </ProtectedRoute>
               }
