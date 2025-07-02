@@ -19,6 +19,7 @@ import Payouts from "./pages/dashboard/Payouts";
 import ReferralSystem from "./pages/dashboard/ReferralSystem";
 import NotFound from "./pages/NotFound";
 import BotStatusPage from "./pages/BotStatusPage";
+import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserManagement from "./pages/admin/UserManagement";
 import BotManagement from "./pages/admin/BotManagement";
@@ -52,6 +53,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/bot/:token" element={<BotStatusPage />} />
             <Route
               path="/dashboard"
