@@ -3,3 +3,9 @@ project_id = "evhqmlflrerazafzmvdk"
 
 [functions.session-generator]
 verify_jwt = false
+
+[functions.payment-webhook]
+verify_jwt = false
+
+[functions.razorpay-webhook]
+verify_jwt = false
