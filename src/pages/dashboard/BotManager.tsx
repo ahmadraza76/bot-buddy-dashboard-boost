@@ -5,12 +5,14 @@ import { AIHealingDashboard } from '@/components/AIHealingDashboard';
 import { NotificationCenter } from '@/components/NotificationCenter';
 import { HealingStatsWidget } from '@/components/HealingStatsWidget';
 import { AISettingsWidget } from '@/components/AISettingsWidget';
+import { PersonalizedAIAssistant } from '@/components/PersonalizedAIAssistant';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useBots } from '@/hooks/useBots';
 
 export default function BotManager() {
   const { data: bots = [] } = useBots();
-  const activeBotId = bots.find(bot => bot.status === 'running')?.id;
+  const activeBot = bots.find(bot => bot.status === 'running');
+  const activeBotId = activeBot?.id;
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-6">
@@ -18,18 +20,19 @@ export default function BotManager() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-              AI-Powered Bot Manager
+              Replit-Style Bot SaaS Platform
             </h1>
             <p className="text-muted-foreground">
-              Deploy, monitor, and auto-heal your Telegram bots with AI
+              Isolated bot environments with personalized AI assistants - जैसे Replit containers!
             </p>
           </div>
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="deploy">Deploy</TabsTrigger>
             <TabsTrigger value="monitor">Monitor</TabsTrigger>
+            <TabsTrigger value="ai-assistant">AI Assistant</TabsTrigger>
             <TabsTrigger value="healing">AI Healing</TabsTrigger>
             <TabsTrigger value="ai-settings">AI Settings</TabsTrigger>
             <TabsTrigger value="notifications">Alerts</TabsTrigger>
@@ -48,6 +51,30 @@ export default function BotManager() {
 
           <TabsContent value="monitor" className="space-y-6">
             <BotHealthMonitor />
+          </TabsContent>
+
+          <TabsContent value="ai-assistant" className="space-y-6">
+            {activeBot ? (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <PersonalizedAIAssistant
+                    botId={activeBot.id}
+                    botName={activeBot.username}
+                    botStatus={activeBot.status}
+                    botHealth={activeBot.health_score || 0}
+                  />
+                </div>
+                <div>
+                  <HealingStatsWidget />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground text-lg">
+                  कोई active bot नहीं मिला। पहले एक bot deploy करें।
+                </p>
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="healing" className="space-y-6">

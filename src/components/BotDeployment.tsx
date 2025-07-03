@@ -8,7 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { useCreateBot } from '@/hooks/useBots';
-import { Bot, Zap, Shield, Play } from 'lucide-react';
+import { Bot, Zap, Shield, Play, Music, Brain, Code } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export const BotDeployment: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ export const BotDeployment: React.FC = () => {
     sudo_user_id: '',
     api_key: '',
     auto_heal_enabled: true,
+    bot_type: 'assistant' as 'music' | 'assistant' | 'custom',
+    environment: 'production' as 'development' | 'production',
   });
   const [isDeploying, setIsDeploying] = useState(false);
   
@@ -44,6 +47,8 @@ export const BotDeployment: React.FC = () => {
         sudo_user_id: formData.sudo_user_id,
         api_key: formData.api_key,
         auto_heal_enabled: formData.auto_heal_enabled,
+        bot_type: formData.bot_type,
+        environment: formData.environment,
       });
 
       toast({
@@ -58,6 +63,8 @@ export const BotDeployment: React.FC = () => {
         sudo_user_id: '',
         api_key: '',
         auto_heal_enabled: true,
+        bot_type: 'assistant',
+        environment: 'production',
       });
     } catch (error) {
       toast({
@@ -78,7 +85,7 @@ export const BotDeployment: React.FC = () => {
           Deploy New Bot
         </CardTitle>
         <CardDescription>
-          Deploy your Telegram bot with full AI-powered monitoring and auto-healing
+          Deploy your Telegram bot with isolated environment, personalized AI assistant, and auto-healing (Replit-style)
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -117,6 +124,50 @@ export const BotDeployment: React.FC = () => {
               className="min-h-[80px]"
               required
             />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="bot_type">Bot Type</Label>
+              <Select value={formData.bot_type} onValueChange={(value: 'music' | 'assistant' | 'custom') => setFormData({ ...formData, bot_type: value })}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select bot type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="music">
+                    <div className="flex items-center gap-2">
+                      <Music className="h-4 w-4" />
+                      Music Bot
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="assistant">
+                    <div className="flex items-center gap-2">
+                      <Brain className="h-4 w-4" />
+                      AI Assistant
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="custom">
+                    <div className="flex items-center gap-2">
+                      <Code className="h-4 w-4" />
+                      Custom Bot
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="environment">Environment</Label>
+              <Select value={formData.environment} onValueChange={(value: 'development' | 'production') => setFormData({ ...formData, environment: value })}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select environment" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="production">Production</SelectItem>
+                  <SelectItem value="development">Development</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           <div className="space-y-2">

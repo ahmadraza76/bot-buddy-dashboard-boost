@@ -159,6 +159,54 @@ export type Database = {
           },
         ]
       }
+      ai_chat_history: {
+        Row: {
+          bot_id: string
+          context: string | null
+          created_at: string
+          id: string
+          message: string
+          role: string
+          timestamp: string
+          user_id: string
+        }
+        Insert: {
+          bot_id: string
+          context?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          role: string
+          timestamp?: string
+          user_id: string
+        }
+        Update: {
+          bot_id?: string
+          context?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          role?: string
+          timestamp?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_ai_chat_history_bot_id"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_ai_chat_history_user_id"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       api_keys: {
         Row: {
           api_key: string

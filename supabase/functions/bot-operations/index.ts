@@ -16,6 +16,13 @@ interface BotOperationRequest {
     sudo_user_id: string;
     api_key?: string;
     auto_heal_enabled?: boolean;
+    bot_type?: 'music' | 'assistant' | 'custom';
+    environment?: 'development' | 'production';
+    resource_limits?: {
+      cpu: string;
+      memory: string;
+      storage: string;
+    };
   };
   userId?: string;
 }
@@ -99,7 +106,7 @@ serve(async (req) => {
 })
 
 async function deployBot(botData: any, userId: string) {
-  console.log('Deploying bot for user:', userId)
+  console.log('Deploying isolated bot instance for user:', userId)
   
   // Validate bot token with Telegram API
   const tokenValidation = await validateBotToken(botData.bot_token)
@@ -111,17 +118,45 @@ async function deployBot(botData: any, userId: string) {
     }
   }
 
-  // Create Docker container configuration
+  // Create user-specific isolated container configuration (Replit-style)
+  const userNamespace = `user_${userId.substring(0, 8)}`
+  const botType = botData.bot_type || 'assistant'
+  const environment = botData.environment || 'production'
+  
   const containerConfig = {
-    image: 'python:3.9-slim',
+    // User-isolated container with unique namespace
+    image: getBotImage(botType),
+    name: `${userNamespace}_${botData.username}_${Date.now()}`,
     env: {
+      // User-specific environment
+      USER_ID: userId,
       BOT_TOKEN: botData.bot_token,
       SUDO_USER_ID: botData.sudo_user_id,
       API_KEY: botData.api_key || '',
-      AUTO_HEAL: botData.auto_heal_enabled ? 'true' : 'false'
+      AUTO_HEAL: botData.auto_heal_enabled ? 'true' : 'false',
+      BOT_TYPE: botType,
+      ENVIRONMENT: environment,
+      USER_NAMESPACE: userNamespace,
+      // Resource isolation
+      PYTHONPATH: `/app/user_${userId}`,
+      LOG_PATH: `/logs/user_${userId}`,
+      CONFIG_PATH: `/config/user_${userId}`
     },
-    ports: ['8080:8080'],
-    restart_policy: 'unless-stopped'
+    // Resource limits (Replit-style)
+    resource_limits: botData.resource_limits || {
+      cpu: '0.5',
+      memory: '512MB',
+      storage: '1GB'
+    },
+    // User-specific networking
+    ports: [`${8080 + parseInt(userId.substring(0, 4), 16) % 1000}:8080`],
+    restart_policy: 'unless-stopped',
+    // Mount user-specific volumes
+    volumes: [
+      `/data/users/${userId}:/app/data`,
+      `/logs/users/${userId}:/app/logs`,
+      `/config/users/${userId}:/app/config`
+    ]
   }
 
   // Simulate container deployment
@@ -326,4 +361,136 @@ async function validateBotToken(token: string): Promise<{ valid: boolean, botInf
   } catch (error) {
     return { valid: false }
   }
+}
+
+// Get appropriate Docker image based on bot type (Replit-style templates)
+function getBotImage(botType: string): string {
+  const images = {
+    'music': 'python:3.9-slim', // Will have music libraries pre-installed
+    'assistant': 'python:3.9-slim', // Will have AI/NLP libraries
+    'custom': 'python:3.9-slim' // Basic Python environment
+  }
+  return images[botType] || images['custom']
+}
+
+// Create user-specific workspace (Replit-style file system)
+async function createUserWorkspace(userId: string, botId: string, botType: string) {
+  const workspace = {
+    userId,
+    botId,
+    botType,
+    files: {
+      'main.py': generateBotTemplate(botType),
+      'requirements.txt': generateRequirements(botType),
+      'config.json': generateConfig(),
+      'README.md': generateReadme(botType)
+    },
+    environment: {
+      python_version: '3.9',
+      pip_packages: getDefaultPackages(botType)
+    }
+  }
+  
+  return workspace
+}
+
+function generateBotTemplate(botType: string): string {
+  const templates = {
+    'music': `# Music Bot Template
+import telebot
+import yt_dlp
+from telebot import types
+
+bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
+
+@bot.message_handler(commands=['play'])
+def play_music(message):
+    # Music bot logic here
+    pass
+
+if __name__ == '__main__':
+    bot.polling()`,
+    
+    'assistant': `# AI Assistant Bot Template  
+import telebot
+import openai
+from telebot import types
+
+bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
+
+@bot.message_handler(func=lambda message: True)
+def ai_response(message):
+    # AI assistant logic here
+    pass
+
+if __name__ == '__main__':
+    bot.polling()`,
+    
+    'custom': `# Custom Bot Template
+import telebot
+from telebot import types
+
+bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, "Bot is running!")
+
+if __name__ == '__main__':
+    bot.polling()`
+  }
+  
+  return templates[botType] || templates['custom']
+}
+
+function generateRequirements(botType: string): string {
+  const requirements = {
+    'music': 'telebot\nyt-dlp\nffmpeg-python\nrequests',
+    'assistant': 'telebot\nopenai\nrequests\nnumpy',
+    'custom': 'telebot\nrequests'
+  }
+  
+  return requirements[botType] || requirements['custom']
+}
+
+function generateConfig(): string {
+  return JSON.stringify({
+    bot_settings: {
+      timeout: 30,
+      polling_interval: 1,
+      retry_attempts: 3
+    },
+    features: {
+      auto_heal: true,
+      logging: true,
+      metrics: true
+    }
+  }, null, 2)
+}
+
+function generateReadme(botType: string): string {
+  return `# Your ${botType.charAt(0).toUpperCase() + botType.slice(1)} Bot
+
+## Features
+- User-isolated environment
+- Auto-healing enabled  
+- Real-time monitoring
+- Personalized AI assistant
+
+## Commands
+- /start - Start the bot
+- /help - Get help
+
+## Powered by BotBuddy SaaS
+Your personal bot instance with dedicated resources.`
+}
+
+function getDefaultPackages(botType: string): string[] {
+  const packages = {
+    'music': ['telebot', 'yt-dlp', 'ffmpeg-python'],
+    'assistant': ['telebot', 'openai', 'numpy'],
+    'custom': ['telebot', 'requests']
+  }
+  
+  return packages[botType] || packages['custom']
 }

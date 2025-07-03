@@ -38,6 +38,8 @@ export const useCreateBot = () => {
       sudo_user_id?: string;
       api_key?: string;
       auto_heal_enabled?: boolean;
+      bot_type?: 'music' | 'assistant' | 'custom';
+      environment?: 'development' | 'production';
     }) => {
       if (!user?.id) throw new Error('No user found');
 
@@ -51,7 +53,9 @@ export const useCreateBot = () => {
             bot_token: botData.bot_token || '',
             sudo_user_id: botData.sudo_user_id || '',
             api_key: botData.api_key || '',
-            auto_heal_enabled: botData.auto_heal_enabled ?? true
+            auto_heal_enabled: botData.auto_heal_enabled ?? true,
+            bot_type: botData.bot_type || 'assistant',
+            environment: botData.environment || 'production'
           },
           userId: user.id
         }
