@@ -23,7 +23,7 @@ export default function BotManager() {
               Replit-Style Bot SaaS Platform
             </h1>
             <p className="text-muted-foreground">
-              Isolated bot environments with personalized AI assistants - जैसे Replit containers!
+              Isolated bot environments with personalized AI assistants - हर user का अपना container!
             </p>
           </div>
         </div>
