@@ -82,10 +82,10 @@ export const BotDeployment: React.FC = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-card-foreground">
           <Bot className="h-5 w-5" />
-          Deploy New Bot
+          Deploy a New Bot
         </CardTitle>
         <CardDescription>
-          Deploy your Telegram bot with isolated environment, personalized AI assistant, and auto-healing (Replit-style)
+          Deploy your Telegram bot in a secure, isolated environment with AI assistant capabilities and self-healing infrastructure.
         </CardDescription>
       </CardHeader>
       <CardContent>

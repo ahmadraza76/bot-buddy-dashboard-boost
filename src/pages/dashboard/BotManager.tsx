@@ -20,10 +20,10 @@ export default function BotManager() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-              Replit-Style Bot SaaS Platform
+              Launch Scalable Telegram Bots with AI — Instantly
             </h1>
             <p className="text-muted-foreground">
-              Isolated bot environments with personalized AI assistants - हर user का अपना container!
+              Deploy isolated, secure bot containers with built-in AI assistants — built for speed, reliability, and scale.
             </p>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function BotManager() {
             ) : (
               <div className="text-center py-12">
                 <p className="text-muted-foreground text-lg">
-                  कोई active bot नहीं मिला। पहले एक bot deploy करें।
+                  No active bot found. Please deploy a bot first.
                 </p>
               </div>
             )}
