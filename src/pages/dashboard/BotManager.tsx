@@ -29,13 +29,13 @@ export default function BotManager() {
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="deploy">Deploy</TabsTrigger>
-            <TabsTrigger value="monitor">Monitor</TabsTrigger>
-            <TabsTrigger value="ai-assistant">AI Assistant</TabsTrigger>
-            <TabsTrigger value="healing">AI Healing</TabsTrigger>
-            <TabsTrigger value="ai-settings">AI Settings</TabsTrigger>
-            <TabsTrigger value="notifications">Alerts</TabsTrigger>
+          <TabsList className="flex w-full overflow-x-auto md:grid md:grid-cols-6">
+            <TabsTrigger value="deploy" className="whitespace-nowrap">Deploy</TabsTrigger>
+            <TabsTrigger value="monitor" className="whitespace-nowrap">Monitor</TabsTrigger>
+            <TabsTrigger value="ai-assistant" className="whitespace-nowrap">AI Assistant</TabsTrigger>
+            <TabsTrigger value="healing" className="whitespace-nowrap">AI Healing</TabsTrigger>
+            <TabsTrigger value="ai-settings" className="whitespace-nowrap">AI Settings</TabsTrigger>
+            <TabsTrigger value="notifications" className="whitespace-nowrap">Alerts</TabsTrigger>
           </TabsList>
 
           <TabsContent value="deploy" className="space-y-6">
