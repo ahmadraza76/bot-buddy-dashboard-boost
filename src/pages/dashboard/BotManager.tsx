@@ -29,13 +29,13 @@ export default function BotManager() {
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <TabsList className="flex w-full overflow-x-auto md:grid md:grid-cols-6">
-            <TabsTrigger value="deploy" className="whitespace-nowrap">Deploy</TabsTrigger>
-            <TabsTrigger value="monitor" className="whitespace-nowrap">Monitor</TabsTrigger>
-            <TabsTrigger value="ai-assistant" className="whitespace-nowrap">AI Assistant</TabsTrigger>
-            <TabsTrigger value="healing" className="whitespace-nowrap">AI Healing</TabsTrigger>
-            <TabsTrigger value="ai-settings" className="whitespace-nowrap">AI Settings</TabsTrigger>
-            <TabsTrigger value="notifications" className="whitespace-nowrap">Alerts</TabsTrigger>
+          <TabsList className="w-full overflow-x-auto flex md:grid md:grid-cols-6 no-scrollbar">
+            <TabsTrigger value="deploy" className="flex-shrink-0 px-4 py-2 text-sm">Deploy</TabsTrigger>
+            <TabsTrigger value="monitor" className="flex-shrink-0 px-4 py-2 text-sm">Monitor</TabsTrigger>
+            <TabsTrigger value="ai-assistant" className="flex-shrink-0 px-4 py-2 text-sm">AI Assistant</TabsTrigger>
+            <TabsTrigger value="healing" className="flex-shrink-0 px-4 py-2 text-sm">AI Healing</TabsTrigger>
+            <TabsTrigger value="ai-settings" className="flex-shrink-0 px-4 py-2 text-sm">AI Settings</TabsTrigger>
+            <TabsTrigger value="notifications" className="flex-shrink-0 px-4 py-2 text-sm">Alerts</TabsTrigger>
           </TabsList>
 
           <TabsContent value="deploy" className="space-y-6">
