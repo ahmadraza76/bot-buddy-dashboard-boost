@@ -29,14 +29,14 @@ export default function BotManager() {
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <div className="w-full overflow-x-auto">
-            <TabsList className="inline-flex w-max min-w-full h-auto p-1 md:grid md:grid-cols-6 md:w-full">
-              <TabsTrigger value="deploy" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Deploy</TabsTrigger>
-              <TabsTrigger value="monitor" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Monitor</TabsTrigger>
-              <TabsTrigger value="ai-assistant" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Assistant</TabsTrigger>
-              <TabsTrigger value="healing" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Healing</TabsTrigger>
-              <TabsTrigger value="ai-settings" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Settings</TabsTrigger>
-              <TabsTrigger value="notifications" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Alerts</TabsTrigger>
+          <div className="w-full overflow-x-auto scrollbar-hide">
+            <TabsList className="flex w-max gap-1 p-1 bg-muted rounded-md md:grid md:grid-cols-6 md:w-full md:gap-0">
+              <TabsTrigger value="deploy" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[80px]">Deploy</TabsTrigger>
+              <TabsTrigger value="monitor" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[80px]">Monitor</TabsTrigger>
+              <TabsTrigger value="ai-assistant" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[100px]">AI Assistant</TabsTrigger>
+              <TabsTrigger value="healing" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[90px]">AI Healing</TabsTrigger>
+              <TabsTrigger value="ai-settings" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[90px]">AI Settings</TabsTrigger>
+              <TabsTrigger value="notifications" className="flex-shrink-0 whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-sm min-w-[70px]">Alerts</TabsTrigger>
             </TabsList>
           </div>
 
