@@ -29,14 +29,16 @@ export default function BotManager() {
         </div>
 
         <Tabs defaultValue="deploy" className="space-y-6">
-          <TabsList className="w-full overflow-x-auto flex md:grid md:grid-cols-6 no-scrollbar">
-            <TabsTrigger value="deploy" className="flex-shrink-0 px-4 py-2 text-sm">Deploy</TabsTrigger>
-            <TabsTrigger value="monitor" className="flex-shrink-0 px-4 py-2 text-sm">Monitor</TabsTrigger>
-            <TabsTrigger value="ai-assistant" className="flex-shrink-0 px-4 py-2 text-sm">AI Assistant</TabsTrigger>
-            <TabsTrigger value="healing" className="flex-shrink-0 px-4 py-2 text-sm">AI Healing</TabsTrigger>
-            <TabsTrigger value="ai-settings" className="flex-shrink-0 px-4 py-2 text-sm">AI Settings</TabsTrigger>
-            <TabsTrigger value="notifications" className="flex-shrink-0 px-4 py-2 text-sm">Alerts</TabsTrigger>
-          </TabsList>
+          <div className="w-full overflow-x-auto">
+            <TabsList className="inline-flex w-max min-w-full h-auto p-1 md:grid md:grid-cols-6 md:w-full">
+              <TabsTrigger value="deploy" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Deploy</TabsTrigger>
+              <TabsTrigger value="monitor" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Monitor</TabsTrigger>
+              <TabsTrigger value="ai-assistant" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Assistant</TabsTrigger>
+              <TabsTrigger value="healing" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Healing</TabsTrigger>
+              <TabsTrigger value="ai-settings" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">AI Settings</TabsTrigger>
+              <TabsTrigger value="notifications" className="flex-shrink-0 whitespace-nowrap px-3 py-2 text-sm min-w-fit">Alerts</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="deploy" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
